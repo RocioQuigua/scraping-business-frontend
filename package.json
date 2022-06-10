@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.20.6",
+    "jwt-decode": "^3.1.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
@@ -16,10 +17,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-env --env-file=environments/.env.staging start",
+    "start:local": "react-app-env --env-file=environments/.env.local start",
+    "start:staging": "react-app-env --env-file=environments/.env.staging start",
+    "start:production": "react-app-env --env-file=environments/.env.production start",
+    "build:production": "react-app-env --env-file=environments/.env.production build",
+    "build:staging": "react-app-env --env-file=environments/.env.staging build"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-env": "^1.2.3"
   }
 }
