@@ -1,6 +1,24 @@
 .login {
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.title-one {
+  font-weight: 700;
+  font-size: 40px;
+  color: #000000;
+  text-align: center;
+}
+.title-two {
+  font-weight: 400;
+  font-size: 22px;
+  color: #000000;
+  margin-bottom: 5px;
+}
+.button-primary {
+  border-radius: 5px;
+  color: #FFFF;
+  background-color: blue;
 }
