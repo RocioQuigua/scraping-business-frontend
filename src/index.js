@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './scenes/App';
-import reportWebVitals from './reportWebVitals';
-import './sass/main.scss';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserHistory } from "history";
+import { Provider } from "react-redux";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import App from "./scenes/App";
+import reportWebVitals from "./reportWebVitals";
+import { initStore } from "./store/Store";
+import "./sass/main.scss";
+
+export const history = createBrowserHistory();
+export const store = initStore();
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
