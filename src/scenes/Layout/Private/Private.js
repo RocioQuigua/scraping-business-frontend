@@ -9,6 +9,8 @@ export const Private = () => {
     <Router>
       <Routes>
         <Route exact path="/search" element={<Search />} />
+        <Route exact path="/" element={<Search />} />
+        <Route path="*" element={<Search />} />
       </Routes>
     </Router>
     </>

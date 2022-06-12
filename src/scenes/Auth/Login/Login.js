@@ -1,16 +1,20 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Form, Button, Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
+import {  auth as AuthActions } from '../../../services/Auth/AuthActions'
 
 export const Login = () => {
+
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    console.error("Values: ", values);
+    dispatch(AuthActions.login(values));
   };
 
   return (
