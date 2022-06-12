@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-import { Search } from "../../Auth/Search/Search";
+import { Search } from "../../Search/Search";
 
 export const Private = () => {
   return (
@@ -9,6 +9,8 @@ export const Private = () => {
     <Router>
       <Routes>
         <Route exact path="/search" element={<Search />} />
+        <Route exact path="/" element={<Search />} />
+        <Route path="*" element={<Search />} />
       </Routes>
     </Router>
     </>
