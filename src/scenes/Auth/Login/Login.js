@@ -49,7 +49,7 @@ export const Login = () => {
             <Button type="link" onClick={() => navigate("/signup")}>
               Registrarse
             </Button>
-            <Button type="link" onClick={() => navigate("/")}>
+            <Button type="link" onClick={() => navigate("/forgetpassword")}>
               Olvidé mi contraseña
             </Button>
           </Form.Item>
