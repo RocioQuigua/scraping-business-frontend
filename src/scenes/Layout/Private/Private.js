@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-import { Search } from "../../Auth/Search/Search";
+import { Search } from "../../Search/Search";
 
 export const Private = () => {
   return (
