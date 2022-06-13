@@ -2,8 +2,8 @@ import { createActions } from "redux-actions";
 
 export const { auth } = createActions({
   AUTH: {
-    LOGIN: () => ({}),
-    LOGIN_RESPONSE: () => ({}),
+    LOGIN: ({ email, password }) => ({ email, password }),
+    LOGIN_RESPONSE: (token) => ({token}),
 
     SIGNUP: () => ({}),
     SIGNUP_RESPONSE: (token) => ({ token }),

@@ -1,15 +1,21 @@
 import React from "react";
 import { Form, Button, Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
-import {  auth as AuthActions } from '../../../services/Auth/AuthActions'
+import { auth as AuthActions } from "../../../services/Auth/AuthActions";
 
 export const Login = () => {
-
   const dispatch = useDispatch();
+
+  const { loading: loadingAuth } = useSelector((state) => state.auth);
+
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
@@ -41,10 +47,14 @@ export const Login = () => {
                 className="button-primary"
                 type="primary"
                 htmlType="submit"
-                disabled={!form.getFieldValue("email") || !form.getFieldValue('password')}
+                disabled={
+                  !form.getFieldValue("email") ||
+                  !form.getFieldValue("password") ||
+                  loadingAuth.login
+                }
                 block
               >
-                Ingresar
+                {loadingAuth.login ? <LoadingOutlined /> : "Ingresar"}
               </Button>
             )}
           </Form.Item>

@@ -1,11 +1,11 @@
-const jwtDecode = require("jwt-decode");
+import jwtDecode from "jwt-decode";
 
 class _Token {
   decode = (token) => jwtDecode(token || this.getToken());
 
   isTokenValid = () => {
     try {
-      return jwtDecode(this.getToken()) !== undefined;
+      return this.decode() !== undefined;
     } catch (e) {
       return false;
     }
@@ -16,7 +16,8 @@ class _Token {
   }
 
   setToken(type, token) {
-    if (type == "local") return localStorage.setItem("token", token);
+    if (type === "local")
+      return localStorage.setItem("token", token);
     return sessionStorage.setItem("token", token);
   }
 }

@@ -22,8 +22,8 @@ const reducer = handleActions(
     AUTH: {
       LOGIN: (state) => ({ ...state }),
       LOGIN_RESPONSE: {
-        next(state) {
-          return { ...state };
+        next(state, { payload: { token } }) {
+          return { ...state, token, authentication: true };
         },
       },
 
@@ -40,16 +40,20 @@ const reducer = handleActions(
 
       LOGOUT: (state) => ({ ...state, authentication: false }),
 
-      SET_ERROR: (state, { payload: { keyState, error } }) => ({ ...state,
+      SET_ERROR: (state, { payload: { keyState, error } }) => ({
+        ...state,
         error: { ...state.error, [keyState]: error },
       }),
-      SET_SUCCESS: (state, { payload: { keyState, newValue } }) => ({ ...state,
+      SET_SUCCESS: (state, { payload: { keyState, newValue } }) => ({
+        ...state,
         success: { ...state.success, [keyState]: newValue },
       }),
-      SET_LOADING: (state, { payload: { keyLoading, newValue } }) => ({ ...state,
+      SET_LOADING: (state, { payload: { keyLoading, newValue } }) => ({
+        ...state,
         loading: { ...state.loading, [keyLoading]: newValue },
       }),
-      SET_STATE: (state, { payload: { keyState, newValue } }) => ({ ...state,
+      SET_STATE: (state, { payload: { keyState, newValue } }) => ({
+        ...state,
         [keyState]: newValue,
       }),
     },

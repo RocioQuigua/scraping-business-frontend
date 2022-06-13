@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <div>
-      {!authentication ? <Private/> : <Public />}
+      {authentication ? <Private/> : <Public />}
     </div>
   );
 }
