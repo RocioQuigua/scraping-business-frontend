@@ -1,0 +1,10 @@
+.input-search {
+  border-radius: 5px;
+  border: 1px solid $color-gray-400 !important;
+  &__button {
+    border: none;
+    font-size: $font-size-m;
+    color: $color-gray-50 !important;
+    padding: 0px;
+  }
+}
