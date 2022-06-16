@@ -1,8 +1,6 @@
 @import 'base/generic';
 @import 'base/reset';
 
-@import 'modules/_all';
-
 @import 'utils/_colors';
 @import 'utils/_fonts';
 @import 'utils/_globals';
@@ -11,3 +9,6 @@
 @import 'utils/_variables';
 
 @import '~antd/dist/antd.css';
+
+@import 'modules/_all';
+

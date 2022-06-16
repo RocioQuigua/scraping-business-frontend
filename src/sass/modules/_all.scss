@@ -5,6 +5,11 @@
   "../../scenes/Search/Search.scss";
 
 //Atoms
-@import "../../components/atoms/InputCustom/InputCustom.scss";
-
+@import "../../components/atoms/Header/Header.scss",
+  "../../components/atoms/InputCustom/InputCustom.scss",
+  "../../components/atoms/InputSearch/InputSearch.scss";
+  
 //Organisms
+@import "../../components/organisms/CardPublication/CardPublication.scss",
+  "../../components/organisms/Pagination/Pagination.scss",
+  "../../components/organisms/Sidebar/Siderbar.scss";
