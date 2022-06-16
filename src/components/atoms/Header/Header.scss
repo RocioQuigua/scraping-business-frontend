@@ -1,0 +1,31 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-blue-800;
+  font-family: $font-poppins;
+  &__information {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 84% 10% 4%;
+    align-items: center;
+    h1 {
+      color: $color-slate-50;
+      margin-left: 16px;
+      font-weight: $font-weight-s;
+      font-size: $font-size-m;
+    }
+    h2 {
+      color: $color-slate-50;
+      font-weight: $font-weight-s;
+    }
+  }
+  &__btn-menu {
+    background: none !important;
+    border: none !important;
+    color: $color-slate-50 !important;
+    font-size: $font-size-e;
+    padding: 0px;
+  }
+}
