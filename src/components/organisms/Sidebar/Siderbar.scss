@@ -1,0 +1,30 @@
+.sidebar {
+  font-family: $font-poppins;
+  border: 5px solid $color-red-500;
+  &__options {
+    display: grid;
+    grid-template-columns: minmax(100px, 40px) 1fr;
+    border: 5px solid yellow;
+  } 
+  &__img {
+    width: 5%;
+    height: 10px;
+  }
+  &__close {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button {
+    font-weight: $font-weight-p;
+    color: $color-blue-800 !important;
+    text-decoration-line: underline;
+  }
+  h2 {
+    font-weight: $font-weight-p;
+    font-size: $font-size-p;
+  }
+  p {
+    font-weight: $font-weight-a;
+    padding: 0px;
+  }
+}
