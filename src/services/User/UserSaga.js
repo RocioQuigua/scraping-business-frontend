@@ -8,7 +8,6 @@ function* getProfile() {
   yield put(user.setError("getProfile", undefined));
 
   const response = yield Api.get("/user/profile");
-  console.error(response, '//////')
 
   if (response.ok) {
     yield put(user.getProfileResponse(response.payload.payload))
