@@ -11,16 +11,16 @@
   &__card {
     display: flex;
     justify-content: space-between;
+    &--group {
+      gap: 15px;
+    }
   }
   &__start {
     border: none;
-    color: $color-black-800 !important;
+    color: yellow!important;
     background-color: $color-slate-50;
     font-size: $font-size-m;
-    padding: 0px;
-    :active {
-      background-color: yellow;
-    }
+    cursor: pointer;
   }
   &__website {
     display: flex;
@@ -37,7 +37,7 @@
       margin-right: 15px;
     }
     &--sitie {
-      text-decoration-line: underline;
+      text-decoration-line: underline !important;
     }
   }
   h1 {
@@ -48,6 +48,7 @@
   h2 {
     font-weight: $font-weight-s;
     font-size: $font-size-a;
+    margin-top: 6px;
   }
   p {
     color: $color-gray-400;
