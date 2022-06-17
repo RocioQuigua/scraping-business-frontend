@@ -11,18 +11,18 @@ export const ForgetPassword = () => {
   };
 
   return (
-    <div className="ForgetPassword">
-      <div>
+    <div className="forget">
+      <div className="forget__info">
         <Form onFinish={onFinish} form={form}>
           <h1>Olvidé mi contraseña</h1>
-          <label>Correo*</label>
+          <label>Correo<strong className="forget__info forget__info--s">*</strong></label>
           <Form.Item name="email">
-            <InputCustom placeholder="example@tucorreo.com" />
+            <InputCustom className="forget__input" placeholder="example@tucorreo.com" />
           </Form.Item>
           <Form.Item shouldUpdate noStyle>
             {() => (
               <Button
-                className="button-primary"
+                className="forget__button"
                 type="primary"
                 htmlType="submit"
                 disabled={!form.getFieldValue("email")}
