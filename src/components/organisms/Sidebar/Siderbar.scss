@@ -3,7 +3,9 @@
   &__title {
     display: grid;
     margin-bottom: 60px;
-    border: 3px solid yellow;
+    padding: 2px;
+    border: 2px solid $color-gray-50;
+    border-radius: 10px;
   }
   &__options {
     display: grid;

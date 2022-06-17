@@ -1,13 +1,15 @@
 import React from "react";
 import { Drawer, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { auth as AuthActions } from "../../../services/Auth/AuthActions";
 
 export const Sidebar = ({ visible, setVisible }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { profile } = useSelector(state => state.user);
 
   const options = [
     {
@@ -56,12 +58,12 @@ export const Sidebar = ({ visible, setVisible }) => {
         <div className="sidebar__options">
           <img
             className="sidebar__img"
-            src= "../../../assets/images/user.png"
+            src={require('../../../assets/images/user.png')}
             alt="user logo"
           />
           <div>
-            <h2>Juan Camilo Castillo</h2>
-            <p>Administrador</p>
+            <h2>{`${profile?.person.name} ${profile?.person.lastname}`}</h2>
+            <p>{profile?.rol?.name || '__'}</p>
           </div>
         </div>
       </div>

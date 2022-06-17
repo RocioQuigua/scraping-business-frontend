@@ -1,62 +1,11 @@
-import React from "react";
+import { useState } from "react";
 
 import { InputSearch } from "../../components/atoms/InputSearch/InputSearch";
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
-
-import { Button, Checkbox, Select } from "antd";
-import {
-  DoubleLeftOutlined,
-  MenuFoldOutlined,
-  PlusCircleFilled,
-} from "@ant-design/icons";
+import { FiltersSearch } from "../../components/organisms/FiltersSearch/FiltersSearch";
 
 export const Search = () => {
-  const interests = [
-    {
-      name: "Lacteos",
-      count: 50,
-    },
-    {
-      name: "Yogurt",
-      count: 100,
-    },
-    {
-      name: "Queso",
-      count: null,
-    },
-  ];
-
-  const years = [2021, 2022, 2000, 2010, 2013];
-
-  const types = [
-    {
-      name: "Documentos",
-      count: 44,
-    },
-    {
-      name: "Articulos",
-      count: 1300,
-    },
-    {
-      name: "Trabajos de grado",
-      count: null,
-    },
-  ];
-
-  const countries = [
-    {
-      name: "Colombia",
-      count: 1340,
-    },
-    {
-      name: "Peru",
-      count: 4,
-    },
-    {
-      name: "Estados Unidos",
-      count: 170,
-    },
-  ];
+  const [visibleFilter, setVisibleFilters] = useState(true);
 
   const publications = [
     {
@@ -123,80 +72,9 @@ export const Search = () => {
   ];
 
   return (
-    <div className="search">
-      <div className="search__filter">
-        <div className="search__title">
-          <div className="search__title search__title--group">
-          <h1>Filtros</h1>
-          <Button className="search__button search__button--filter">
-            <MenuFoldOutlined />
-          </Button>
-          </div>
-          <Button 
-            className="search__button search__button--hide"
-            >
-            <DoubleLeftOutlined />
-          </Button>
-        </div>
-        <div className="search__item">
-          <div className="search__item-title search__item-title--row">
-            <h2>Intereses</h2>
-            <Button className="search__button search__button--agg">
-            <PlusCircleFilled />
-            </Button>
-          </div>
-          <div className="search__content">
-            {interests.map((interest, index) => (
-              <Checkbox className="search__checkbox">
-                {interest.name} (<strong>{interest.count}</strong>)
-              </Checkbox>
-            ))}
-            <Button className="search__button search__button--link" type="link">Mostrar mas...</Button>
-          </div>
-        </div>
-        <div className="search__item">
-          <div className="search__item-title search__item-title--row">
-            <h2>Año</h2>
-          </div>
-          <div className="search__content">
-            <div  className="search__select">
-            <Select className="search__select search__select--year" defaultValue={years[0]}>
-              {years.map((year, index) => (
-                <Select.Option key={index}>{year}</Select.Option>
-              ))}
-            </Select>
-            <Select className="search__select search__select--year" defaultValue={years[1]}>
-              {years.map((year, index) => (
-                <Select.Option key={index}>{year}</Select.Option>
-              ))}
-            </Select>
-            </div>
-          </div>
-        </div>
-        <div className="search__item">
-          <div className="search__item-title search__item-title--row">
-            <h2>Tipos</h2>
-          </div>
-          <div className="search__content">
-            {types.map((type, index) => (
-              <Checkbox className="search__checkbox">
-                {type.name} (<strong>{type.count}</strong>)
-              </Checkbox>
-            ))}
-          </div>
-        </div>
-        <div className="search__item">
-          <div className="search__item-title search__item-title--row">
-            <h2>Ubicación</h2>
-          </div>
-          <div className="search__content">
-            {countries.map((country, index) => (
-              <Checkbox className="search__checkbox">
-                {country.name} (<strong>{country.count}</strong>)
-              </Checkbox>
-            ))}
-          </div>
-        </div>
+    <div className={`search search--${!visibleFilter && "hide-filters"}`}>
+      <div className={`search__filter search__filter--${!visibleFilter && "hide"}`}>
+        <FiltersSearch visible={visibleFilter} setVisible={setVisibleFilters} />
       </div>
       <div className="search__container">
         <InputSearch placeholder="Que estas buscando?" allowClear />

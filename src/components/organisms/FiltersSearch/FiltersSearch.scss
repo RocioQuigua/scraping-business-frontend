@@ -1,0 +1,77 @@
+.filters-search {
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    color: $color-black-900 !important;
+    font-weight: $font-weight-p;
+    &--group {
+      display: flex;
+    }
+  }
+  &__filter {
+    border-right: 1px solid $color-gray-400;
+    padding: 15px;
+  }
+  &__button {
+    border: none;
+    &--filter {
+      font-size: $font-size-p;
+    }
+    &--hide {
+      font-size: $font-size-p;
+      color: $color-black-800 !important;
+    }
+    &--agg {
+      font-size: $font-size-p;
+      color: $color-blue-800 !important;
+      padding: 0px 15px;
+    }
+    &--link {
+      display: flex;
+      justify-content: flex-start;
+      padding: 0px;
+      color: $color-blue-800 !important;
+      margin-top: 5px;
+      text-decoration-line: underline !important;
+    }
+  }
+  &__item {
+    display: grid;
+    margin-bottom: 24px;
+    h2 {
+      color: $color-black-900;
+      font-weight: $font-weight-p;
+      margin: 0px;
+    }
+  }
+  &__item-title {
+    display: flex;
+    align-items: center;
+    font-weight: $font-weight-p;
+    color: $color-black-800;
+    &--row {
+      justify-content: space-between;
+      border-bottom: 1px solid $color-gray-400;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  &__select {
+    display: flex;
+    justify-content: space-evenly;
+    &--year {
+      width: 40%;
+      border-radius: 15px;
+    }
+  }
+  .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+    margin-left: 0px!important;
+  }
+  .ant-btn + ant-btn-link {
+    color: $color-blue-800;
+    margin-left: 0px;
+  }
+}

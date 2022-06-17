@@ -87,6 +87,8 @@ export class Api {
     if (!navigator.onLine) return { error: "DISCONNECT" };
 
     url = new URL(`${apiUrl}${url}`);
+    console.error(Token.getToken())
+
     if (params)
       Object.keys(params).forEach((key) =>
         url.searchParams.append(key, params[key])
