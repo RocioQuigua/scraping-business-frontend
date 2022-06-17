@@ -12,13 +12,15 @@
     align-items: center;
     h1 {
       color: $color-slate-50;
-      margin-left: 16px;
       font-weight: $font-weight-s;
       font-size: $font-size-m;
+      margin: 10px;
+      cursor: pointer;
     }
     h2 {
       color: $color-slate-50;
       font-weight: $font-weight-s;
+      margin-top: 5px;
     }
   }
   &__btn-menu {
