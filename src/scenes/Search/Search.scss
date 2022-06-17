@@ -20,4 +20,23 @@
     gap: 24px;
     padding: 24px;
   }
+  &__results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 {
+      font-weight: $font-weight-p;
+      font-size: $font-size-p;
+      color: $color-black-900 !important;
+      margin: 0px;
+    }
+    &--button {
+      font-weight: $font-weight-p;
+      font-size: $font-size-x;
+      color: $color-blue-800 !important;
+      border-bottom: 1px solid $color-gray-400 !important;
+      padding: 0px;
+      margin-top: 5px;
+    }
+  }
 }

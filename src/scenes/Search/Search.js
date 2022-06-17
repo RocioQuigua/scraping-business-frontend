@@ -4,6 +4,8 @@ import { InputSearch } from "../../components/atoms/InputSearch/InputSearch";
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
 import { FiltersSearch } from "../../components/organisms/FiltersSearch/FiltersSearch";
 
+import { Button } from 'antd';
+
 export const Search = () => {
   const [visibleFilter, setVisibleFilters] = useState(true);
 
@@ -73,11 +75,21 @@ export const Search = () => {
 
   return (
     <div className={`search search--${!visibleFilter && "hide-filters"}`}>
-      <div className={`search__filter search__filter--${!visibleFilter && "hide"}`}>
+      <div
+        className={`search__filter search__filter--${!visibleFilter && "hide"}`}
+      >
         <FiltersSearch visible={visibleFilter} setVisible={setVisibleFilters} />
       </div>
       <div className="search__container">
         <InputSearch placeholder="Que estas buscando?" allowClear />
+        <div className="search search__results">
+          <h1>Resultados()</h1>
+          <Button
+          className="search search__results--button"
+          type="link"
+          //onClick={}
+          >📊Analizar resultados</Button>
+        </div>
         {publications.map((publication, index) => (
           <CardPublication
             key={index}
