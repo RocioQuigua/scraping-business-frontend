@@ -29,6 +29,7 @@ export const { favorite } = createActions({
       typeKey,
     }),
     REMOVE: (id) => ({ id }),
+    REMOVE_RESPONSE: (newFavorites) => ({ newFavorites }),
 
     SET_ERROR: (keyState, error) => ({ keyState, error }),
     SET_SUCCESS: (keyState, newValue) => ({ keyState, newValue }),

@@ -1,23 +1,44 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import React, { useEffect } from "react";
+import { message } from "antd";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatterDate } from "../../common/Utils/FormatterDateUtils";
+import { AlertMessage } from "../../components/Modals/AlertMessage";
 
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
 import { favorite as FavoriteActions } from "../../services/Favorite/FavoriteActions";
+import { modal as ModalActions } from "../../services/Modal/ModalActions";
 
 export const Favorites = () => {
-  const { favorites, loading } = useSelector((state) => state.favorite);
+  const [visibleAlert, setVisibleAlert] = useState();
+  const { favorites, loading, success } = useSelector((state) => state.favorite);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (success.remove) {
+      dispatch(ModalActions.setModal("alertMessage", false, undefined))
+      dispatch(FavoriteActions.setSuccess('remove', undefined));
+      message.success('Se ha removido un elemento de favoritos')
+    }
+  }, [success.remove, dispatch]);
 
   useEffect(() => {
     dispatch(FavoriteActions.getAll());
   }, [dispatch]);
 
-  const handleRemove = () => {
-    
-  }
+  const handleRemove = (item) => {
+    dispatch(
+      ModalActions.setModal("alertMessage", true, {
+        title: "¿Estas seguro de remover el actual item?",
+        onClick: () => removeItem(item),
+      })
+    );
+  };
+
+  const removeItem = (item) => {
+    dispatch(FavoriteActions.remove(item.id));
+  };
 
   return (
     <div className="favorites">
@@ -41,11 +62,10 @@ export const Favorites = () => {
           ))}
         </div>
         <div className="favorites__loading">
-          {loading.getAll && (
-            <LoadingOutlined />
-          )}
+          {loading.getAll && <LoadingOutlined />}
         </div>
       </div>
+      <AlertMessage visible={visibleAlert} setVisible={setVisibleAlert} />
     </div>
   );
 };

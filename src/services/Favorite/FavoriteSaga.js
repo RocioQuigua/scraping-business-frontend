@@ -1,4 +1,4 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, select } from "redux-saga/effects";
 
 import { favorite } from "./FavoriteActions";
 import Api from "../../common/Api/Api";
@@ -50,9 +50,29 @@ function* getAll() {
   }
 }
 
+function* remove({ payload }) {
+  yield put(favorite.setLoading("remove", true));
+  yield put(favorite.setError("remove", undefined));
+
+  const response = yield Api.post(`/favorite/delete?id=${payload.id}`,);
+  
+  if (response.ok) {
+    let { favorites } = yield select(state => state.favorite);
+    favorites = favorites.filter(item => item.id !== payload.id)
+    yield put(favorite.removeResponse(favorites));
+    yield put(favorite.setLoading("remove", false));
+    yield put(favorite.setSuccess("remove", true));
+  } else {
+    yield put(favorite.setError("remove", response.payload));
+    yield put(favorite.setLoading("remove", false));
+  }
+}
+
 function* ActionWatcher() {
   yield takeLatest(favorite.getAll, getAll);
   yield takeLatest(favorite.create, create);
+  yield takeLatest(favorite.remove, remove);
+
 }
 
 export default function* rootSaga() {

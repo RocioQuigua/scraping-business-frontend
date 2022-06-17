@@ -22,7 +22,15 @@ const reducer = handleActions(
   {
     FAVORITE: {
       GET_ALL: (state) => ({ ...state }),
-      GET_ALL_RESPONSE: (state, { payload: { favorites } }) => ({ ...state, favorites }),
+      GET_ALL_RESPONSE: (state, { payload: { favorites } }) => ({
+        ...state,
+        favorites,
+      }),
+
+      REMOVE_RESPONSE: (state, { payload: { newFavorites } }) => ({
+        ...state,
+        favorites: newFavorites,
+      }),
 
       SET_ERROR: (state, { payload: { keyState, error } }) => ({
         ...state,

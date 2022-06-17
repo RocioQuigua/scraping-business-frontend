@@ -5,12 +5,14 @@ import reducerAuth from '../services/Auth/AuthReducer';
 import reducerUser from '../services/User/UserReducer';
 import reducerSearch from '../services/Search/SearchReducer';
 import reducerFavorite from '../services/Favorite/FavoriteReducer';
+import reducerModal from '../services/Modal/ModalReducer';
 
 const appReducer =  () => combineReducers({
   auth: reducerAuth,
   user: reducerUser,
   search: reducerSearch, 
   favorite: reducerFavorite,
+  modal: reducerModal,
 });
 
 const rootReducer = () => {
