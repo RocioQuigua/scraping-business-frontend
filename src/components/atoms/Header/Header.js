@@ -18,6 +18,7 @@ export const Header = () => {
         <h1 onClick={() => navigate("/")}>
           Search<strong>GO</strong>
         </h1>
+        <div className="header__information header__information--group"> 
         <h2>{profile?.person?.name}</h2>
         <Button
           className="header__btn-menu"
@@ -27,6 +28,7 @@ export const Header = () => {
         </Button>
         <Sidebar visible={visibleMenu} setVisible={setVisibleMenu} />
         {}
+        </div>
       </div>
     </div>
   );

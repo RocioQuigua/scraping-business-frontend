@@ -1,15 +1,18 @@
 .header {
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   background-color: $color-blue-800;
   font-family: $font-poppins;
   &__information {
     width: 100%;
-    display: grid;
-    grid-template-columns: 84% 10% 4%;
+    display: flex;
     align-items: center;
+    &--group {
+      margin: 10px;
+      justify-content: flex-end;
+      gap: 15px;
+    }
     h1 {
       color: $color-slate-50;
       font-weight: $font-weight-s;
