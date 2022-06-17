@@ -1,20 +1,28 @@
 import { handleActions } from "redux-actions";
 
 export const INITIAL_STATE = {
-  profile: undefined,
+  favorites: undefined,
   loading: {
-    getProfile: false,
+    getAll: false,
+    create: false,
+    remove: false,
   },
   error: {
-    getProfile: false,
+    getAll: undefined,
+    create: undefined,
+    remove: undefined,
   },
-  success: {},
+  success: {
+    create: undefined,
+    remove: undefined,
+  },
 };
 
 const reducer = handleActions(
   {
-    USER: {
-      GET_PROFILE_RESPONSE: (state, { payload: { profile } }) => ({ ...state, profile }),
+    FAVORITE: {
+      GET_ALL: (state) => ({ ...state }),
+      GET_ALL_RESPONSE: (state, { payload: { favorites } }) => ({ ...state, favorites }),
 
       SET_ERROR: (state, { payload: { keyState, error } }) => ({
         ...state,

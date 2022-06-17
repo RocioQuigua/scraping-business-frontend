@@ -1,26 +1,35 @@
 import React from "react";
 import { Button } from "antd";
-import { StarFilled, StarOutlined } from "@ant-design/icons";
+import {
+  BookOutlined,
+  StarFilled,
+  StarOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 
 export const CardPublication = ({
   title,
   description,
   date,
   words,
-  onClick,
+  authors,
+  journal,
+  origin,
   website,
+  type,
   isActive,
+  onClickStart,
 }) => {
   return (
     <div className="card-publication">
+      <div className="card-publication__card card-publication__card--group">
+        <h2>{date}</h2>
+        <button className="card-publication__start" onClick={onClickStart}>
+          {isActive ? <StarFilled /> : <StarOutlined />}
+        </button>
+      </div>
       <div className="card-publication__card">
         <h1>{title}</h1>
-        <div className="card-publication__card card-publication__card--group">
-          <h2>{date}</h2>
-          <button className="card-publication__start">
-            {isActive ? <StarFilled /> : <StarOutlined />}
-          </button>
-        </div>
       </div>
       <p>{description}</p>
       <div className="card-publication__website">
@@ -41,6 +50,19 @@ export const CardPublication = ({
         >
           Visitar sitio
         </Button>
+      </div>
+      <div className="card-publication__detail">
+        <h3>{origin}</h3>
+        {authors && (
+          <h3>
+            {authors} <TeamOutlined />
+          </h3>
+        )}
+        {journal && (
+          <h3>
+            {journal} <BookOutlined /> <strong>{type}</strong>
+          </h3>
+        )}
       </div>
     </div>
   );

@@ -11,7 +11,9 @@
   &__card {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     &--group {
+      justify-content: flex-end;
       gap: 15px;
     }
   }
@@ -21,7 +23,7 @@
   }
   &__start {
     border: none;
-    color: yellow!important;
+    color: $color-yellow-500 !important;
     background-color: $color-slate-50;
     font-size: $font-size-m;
     cursor: pointer;
@@ -30,6 +32,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 10px 0px;
   }
   &__button {
     display: flex;
@@ -41,22 +44,49 @@
       margin-right: 15px;
     }
     &--sitie {
+      font-size: medium;
+      font-weight: bold;
+      color: $color-blue-800!important;
       text-decoration-line: underline !important;
+      padding: 0px;
+      height: auto!important;
     }
   }
   h1 {
     color: $color-black-800;
     font-weight: $font-weight-p;
-    font-size: $font-size-e;
+    font-size: $font-size-x;
+    line-height: $font-size-e ;
+    text-align: justify;
+    padding-bottom: 16px;
   }
   h2 {
     font-weight: $font-weight-s;
     font-size: $font-size-a;
-    margin-top: 6px;
+    line-height: $font-size-a;
   }
   p {
-    color: $color-gray-400;
+    color: $color-black-800;
+    opacity: 0.4;
     font-weight: $font-weight-s;
-    font: $font-size-a;
+    font-size: $font-size-y;
+    line-height: $font-size-e ;
+    text-align: justify;
+  }
+  &__detail {
+    h3 {
+      color: $color-black-800;
+      font-size: small;
+      line-height: $font-size-a;
+    }
+    strong {
+      opacity: 1;
+      font-weight: bold;
+      color: $color-blue-800;
+    }
+  }
+  .anticon-usergroup-add {
+    font-size: 2vh;
+    margin: 5px;
   }
 }

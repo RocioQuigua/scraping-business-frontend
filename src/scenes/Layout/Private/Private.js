@@ -8,7 +8,7 @@ import { Profile } from "../../../scenes/Profile/Profile";
 import { Favorites } from "../../Favorites/Favorites";
 import { Business } from "../../Business/Business";
 
-import { user as UserActions } from '../../../services/User/UserActions';
+import { user as UserActions } from "../../../services/User/UserActions";
 
 export const Private = () => {
   const dispatch = useDispatch();
@@ -19,17 +19,16 @@ export const Private = () => {
 
   return (
     <Router>
+      <Header />
       <div>
-        <Header />
-        <div>
-          <Routes>
-            <Route exact path="/search" element={<Search />} />
-            <Route exact path="/" element={<Search />} />
-            <Route exact path="/profile" element={<Profile />} />
-            <Route exact path="/favorites" element={<Favorites />} />
-            <Route exact path="/business" element={<Business />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route exact path="/search" element={<Search />} />
+          <Route exact path="/" element={<Search />} />
+          <Route path="*" element={<Search />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/favorites" element={<Favorites />} />
+          <Route exact path="/business" element={<Business />} />
+        </Routes>
       </div>
     </Router>
   );

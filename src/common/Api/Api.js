@@ -1,9 +1,9 @@
 import { apiUrl } from "../Config/Environments";
 import { Token } from "../Storage/Token";
-//import { store } from "../../index";
-//import { auth as authActions } from "../../services/Auth/AuthActions";
+import { store } from "../../index";
+import { auth as authActions } from "../../services/Auth/AuthActions";
 
-export class Api {
+class Api {
   post(url, data, header) {
     if (!navigator.onLine) return { error: "DISCONNECT" };
 
@@ -24,7 +24,7 @@ export class Api {
     })
       .then(async (response) => {
         if (response.status === 401) {
-          //store.dispatch(authActions.logout());
+          store.dispatch(authActions.logout());
           return response;
         }
         response.payload = await response.json();
@@ -53,7 +53,7 @@ export class Api {
     })
       .then(async (response) => {
         if (response.status === 401) {
-          //store.dispatch(authActions.logout());
+          store.dispatch(authActions.logout());
           return response;
         }
         response.payload = await response.json();
@@ -74,7 +74,7 @@ export class Api {
     })
       .then(async (response) => {
         if (response.status === 401) {
-          //store.dispatch(authActions.logout());
+          store.dispatch(authActions.logout());
           return response;
         }
         response.payload = await response.json();
@@ -86,8 +86,8 @@ export class Api {
   get(url, params) {
     if (!navigator.onLine) return { error: "DISCONNECT" };
 
+    console.error( 'URL ', url)
     url = new URL(`${apiUrl}${url}`);
-    console.error(Token.getToken())
 
     if (params)
       Object.keys(params).forEach((key) =>
@@ -101,7 +101,7 @@ export class Api {
     })
       .then(async (response) => {
         if (response.status === 401) {
-          //store.dispatch(authActions.logout());
+          store.dispatch(authActions.logout());
           return response;
         }
         response.payload = await response.json();

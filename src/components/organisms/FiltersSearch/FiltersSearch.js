@@ -83,7 +83,7 @@ export const FiltersSearch = ({ visible, setVisible }) => {
             </div>
             <div className="filters-search__content">
               {interests.map((interest, index) => (
-                <Checkbox className="filters-search__checkbox">
+                <Checkbox className="filters-search__checkbox" key={index}>
                   {interest.name} (<strong>{interest.count}</strong>)
                 </Checkbox>
               ))}
@@ -126,7 +126,7 @@ export const FiltersSearch = ({ visible, setVisible }) => {
             </div>
             <div className="filters-search__content">
               {types.map((type, index) => (
-                <Checkbox className="filters-search__checkbox">
+                <Checkbox className="filters-search__checkbox" key={index}>
                   {type.name} (<strong>{type.count}</strong>)
                 </Checkbox>
               ))}
@@ -138,7 +138,7 @@ export const FiltersSearch = ({ visible, setVisible }) => {
             </div>
             <div className="filters-search__content">
               {countries.map((country, index) => (
-                <Checkbox className="filters-search__checkbox">
+                <Checkbox className="filters-search__checkbox" key={index}>
                   {country.name} (<strong>{country.count}</strong>)
                 </Checkbox>
               ))}
