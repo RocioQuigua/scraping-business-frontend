@@ -3,11 +3,18 @@
   grid-template-columns: 20% 80%;
   font-family: $font-poppins;
   padding: 10px;
+  &__filter {
+    border-right: 1px solid $color-gray-400;
+    padding: 15px;
+  }
   &__title {
     display: flex;
     justify-content: space-between;
     color: $color-black-900 !important;
     font-weight: $font-weight-p;
+    &--group {
+      display: flex;
+    }
   }
   &__item {
     display: grid;
@@ -15,8 +22,7 @@
     h2 {
       color: $color-black-900;
       font-weight: $font-weight-p;
-      text-decoration-line: underline;
-      text-decoration-color: $color-gray-50;
+      margin: 0px;
     }
   } 
   &__item-title {
@@ -26,13 +32,13 @@
     color: $color-black-800;
     &--row {
       justify-content: space-between;
+      border-bottom: 1px solid $color-gray-400;
     }
   }
   &__button {
     border: none;
     &--filter {
       font-size: $font-size-p;
-      color: $color-black-800 !important;
     }
     &--hide {
       font-size: $font-size-p;
@@ -47,13 +53,15 @@
       display: flex;
       justify-content: flex-start;
       padding: 0px;
-      color: $color-blue-800;
+      color: $color-blue-800 !important;
       margin-top: 5px;
+      text-decoration-line: underline !important;
     }
   }
   &__content {
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
   }
   &__select {
     display: flex;

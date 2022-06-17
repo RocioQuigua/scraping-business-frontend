@@ -7,7 +7,7 @@ import { Button, Checkbox, Select } from "antd";
 import {
   DoubleLeftOutlined,
   MenuFoldOutlined,
-  PlusCircleOutlined,
+  PlusCircleFilled,
 } from "@ant-design/icons";
 
 export const Search = () => {
@@ -64,6 +64,7 @@ export const Search = () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
       date: "10/06/2021",
+      isActive: true,
       words: [
         {
           name: "leche",
@@ -117,6 +118,7 @@ export const Search = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
       date: "10/06/2021",
       siteUrl: "https://es.reactjs.org/docs/handling-events.html",
+      isActive: true,
     },
   ];
 
@@ -124,10 +126,12 @@ export const Search = () => {
     <div className="search">
       <div className="search__filter">
         <div className="search__title">
+          <div className="search__title search__title--group">
           <h1>Filtros</h1>
           <Button className="search__button search__button--filter">
             <MenuFoldOutlined />
           </Button>
+          </div>
           <Button 
             className="search__button search__button--hide"
             >
@@ -138,7 +142,7 @@ export const Search = () => {
           <div className="search__item-title search__item-title--row">
             <h2>Intereses</h2>
             <Button className="search__button search__button--agg">
-              <PlusCircleOutlined />
+            <PlusCircleFilled />
             </Button>
           </div>
           <div className="search__content">
@@ -151,7 +155,7 @@ export const Search = () => {
           </div>
         </div>
         <div className="search__item">
-          <div className="search__item-title">
+          <div className="search__item-title search__item-title--row">
             <h2>Año</h2>
           </div>
           <div className="search__content">
@@ -170,7 +174,7 @@ export const Search = () => {
           </div>
         </div>
         <div className="search__item">
-          <div className="search__item-title">
+          <div className="search__item-title search__item-title--row">
             <h2>Tipos</h2>
           </div>
           <div className="search__content">
@@ -182,7 +186,7 @@ export const Search = () => {
           </div>
         </div>
         <div className="search__item">
-          <div className="search__item-title">
+          <div className="search__item-title search__item-title--row">
             <h2>Ubicación</h2>
           </div>
           <div className="search__content">
@@ -204,6 +208,7 @@ export const Search = () => {
             date={publication.date}
             words={publication.words}
             website={publication.siteUrl}
+            isActive={publication.isActive}
           />
         ))}
       </div>
