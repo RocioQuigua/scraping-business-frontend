@@ -15,6 +15,10 @@
       gap: 15px;
     }
   }
+  &__results {
+    display: flex;
+    justify-content: space-between;
+  }
   &__start {
     border: none;
     color: yellow!important;
