@@ -1,18 +1,31 @@
 .sidebar {
   font-family: $font-poppins;
-  border: 5px solid $color-red-500;
+  &__title {
+    display: grid;
+    margin-bottom: 60px;
+    border: 3px solid yellow;
+  }
   &__options {
     display: grid;
-    grid-template-columns: minmax(100px, 40px) 1fr;
-    border: 5px solid yellow;
+    grid-template-columns: minmax(0px, 60px) 1fr;
+    cursor: pointer;
   } 
+  &__menu {
+    display: grid;
+    gap: 20px;
+  }
   &__img {
-    width: 5%;
-    height: 10px;
+    width: fit-content;
+    height: 40px;
+    margin: 10px;
+  }
+  &__info {
+    margin-left: 28px;
   }
   &__close {
     display: flex;
     justify-content: space-between;
+    margin-top: 60px;
   }
   &__button {
     font-weight: $font-weight-p;
@@ -21,10 +34,11 @@
   }
   h2 {
     font-weight: $font-weight-p;
-    font-size: $font-size-p;
+    font-size: $font-size-x;
+    margin-bottom: 0px;
   }
   p {
     font-weight: $font-weight-a;
-    padding: 0px;
+    margin: 0px;
   }
 }
