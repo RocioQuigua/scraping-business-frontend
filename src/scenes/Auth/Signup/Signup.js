@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button, Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons"; 
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
@@ -15,49 +15,79 @@ export const Signup = () => {
 
   return (
     <div className="signup">
-      <div>
+      <div className="signup__info">
         <Form onFinish={onFinish} form={form}>
           <h1>Registro</h1>
           <h2>Información personal</h2>
-          <label className="name">Nombres*</label>
+          <label className="signup__title">
+            Nombres<strong className="signup__title signup__title--s">*</strong>
+          </label>
           <Form.Item name="name">
             <InputCustom />
           </Form.Item>
-          <label className="surname">Apellidos*</label>
+          <label className="signup__title">
+            Apellidos
+            <strong className="signup__title signup__title--s">*</strong>
+          </label>
           <Form.Item name="surname">
             <InputCustom />
           </Form.Item>
-          <label>Celular*</label>
+          <label className="signup__title">
+            Celular<strong className="signup__title signup__title--s">*</strong>
+          </label>
           <Form.Item name="phone">
-            <Input maxLength={10} />
+            <Input className="signu__input" maxLength={10} />
           </Form.Item>
-          <label>Correo*</label>
+          <label className="signup__title">
+            Correo<strong className="signup__title signup__title--s">*</strong>
+          </label>
           <Form.Item name="email">
-            <InputCustom  placeholder="example@tucorreo.com"/>
+            <InputCustom
+              placeholder="example@tucorreo.com"
+            />
           </Form.Item>
-          <label>Contraseña*</label>
+          <label className="signup__title">
+            Contraseña
+            <strong className="signup__title signup__title--s">*</strong>
+          </label>
           <Form.Item name="password">
             <Input.Password
-            placeholder="********"
-            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              className="signu__input signu__input--password"
+              placeholder="********"
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
             />
           </Form.Item>
           <Form.Item shouldUpdate noStyle>
             {() => (
-              <Button 
-              className="button-primary"
-              type="primary" 
-              htmlType="submit"
-              disabled={!form.getFieldValue("name") || !form.getFieldValue("surname") || !form.getFieldValue("phone") || !form.getFieldValue("email") || !form.getFieldValue("password")}
-              block >
-                Siguiente</Button>
+              <Button
+                className="signup__button"
+                type="primary"
+                htmlType="submit"
+                disabled={
+                  !form.getFieldValue("name") ||
+                  !form.getFieldValue("surname") ||
+                  !form.getFieldValue("phone") ||
+                  !form.getFieldValue("email") ||
+                  !form.getFieldValue("password")
+                }
+                block
+              >
+                Siguiente
+              </Button>
             )}
-          </Form.Item > 
-          <label>Tienes una cuenta?</label>
-          <Form.Item noStyle>
-            <Button type="link" onClick={() => navigate('/login')}>
-              Ingresar</Button>
           </Form.Item>
+          <div className="signup__footer">
+              <label>Tienes una cuenta?</label>
+              <Button
+                className="signup__footer signup__footer--button"
+                type="link"
+                onClick={() => navigate("/login")}
+              >
+                Ingresar
+              </Button>
+            </div>
         </Form>
       </div>
     </div>
