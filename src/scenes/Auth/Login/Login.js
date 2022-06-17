@@ -25,7 +25,7 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <div className="login__content">
+      <div className="login__info">
         <Form onFinish={onFinish} form={form}>
           <h1 className="login__content login__content--titlep">Iniciar sesion</h1>
           <label className="login__content login__content--title">Correo<strong className="login__content login__content--s">*</strong></label>

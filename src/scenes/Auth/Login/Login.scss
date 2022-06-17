@@ -1,17 +1,22 @@
 .login {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  &__info {
+    width: 30%;
+  }
   &__content {
     font-weight: $font-weight-p;
     &--titlep {
+      display: flex;
+      justify-content: center;
       font-size: $font-size-s;
       color: $color-black-900;
+      margin-bottom: 40px;
     }
     &--title {
-      //border: 3px solid purple;
       font-size: $font-size-p;
       color: $color-black-800;
     }
