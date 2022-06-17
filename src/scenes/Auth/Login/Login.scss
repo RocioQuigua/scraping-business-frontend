@@ -4,21 +4,58 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.title-one {
-  font-weight: 700;
-  font-size: 40px;
-  color: #000000;
-  text-align: center;
-}
-.title-two {
-  font-weight: 400;
-  font-size: 22px;
-  color: #000000;
-  margin-bottom: 5px;
-}
-.button-primary {
-  border-radius: 5px;
-  color: #FFFF;
-  background-color: blue;
+  &__content {
+    font-weight: $font-weight-p;
+    &--titlep {
+      font-size: $font-size-s;
+      color: $color-black-900;
+    }
+    &--title {
+      //border: 3px solid purple;
+      font-size: $font-size-p;
+      color: $color-black-800;
+    }
+    &--s {
+      color: $color-red-500;
+    }
+    &--input {
+      font-weight: $font-weight-a;
+      font-size: $font-size-x;
+      color: $color-gray-400;
+      border: 1px solid $color-gray-400 !important;
+      border-radius: 5px;
+      margin-top: 6px;
+    }
+  }
+  &__button {
+    border-radius: 5px;
+    margin-top: 14px;
+  }
+  &__footer {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--group {
+      flex-direction: row;
+      margin-top: 60px;
+      padding: 0px;
+      font-weight: $font-weight-a;
+      justify-content: center;
+    }
+    &--button {
+      font-weight: $font-weight-p;
+      font-size: $font-size-y;
+      text-decoration-line: underline !important;
+      color: $color-blue-800 !important;
+      padding: 5px;
+    }
+    &--buttonp {
+      font-weight: $font-weight-p;
+      font-size: $font-size-y;
+      text-decoration-line: underline !important;
+      color: $color-blue-800 !important;
+    }
+  }
 }

@@ -25,16 +25,19 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <div>
+      <div className="login__content">
         <Form onFinish={onFinish} form={form}>
-          <h1 className="title-one">Iniciar sesion</h1>
-          <label className="title-two">Correo*</label>
+          <h1 className="login__content login__content--titlep">Iniciar sesion</h1>
+          <label className="login__content login__content--title">Correo<strong className="login__content login__content--s">*</strong></label>
           <Form.Item name="email">
-            <InputCustom placeholder="example@tucorreo.com" />
+            <InputCustom 
+            className="login__content login__content--input"
+            placeholder="example@tucorreo.com" />
           </Form.Item>
-          <label className="title-two">Contraseña*</label>
+          <label className="login__content login__content--title">Contraseña<strong className="login__content login__content--s">*</strong></label>
           <Form.Item name="password">
             <Input.Password
+              className="login__content login__content--input"
               placeholder="********"
               iconRender={(visible) =>
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
@@ -44,7 +47,7 @@ export const Login = () => {
           <Form.Item shouldUpdate noStyle>
             {() => (
               <Button
-                className="button-primary"
+                className="login__button"
                 type="primary"
                 htmlType="submit"
                 disabled={
@@ -58,15 +61,17 @@ export const Login = () => {
               </Button>
             )}
           </Form.Item>
-          <Form.Item className="footer" noStyle>
-            <label>No tienes una cuenta?</label>
-            <Button type="link" onClick={() => navigate("/signup")}>
-              Registrarse
-            </Button>
-            <Button type="link" onClick={() => navigate("/forgetpassword")}>
+          <div className="login__footer">
+            <div className="login__footer login__footer--group">
+              <label>No tienes una cuenta?</label>
+              <Button className="login__footer login__footer--button" type="link" onClick={() => navigate("/signup")}>
+                Registrarse
+              </Button>
+            </div>
+            <Button className="login__footer login__footer--buttonp" type="link" onClick={() => navigate("/forgetpassword")}>
               Olvidé mi contraseña
             </Button>
-          </Form.Item>
+          </div>
         </Form>
       </div>
     </div>
