@@ -88,7 +88,7 @@ export const Search = () => {
           className="search search__results--button"
           type="link"
           //onClick={}
-          >📊Analizar resultados</Button>
+          >📊 Analizar resultados</Button>
         </div>
         {publications.map((publication, index) => (
           <CardPublication
