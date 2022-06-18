@@ -20,6 +20,7 @@ export const Signup = () => {
     "Lacteos",
     "Agropecuario",
     "Pesquero",
+    "Turismo", 
   ];
 
   return (
@@ -114,11 +115,19 @@ export const Signup = () => {
             <InputCustom className="signu__input" />
           </Form.Item>
           <label className="signup__title">
+              Nit
+            </label>
+            <Form.Item name="nitBusiness">
+              <Input className="signup__input" maxLength={10} />
+            </Form.Item>
+          <label className="signup__title">
             Tipo de negocio
             <strong className="signup__title signup__title--s">*</strong>
           </label>
-          <Form.Item name="typeBusiness">
-            <Select className="signup__options" defaultValue={business[0]}>
+          <Form.Item  name="typeBusiness">
+            <Select  
+            className="signup__options" 
+            defaultValue={business[0]}>
               {business.map((busines, index) => (
                 <Select.Option key={index}>{busines}</Select.Option>
               ))}
@@ -132,6 +141,7 @@ export const Signup = () => {
                 htmlType="submit"
                 disabled={
                   !form.getFieldValue("nameBusiness") ||
+                  !form.getFieldValue("nitBusiness") ||
                   !form.getFieldValue("typeBusiness")
                 }
                 block
