@@ -42,6 +42,10 @@
       color: $color-red-500 !important;
     }
   }
+  &__input {
+    border-radius: 5px;
+    border: 1px solid $color-gray-400  !important;
+  }
   &__button {
     border-radius: 5px;
     margin-top: 14px;
@@ -80,18 +84,5 @@
       border: 1px solid $color-gray-400 !important;
       border-radius: 5px;
       margin-top: 4px;
-  }
-  .ant-input-affix-wrapper {
-    border-radius: 5px;
-    width: 100%;
-    border: none;
-  }
-  .ant-input-password {
-    border-radius: 5px;
-    border: 1px solid $color-gray-400 !important;
-  }
-  .ant-input {
-    border-radius: 5px;
-    border: 1px solid $color-gray-400 !important;
   }
 }

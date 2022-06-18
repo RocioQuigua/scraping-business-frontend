@@ -48,7 +48,7 @@ export const Signup = () => {
               <strong className="signup__title signup__title--s">*</strong>
             </label>
             <Form.Item name="phone">
-              <Input className="signu__input" maxLength={10} />
+              <Input className="signup__input" maxLength={10} />
             </Form.Item>
             <label className="signup__title">
               Correo
@@ -63,7 +63,7 @@ export const Signup = () => {
             </label>
             <Form.Item name="password">
               <Input.Password
-                className="signu__input signu__input--password"
+                className="signup__input"
                 placeholder="********"
                 iconRender={(visible) =>
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
