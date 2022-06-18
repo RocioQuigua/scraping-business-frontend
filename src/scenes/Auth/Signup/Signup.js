@@ -4,8 +4,11 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
+import { useSelector } from "react-redux";
 
 export const Signup = () => {
+
+  const { categories } = useSelector(state => state.utils);
   const [visibleInfo, setVisibleInfo] = useState(true);
 
   const [form] = Form.useForm();
@@ -14,14 +17,6 @@ export const Signup = () => {
   const onFinish = (values) => {
     console.error("Values", values);
   };
-
-  const business = [
-    "Seleccionar una opcion",
-    "Lacteos",
-    "Agropecuario",
-    "Pesquero",
-    "Turismo",
-  ];
 
   return (
     <div className="signup">
@@ -34,35 +29,52 @@ export const Signup = () => {
               Nombres
               <strong className="signup__title signup__title--s">*</strong>
             </label>
-            <Form.Item name="name">
+            <Form.Item name="name" rules={[{ required: true, message: "" }]}>
               <InputCustom />
             </Form.Item>
             <label className="signup__title">
               Apellidos
               <strong className="signup__title signup__title--s">*</strong>
             </label>
-            <Form.Item name="surname">
+            <Form.Item
+              name="lastname"
+              rules={[{ required: true, message: "" }]}
+            >
               <InputCustom />
             </Form.Item>
             <label className="signup__title">
               Celular
               <strong className="signup__title signup__title--s">*</strong>
             </label>
-            <Form.Item name="phone">
+            <Form.Item name="phone" rules={[{ required: true, message: "" }]}>
               <Input className="signup__input" maxLength={10} />
             </Form.Item>
             <label className="signup__title">
               Correo
               <strong className="signup__title signup__title--s">*</strong>
             </label>
-            <Form.Item name="email">
+            <Form.Item name="email" rules={[{ required: true, message: "" }]}>
               <InputCustom placeholder="example@tucorreo.com" />
+            </Form.Item>
+            <label className="signup__title">
+              Tipo de actividad
+              <strong className="signup__title signup__title--s">*</strong>
+            </label>
+            <Form.Item name="typeBusiness">
+              <Select className="signup__options" placeholder="Selecciona una opción">
+                {categories.map((busines, index) => (
+                  <Select.Option key={index} value={busines.id}>{busines.name}</Select.Option>
+                ))}
+              </Select>
             </Form.Item>
             <label className="signup__title">
               Contraseña
               <strong className="signup__title signup__title--s">*</strong>
             </label>
-            <Form.Item name="password">
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: "" }]}
+            >
               <Input.Password
                 className="signup__input"
                 placeholder="********"
@@ -79,7 +91,7 @@ export const Signup = () => {
                   htmlType="submit"
                   disabled={
                     !form.getFieldValue("name") ||
-                    !form.getFieldValue("surname") ||
+                    !form.getFieldValue("lastname") ||
                     !form.getFieldValue("phone") ||
                     !form.getFieldValue("email") ||
                     !form.getFieldValue("password")
@@ -120,17 +132,6 @@ export const Signup = () => {
             <label className="signup__title">Nit</label>
             <Form.Item name="nitBusiness">
               <Input className="signup__input" maxLength={10} />
-            </Form.Item>
-            <label className="signup__title">
-              Tipo de negocio
-              <strong className="signup__title signup__title--s">*</strong>
-            </label>
-            <Form.Item name="typeBusiness">
-              <Select className="signup__options" defaultValue={business[0]}>
-                {business.map((busines, index) => (
-                  <Select.Option key={index}>{busines}</Select.Option>
-                ))}
-              </Select>
             </Form.Item>
             <Form.Item shouldUpdate noStyle>
               {() => (
