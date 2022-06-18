@@ -4,11 +4,15 @@ export const INITIAL_STATE = {
   profile: undefined,
   loading: {
     getProfile: false,
+    updateProfile: false
   },
   error: {
     getProfile: false,
+    updateProfile: false,
   },
-  success: {},
+  success: {
+    updateProfile: false,
+  },
 };
 
 const reducer = handleActions(
