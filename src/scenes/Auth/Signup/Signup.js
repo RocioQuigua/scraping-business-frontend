@@ -20,7 +20,7 @@ export const Signup = () => {
     "Lacteos",
     "Agropecuario",
     "Pesquero",
-    "Turismo", 
+    "Turismo",
   ];
 
   return (
@@ -105,58 +105,58 @@ export const Signup = () => {
         </div>
       ) : (
         <div className="signup__info">
-          <h1 className="signup__titlep signup__titlep-b">Registro</h1>
-          <h2 className="signup__titles signup__titles-b">Información de la empresa</h2>
-          <label className="signup__title">
-            Nombre de la empresa
-            <strong className="signup__title signup__title--s">*</strong>
-          </label>
-          <Form.Item name="nameBusiness">
-            <InputCustom className="signu__input" />
-          </Form.Item>
-          <label className="signup__title">
-              Nit
+          <Form onFinish={onFinish} form={form}>
+            <h1 className="signup__titlep signup__titlep-b">Registro</h1>
+            <h2 className="signup__titles signup__titles-b">
+              Información de la empresa
+            </h2>
+            <label className="signup__title">
+              Nombre de la empresa
+              <strong className="signup__title signup__title--s">*</strong>
             </label>
+            <Form.Item name="nameBusiness">
+              <InputCustom className="signu__input" />
+            </Form.Item>
+            <label className="signup__title">Nit</label>
             <Form.Item name="nitBusiness">
               <Input className="signup__input" maxLength={10} />
             </Form.Item>
-          <label className="signup__title">
-            Tipo de negocio
-            <strong className="signup__title signup__title--s">*</strong>
-          </label>
-          <Form.Item  name="typeBusiness">
-            <Select  
-            className="signup__options" 
-            defaultValue={business[0]}>
-              {business.map((busines, index) => (
-                <Select.Option key={index}>{busines}</Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item shouldUpdate noStyle>
-            {() => (
-              <Button
-                className="signup__button signup__button--created"
-                type="primary"
-                htmlType="submit"
-                disabled={
-                  !form.getFieldValue("nameBusiness") ||
-                  !form.getFieldValue("nitBusiness") ||
-                  !form.getFieldValue("typeBusiness")
-                }
-                block
-              >
-                Crear cuenta
-              </Button>
-            )}
-          </Form.Item>
-          <Button
-            className="signup__footer signup__footer--back"
-            type="link"
-            onClick={() => setVisibleInfo(true)}
-          >
-            Atras
-          </Button>
+            <label className="signup__title">
+              Tipo de negocio
+              <strong className="signup__title signup__title--s">*</strong>
+            </label>
+            <Form.Item name="typeBusiness">
+              <Select className="signup__options" defaultValue={business[0]}>
+                {business.map((busines, index) => (
+                  <Select.Option key={index}>{busines}</Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item shouldUpdate noStyle>
+              {() => (
+                <Button
+                  className="signup__button signup__button--created"
+                  type="primary"
+                  htmlType="submit"
+                  disabled={
+                    !form.getFieldValue("nameBusiness") ||
+                    !form.getFieldValue("nitBusiness") ||
+                    !form.getFieldValue("typeBusiness")
+                  }
+                  block
+                >
+                  Crear cuenta
+                </Button>
+              )}
+            </Form.Item>
+            <Button
+              className="signup__footer signup__footer--back"
+              type="link"
+              onClick={() => setVisibleInfo(true)}
+            >
+              Atras
+            </Button>
+          </Form>
         </div>
       )}
     </div>
