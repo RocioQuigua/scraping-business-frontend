@@ -8,27 +8,34 @@
   &__info {
     width: 30%;
   }
-  h1 {
+  &__titlep {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     font-weight: $font-weight-p;
-    color: $color-black-900;
+    font-size: $font-size-z;
+    color: $color-black-900 !important;
     margin: 0px;
+    &-b {
+      margin-bottom: 8px;
+    }
   }
-  h2 {
+  &__titles {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     font-weight: $font-weight-a;
-    font-size: $font-size-x;
-    color: $color-black-800;
+    font-size: $font-size-y;
+    color: $color-black-800 !important;
+    margin-bottom: 16px;
+    &-b {
+      margin-bottom: 36px;
+    }
   }
   &__title {
     font-weight: $font-weight-p;
-    font-size: $font-size-p;
     color: $color-black-800 !important;
     &--s {
       font-size: $font-size-x;
@@ -38,6 +45,9 @@
   &__button {
     border-radius: 5px;
     margin-top: 14px;
+    &--created {
+      margin-top: 100px;
+    }
   }
   &__footer {
     font-weight: $font-weight-a;
@@ -54,6 +64,22 @@
       color: $color-blue-800 !important;
       padding: 5px;
     }
+    &--back {
+      justify-content: center;
+      align-items: center;
+      font-weight: $font-weight-p;
+      font-size: $font-size-y;
+      text-decoration-line: underline !important;
+      color: $color-blue-800 !important;
+      margin: 0px;
+      padding-top: 40px;
+      width: 100%;
+    }
+  }
+  &__options {
+      border: 1px solid $color-gray-400 !important;
+      border-radius: 5px;
+      margin-top: 4px;
   }
   .ant-input-affix-wrapper {
     border-radius: 5px;
