@@ -2,10 +2,15 @@
   &__title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: $color-black-900 !important;
     font-weight: $font-weight-p;
+    font-size: $font-size-p;
+    padding: 0px;
+    margin-bottom: 12px;
     &--group {
       display: flex;
+      margin: 0px;
     }
   }
   &__filter {
@@ -16,10 +21,13 @@
     border: none;
     &--filter {
       font-size: $font-size-p;
+      padding: 0px;
+      margin: 8px;
     }
     &--hide {
       font-size: $font-size-p;
       color: $color-black-800 !important;
+      padding: 0px;
     }
     &--agg {
       font-size: $font-size-p;
