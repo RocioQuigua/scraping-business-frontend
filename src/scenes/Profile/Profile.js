@@ -4,9 +4,12 @@ import { Form, Button, Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 import { InputCustom } from "../../components/atoms/InputCustom/InputCustom";
+import { useSelector } from "react-redux";
 
 export const Profile = () => {
   const [form] = Form.useForm();
+
+  const { profile } = useSelector(state => state.user);
 
   const onFinish = (values) => {
     console.error("Values", values);
