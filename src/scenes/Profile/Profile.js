@@ -14,8 +14,15 @@ export const Profile = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const { profile, loading, success } = useSelector((state) => state.user);
+  const { profile, loading, success, error } = useSelector((state) => state.user);
   const { categories } = useSelector((state) => state.utils);
+
+  useEffect(() => {
+    if (error.updateProfile) {
+      message.error(error.updateProfile.detail);
+      dispatch(UserActions.setError("updateProfile", undefined));
+    }
+  }, [error, dispatch]);
 
   useEffect(() => {
     if (success.updateProfile) {

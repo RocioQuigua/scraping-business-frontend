@@ -15,6 +15,7 @@ export const Private = () => {
 
   useEffect(() => {
     dispatch(UserActions.getProfile());
+    dispatch(UserActions.getBusiness());
   }, [dispatch]);
 
   return (

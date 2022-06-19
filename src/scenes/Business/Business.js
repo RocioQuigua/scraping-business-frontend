@@ -1,50 +1,47 @@
-import React from "react";
-
-import { Form, Button, Input, Select } from "antd";
+import React, { useEffect } from "react";
+import { Form, Button, Input, message } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
 import { InputCustom } from "../../components/atoms/InputCustom/InputCustom";
+import { user as UserActions } from "../../services/User/UserActions";
+import { LoadingOutlined } from "@ant-design/icons";
 
 export const Business = () => {
+  const dispatch = useDispatch();
+  const { loading, business, success } = useSelector((state) => state.user);
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.error("Values", values);
-  };
+  useEffect(() => {
+    if (success.updateBusiness) {
+      message.success("Actualizacion exitosa!");
+      dispatch(UserActions.setSuccess("updateBusiness", undefined));
+    }
+  }, [success.updateBusiness, dispatch]);
 
-  const business = [
-    "Seleccionar una opcion",
-    "Lacteos",
-    "Agropecuario",
-    "Pesquero",
-    "Turismo",
-  ];
+  useEffect(() => {
+    if (business)
+      form.setFieldsValue({
+        name: business.name,
+        nit: business.nit,
+      });
+  }, [business, form]);
+
+  const onFinish = (values) => {
+    dispatch(UserActions.updateBusiness(values));
+  };
 
   return (
     <div className="business">
       <div className="business__info">
         <Form onFinish={onFinish} form={form}>
           <h1 className="business__titlep">Información empresarial</h1>
-          <label className="business__title">
-            Nombre de la empresa
-            <strong className="business__title business__title--s">*</strong>
-          </label>
-          <Form.Item name="nameBusiness">
+          <label className="business__title">Nombre de la empresa</label>
+          <Form.Item name="name">
             <InputCustom className="business__input" />
           </Form.Item>
           <label className="business__title">Nit</label>
-          <Form.Item name="nitBusiness">
+          <Form.Item name="nit">
             <Input className="business__input" maxLength={10} />
-          </Form.Item>
-          <label className="business__title">
-            Tipo de negocio
-            <strong className="business__title business__title--s">*</strong>
-          </label>
-          <Form.Item name="typeBusiness">
-            <Select className="business__options" defaultValue={business[0]}>
-              {business.map((busines, index) => (
-                <Select.Option key={index}>{busines}</Select.Option>
-              ))}
-            </Select>
           </Form.Item>
           <Form.Item shouldUpdate noStyle>
             {() => (
@@ -54,7 +51,8 @@ export const Business = () => {
                 htmlType="submit"
                 block
               >
-                Actualizar datos
+                {!loading.updateBusiness && "Actualizar datos"}
+                {loading.updateBusiness && <LoadingOutlined />}
               </Button>
             )}
           </Form.Item>

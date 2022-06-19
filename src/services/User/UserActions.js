@@ -13,6 +13,11 @@ export const { user } = createActions({
       categoryId,
     }),
 
+    GET_BUSINESS: () => ({}),
+    GET_BUSINESS_RESPONSE: (business) => ({ business }),
+    
+    UPDATE_BUSINESS: ({ name, nit }) => ({ name, nit }),
+
     SET_ERROR: (keyState, error) => ({ keyState, error }),
     SET_SUCCESS: (keyState, newValue) => ({ keyState, newValue }),
     SET_STATE: (keyState, newValue) => ({ keyState, newValue }),

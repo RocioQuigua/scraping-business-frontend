@@ -2,16 +2,23 @@ import { handleActions } from "redux-actions";
 
 export const INITIAL_STATE = {
   profile: undefined,
+  business: undefined,
   loading: {
     getProfile: false,
-    updateProfile: false
+    getBusiness: false,
+    updateProfile: false,
+    updateBusiness: false,
   },
   error: {
-    getProfile: false,
-    updateProfile: false,
+    getProfile: undefined,
+    getBusiness: undefined,
+    updateProfile: undefined,
+    updateBusiness: undefined,
   },
   success: {
-    updateProfile: false,
+    updateProfile: undefined,
+    updateBusiness: undefined,
+    getBusiness: undefined,
   },
 };
 
@@ -19,6 +26,8 @@ const reducer = handleActions(
   {
     USER: {
       GET_PROFILE_RESPONSE: (state, { payload: { profile } }) => ({ ...state, profile }),
+
+      GET_BUSINESS_RESPONSE: (state, { payload: { business } }) => ({ ...state, business }),
 
       SET_ERROR: (state, { payload: { keyState, error } }) => ({
         ...state,
