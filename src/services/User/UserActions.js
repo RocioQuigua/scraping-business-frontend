@@ -5,11 +5,12 @@ export const { user } = createActions({
     GET_PROFILE: () => ({}),
     GET_PROFILE_RESPONSE: (profile) => ({ profile }),
 
-    UPDATE_PROFILE: ({ name, lastname, phone, email }) => ({
+    UPDATE_PROFILE: ({ name, lastname, phone, email, categoryId }) => ({
       name,
       lastname,
       phone,
       email,
+      categoryId,
     }),
 
     SET_ERROR: (keyState, error) => ({ keyState, error }),

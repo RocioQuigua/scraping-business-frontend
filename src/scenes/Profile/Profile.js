@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, Button, Input, message } from "antd";
+import { Form, Button, Input, message, Select } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
@@ -15,11 +15,12 @@ export const Profile = () => {
   const [form] = Form.useForm();
 
   const { profile, loading, success } = useSelector((state) => state.user);
+  const { categories } = useSelector((state) => state.utils);
 
   useEffect(() => {
     if (success.updateProfile) {
-      message.success('Actualizacion exitosa!')
-      dispatch(UserActions.setSuccess('updateProfile', undefined))
+      message.success("Actualizacion exitosa!");
+      dispatch(UserActions.setSuccess("updateProfile", undefined));
     }
   }, [success.updateProfile, dispatch]);
 
@@ -30,20 +31,23 @@ export const Profile = () => {
         lastname: profile.person.lastname,
         phone: profile.person.phone,
         email: profile.email,
+        categoryId: profile?.category?.id,
       });
   }, [profile, form]);
 
   const onFinish = (values) => {
+    values.categoryId = parseInt(values.categoryId)
     dispatch(UserActions.updateProfile(values));
   };
 
   const isChange = () => {
-    const { name, lastname, phone, email } = form.getFieldsValue();
+    const { name, lastname, phone, email, categoryId } = form.getFieldsValue();
     return (
       name !== profile?.person.name ||
       lastname !== profile?.person.lastname ||
       phone !== profile?.person.phone ||
-      email !== profile?.email
+      email !== profile?.email ||
+      categoryId !== profile?.category.id
     );
   };
 
@@ -79,6 +83,25 @@ export const Profile = () => {
           </label>
           <Form.Item name="email" rules={[{ required: true, message: "" }]}>
             <InputCustom placeholder="example@tucorreo.com" />
+          </Form.Item>
+          <label className="signup__title">
+            Tipo de actividad
+            <strong className="signup__title signup__title--s">*</strong>
+          </label>
+          <Form.Item
+            name="categoryId"
+            rules={[{ required: true, message: "" }]}
+          >
+            <Select
+              className="signup__options"
+              placeholder="Selecciona una opción"
+            >
+              {categories?.map((busines, index) => (
+                <Select.Option key={index} value={busines.id}>
+                  {busines.name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
           <label className="profile__title">
             Contraseña

@@ -26,12 +26,14 @@ function* updateProfile({ payload }) {
 
   if (response.ok) {
     const { profile } = yield select((state) => state.user);
+    const { categories } = yield select((_state) => _state.utils);
 
     yield put(
       user.setState("profile", {
         ...profile,
         email: payload.email,
-        person: {...profile.person, ...payload},
+        person: { ...profile.person, ...payload },
+        category: categories.find((item) => parseInt(item.id , 10)=== payload.categoryId),
       })
     );
     yield put(user.setLoading("updateProfile", false));
