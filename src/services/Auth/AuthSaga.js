@@ -30,20 +30,29 @@ function* signup({ payload }) {
   yield put(auth.setLoading("signup", true));
   yield put(auth.setError("signup", undefined));
 
-  const response = yield Api.post("/auth/twilio/signup", {
+  let params = {
     name: payload.name,
     lastname: payload.lastname,
     phone: payload.phone,
-    countryId: payload.countryId,
-    municipalityKeyName: payload.municipalityKeyName,
-    checkCode: payload.checkCode,
-  });
+    email: payload.email,
+    password: payload.password,
+    categoryId: parseInt(payload.categoryId, 10),
+  };
+
+  if (payload.businessName)
+    params.businessName = payload.businessName;
+  
+  if (payload.nit) 
+    params.nit = payload.nit;
+  
+
+  const response = yield Api.post("/auth/signup", params);
 
   if (response.ok) {
     history.push("/");
-    yield put(auth.signupResponse(response.payload.token));
+    yield put(auth.signupResponse(response.payload.payload));
     yield put(auth.setLoading("signup", false));
-    Token.setToken("local", response.payload.token);
+    Token.setToken("local", response.payload.payload);
   } else {
     yield put(auth.setError("signup", response.payload));
     yield put(auth.setLoading("signup", false));
