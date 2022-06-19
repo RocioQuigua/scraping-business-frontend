@@ -3,18 +3,34 @@ import { all, put, takeLatest } from "redux-saga/effects";
 import Api from "../../common/Api/Api";
 import { search } from "./SearchActions";
 
-function* createSearch() {
-  yield put(search.setLoading("search", true));
-  yield put(search.setError("search", undefined));
+function* createSearch({ payload }) {
+  yield put(search.setLoading("createSearch", true));
+  yield put(search.setError("createSearch", undefined));
+  let params = {
+    q: payload.q,
+  };
 
-  const response = yield Api.post("/search/engine");
+  if (payload.page) params.page = payload.page;
+
+  if (payload.totalPages) params.totalPages = payload.totalPages;
+
+  if (payload.quantity) params.quantity = payload.quantity;
+
+  if (payload.year) params.year = payload.year;
+
+  const response = yield Api.post("/search/engine", params);
 
   if (response.ok) {
-    yield put(search.getSearchResponse(response.payload.payload));
-    yield put(search.setLoading("search", false));
+    yield put(
+      search.createSearchResponse(
+        response.payload.payload.publications,
+        response.payload.payload.filters
+      )
+    );
+    yield put(search.setLoading("createSearch", false));
   } else {
-    yield put(search.setError("search", response.payload));
-    yield put(search.setLoading("search", false));
+    yield put(search.setError("createSearch", response.payload));
+    yield put(search.setLoading("createSearch", false));
   }
 }
 

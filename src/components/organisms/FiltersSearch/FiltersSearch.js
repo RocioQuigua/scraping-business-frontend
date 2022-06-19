@@ -5,8 +5,11 @@ import {
 } from "@ant-design/icons";
 import { Button, Checkbox, Select } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export const FiltersSearch = ({ visible, setVisible }) => {
+  const { filters } = useSelector((state) => state.search);
+
   const types = [
     {
       name: "Documentos",
@@ -76,28 +79,14 @@ export const FiltersSearch = ({ visible, setVisible }) => {
           </div>
           <div className="filters-search__item">
             <div className="filters-search__item-title filters-search__item-title--row">
-              <h2>Intereses</h2>
-              <Button className="filters-search__button filters-search__button--agg">
-                <PlusCircleFilled />
-              </Button>
+              <h2>Año</h2>
             </div>
             <div className="filters-search__content">
-              {interests.map((interest, index) => (
+              {filters?.years.map((type, index) => (
                 <Checkbox className="filters-search__checkbox" key={index}>
-                  {interest.name} (<strong>{interest.count}</strong>)
+                  {type.name} (<strong>{type.value}</strong>)
                 </Checkbox>
               ))}
-              <Button
-                className="filters-search__button filters-search__button--link"
-                type="link"
-              >
-                Mostrar mas...
-              </Button>
-            </div>
-          </div>
-          <div className="filters-search__item">
-            <div className="filters-search__item-title filters-search__item-title--row">
-              <h2>Año</h2>
             </div>
             <div className="filters-search__content">
               <div className="filters-search__select">
@@ -125,21 +114,21 @@ export const FiltersSearch = ({ visible, setVisible }) => {
               <h2>Tipos</h2>
             </div>
             <div className="filters-search__content">
-              {types.map((type, index) => (
+              {filters?.type.map((type, index) => (
                 <Checkbox className="filters-search__checkbox" key={index}>
-                  {type.name} (<strong>{type.count}</strong>)
+                  {type.name} (<strong>{type.value}</strong>)
                 </Checkbox>
               ))}
             </div>
           </div>
           <div className="filters-search__item">
             <div className="filters-search__item-title filters-search__item-title--row">
-              <h2>Ubicación</h2>
+              <h2>Revistas</h2>
             </div>
             <div className="filters-search__content">
-              {countries.map((country, index) => (
+              {filters?.journals.map((type, index) => (
                 <Checkbox className="filters-search__checkbox" key={index}>
-                  {country.name} (<strong>{country.count}</strong>)
+                  {type.name} (<strong>{type.value}</strong>)
                 </Checkbox>
               ))}
             </div>

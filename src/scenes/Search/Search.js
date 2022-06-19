@@ -1,77 +1,24 @@
+import { LoadingOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { InputSearch } from "../../components/atoms/InputSearch/InputSearch";
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
 import { FiltersSearch } from "../../components/organisms/FiltersSearch/FiltersSearch";
-
-import { Button } from 'antd';
+import { search as SearchActions } from "../../services/Search/SearchActions";
 
 export const Search = () => {
+  const dispatch = useDispatch();
+
+  const { publications, filters, loading } = useSelector(
+    (state) => state.search
+  );
   const [visibleFilter, setVisibleFilters] = useState(true);
 
-  const publications = [
-    {
-      title: "The standard Lorem Ipsum passage, used since the 1500s",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-      date: "10/06/2021",
-      isActive: true,
-      words: [
-        {
-          name: "leche",
-          count: 10,
-        },
-        {
-          name: "queso",
-          count: 19,
-        },
-        {
-          name: "cuajada",
-          count: 11,
-        },
-        {
-          name: "arroz con leche",
-          count: 15,
-        },
-      ],
-      siteUrl:
-        "https://stackoverflow.com/questions/47406344/how-to-open-a-page-in-new-tab-on-click-of-a-button-in-react-i-want-to-send-some",
-    },
-    {
-      title: "The standard Lorem Ipsum, used since the 2500s",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-      date: "10/12/2021",
-      words: [
-        {
-          name: "pan",
-          count: 10,
-        },
-        {
-          name: "sandwich",
-          count: 19,
-        },
-        {
-          name: "calados",
-          count: 11,
-        },
-        {
-          name: "pan leche",
-          count: 15,
-        },
-      ],
-      siteUrl:
-        "https://thewebdev.info/2021/10/03/how-to-open-a-component-in-new-window-on-a-click-in-react/",
-    },
-    {
-      title: "The standard Lorem Ipsum, since the 3500s",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
-      date: "10/06/2021",
-      siteUrl: "https://es.reactjs.org/docs/handling-events.html",
-      isActive: true,
-    },
-  ];
+  const onSearch = (text) => {
+    dispatch(SearchActions.createSearch(text));
+  };
 
   return (
     <div className={`search search--${!visibleFilter && "hide-filters"}`}>
@@ -81,26 +28,59 @@ export const Search = () => {
         <FiltersSearch visible={visibleFilter} setVisible={setVisibleFilters} />
       </div>
       <div className="search__container">
-        <InputSearch placeholder="Que estas buscando?" allowClear />
-        <div className="search search__results">
-          <h1>Resultados()</h1>
-          <Button
-          className="search search__results--button"
-          type="link"
-          //onClick={}
-          >📊 Analizar resultados</Button>
-        </div>
-        {publications.map((publication, index) => (
-          <CardPublication
-            key={index}
-            title={publication.title}
-            description={publication.description}
-            date={publication.date}
-            words={publication.words}
-            website={publication.siteUrl}
-            isActive={publication.isActive}
-          />
-        ))}
+        <InputSearch
+          placeholder="Que estas buscando?"
+          onSearch={onSearch}
+          allowClear
+        />
+        {loading.createSearch && (
+          <div className="search__loading">
+            <span>Consultando informacion...</span>
+            <LoadingOutlined />
+          </div>
+        )}
+        {publications?.length === 0 && !loading.createSearch && (
+          <div className="search__feedback">
+            <img
+              src={require("../../assets/images/feedback.png")}
+              alt="feedback_img"
+            />
+            <span>
+              !Encuentra todo lo que necesites para que
+              <br />
+              <strong>tu negocio crezca</strong>!
+            </span>
+          </div>
+        )}
+        {publications?.length > 0 && !loading.createSearch && (
+          <>
+            <div className="search search__results">
+              <h1>Resultados({publications?.length})</h1>
+              <Button
+                className="search search__results--button"
+                type="link"
+                //onClick={}
+              >
+                📊 Analizar resultados
+              </Button>
+            </div>
+            {publications?.map((publication, index) => (
+              <CardPublication
+                key={index}
+                title={publication.title}
+                description={publication.description}
+                //words={publication.words}
+                authors={publication.authors}
+                origin={publication.origin}
+                website={publication.siteUrl}
+                journal={`${publication?.journal || ""} ${
+                  publication.year || ""
+                }`}
+                //isActive={publication.isActive}
+              />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

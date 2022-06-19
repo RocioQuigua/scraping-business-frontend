@@ -9,7 +9,10 @@ export const { search } = createActions({
       page,
       year,
     }),
-    CREATE_SEARCH_RESPONSE: () => ({}),
+    CREATE_SEARCH_RESPONSE: (publications, filters) => ({
+      publications,
+      filters,
+    }),
 
     SET_ERROR: (keyState, error) => ({ keyState, error }),
     SET_SUCCESS: (keyState, newValue) => ({ keyState, newValue }),
