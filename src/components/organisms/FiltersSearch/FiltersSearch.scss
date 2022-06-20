@@ -51,6 +51,13 @@
       font-weight: $font-weight-p;
       margin: 0px;
     }
+    h3 {
+      font-size: $font-size-y;
+      font-weight: $font-weight-p;
+      margin-top: 10px;
+      text-decoration: underline;
+      margin-left: 5px;
+    }
   }
   &__item-title {
     display: flex;
@@ -65,11 +72,12 @@
   &__content {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   &__select {
     display: flex;
     justify-content: space-evenly;
+    margin-left: 5px;
     &--year {
       width: 40%;
       border-radius: 15px;

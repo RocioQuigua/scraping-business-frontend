@@ -28,7 +28,7 @@ function* create({ payload }) {
 
   if (response.ok) {
     yield put(favorite.setLoading("create", false));
-    yield put(favorite.setSuccess("create", false));
+    yield put(favorite.setSuccess("create", true));
   } else {
     yield put(favorite.setError("create", response.payload));
     yield put(favorite.setLoading("create", false));

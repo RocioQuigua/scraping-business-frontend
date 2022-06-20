@@ -5,7 +5,7 @@ export const { favorite } = createActions({
     GET_ALL: () => ({}),
     GET_ALL_RESPONSE: (favorites) => ({ favorites }),
 
-    CREATE: (
+    CREATE: ({
       userId,
       title,
       description,
@@ -15,8 +15,8 @@ export const { favorite } = createActions({
       authors,
       year,
       quotes,
-      typeKey
-    ) => ({
+      typeKey,
+    }) => ({
       userId,
       title,
       description,

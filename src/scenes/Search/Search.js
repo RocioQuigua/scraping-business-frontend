@@ -1,23 +1,42 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import { useState } from "react";
+import { Button, message } from "antd";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { InputSearch } from "../../components/atoms/InputSearch/InputSearch";
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
 import { FiltersSearch } from "../../components/organisms/FiltersSearch/FiltersSearch";
 import { search as SearchActions } from "../../services/Search/SearchActions";
+import { favorite as FavoriteActions } from "../../services/Favorite/FavoriteActions";
 
 export const Search = () => {
   const dispatch = useDispatch();
 
-  const { publications, filters, loading } = useSelector(
-    (state) => state.search
-  );
+  const { success } = useSelector(state => state.favorite);
+  const { profile } = useSelector((state) => state.user);
+  const { publications, loading } = useSelector((state) => state.search);
   const [visibleFilter, setVisibleFilters] = useState(true);
+
+  useEffect(() => {
+    if (success.create) {
+      //dispatch(ModalActions.setModal("alertMessage", false, undefined))
+      dispatch(FavoriteActions.setSuccess('create', undefined));
+      message.success('Se ha agregado un elemento a favoritos!')
+    }
+  }, [success.create, dispatch]);
 
   const onSearch = (text) => {
     dispatch(SearchActions.createSearch(text));
+  };
+
+  const onClickStart = (item) => {
+    dispatch(
+      FavoriteActions.create({
+        ...item,
+        userId: parseInt(profile.id, 10),
+        typeKey: item?.type?.key,
+      })
+    );
   };
 
   return (
@@ -73,9 +92,12 @@ export const Search = () => {
                 authors={publication.authors}
                 origin={publication.origin}
                 website={publication.siteUrl}
+                language={publication?.language}
                 journal={`${publication?.journal || ""} ${
                   publication.year || ""
                 }`}
+                type={`[${publication?.type?.name || 'Web'}]`}
+                onClickStart={() => onClickStart(publication)}
                 //isActive={publication.isActive}
               />
             ))}

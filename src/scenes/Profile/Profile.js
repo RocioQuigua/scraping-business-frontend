@@ -14,7 +14,9 @@ export const Profile = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const { profile, loading, success, error } = useSelector((state) => state.user);
+  const { profile, loading, success, error } = useSelector(
+    (state) => state.user
+  );
   const { categories } = useSelector((state) => state.utils);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export const Profile = () => {
   }, [profile, form]);
 
   const onFinish = (values) => {
-    values.categoryId = parseInt(values.categoryId)
+    values.categoryId = parseInt(values.categoryId);
     dispatch(UserActions.updateProfile(values));
   };
 
@@ -82,7 +84,12 @@ export const Profile = () => {
             <strong className="profile__title profile__title--s">*</strong>
           </label>
           <Form.Item name="phone" rules={[{ required: true, message: "" }]}>
-            <Input className="profile__input" maxLength={10} />
+            <Input
+              className="profile__input"
+              type="tel"
+              keyboardtype="number-pad"
+              maxLength={10}
+            />
           </Form.Item>
           <label className="profile__title">
             Correo

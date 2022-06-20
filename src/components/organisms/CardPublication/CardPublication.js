@@ -17,6 +17,7 @@ export const CardPublication = ({
   origin,
   website,
   type,
+  language,
   isActive,
   onClickStart,
 }) => {
@@ -29,7 +30,7 @@ export const CardPublication = ({
         </button>
       </div>
       <div className="card-publication__card">
-        <h1>{title}</h1>
+        <h1>{language?.band} {title}</h1>
       </div>
       <p>{description}</p>
       <div className="card-publication__website">
@@ -52,7 +53,7 @@ export const CardPublication = ({
         </Button>
       </div>
       <div className="card-publication__detail">
-        <h3>{origin}</h3>
+        <h3>{origin} {language?.name}</h3>
         {authors && (
           <h3>
             {authors} <TeamOutlined />

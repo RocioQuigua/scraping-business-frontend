@@ -54,7 +54,7 @@ export const Favorites = () => {
               origin={item.publication.origin}
               journal={`${item.publication.journal} (${item.publication.year})`}
               authors={item.publication.authors}
-              type={`[${item.publication?.type?.name}]`}
+              type={`[${item.publication?.type?.name || 'Web'}]`}
               isActive={true}
               date={formatterDate(item.publication.createdAt)}
               onClickStart={() => handleRemove(item)}

@@ -8,7 +8,7 @@ import { Sidebar } from "../../organisms/Sidebar/Sidebar";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { profile } = useSelector(state => state.user);
+  const { profile } = useSelector((state) => state.user);
 
   const [visibleMenu, setVisibleMenu] = useState();
 
@@ -18,16 +18,16 @@ export const Header = () => {
         <h1 onClick={() => navigate("/")}>
           Search<strong>GO</strong>
         </h1>
-        <div className="header__information header__information--group"> 
-        <h2>{profile?.person?.name}</h2>
-        <Button
-          className="header__btn-menu"
-          onClick={() => setVisibleMenu(true)}
-        >
-          <MenuOutlined />
-        </Button>
-        <Sidebar visible={visibleMenu} setVisible={setVisibleMenu} />
-        {}
+        <div className="header__information header__information--group">
+          <h2 onClick={() => setVisibleMenu(true)}>{profile?.person?.name}</h2>
+          <Button
+            className="header__btn-menu"
+            onClick={() => setVisibleMenu(true)}
+          >
+            <MenuOutlined />
+          </Button>
+          <Sidebar visible={visibleMenu} setVisible={setVisibleMenu} />
+          {}
         </div>
       </div>
     </div>

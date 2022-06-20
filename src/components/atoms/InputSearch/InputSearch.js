@@ -13,7 +13,12 @@ export const InputSearch = ({ placeholder, onSearch, ...props }) => {
         onChange={({ target: { value } }) => setValue(value)}
         {...props}
       />
-      <Button className="input-search__button" onClick={() => onSearch(value)} block>
+      <Button
+        className="input-search__button"
+        onClick={() => onSearch(value)}
+        disabled={!value}
+        block
+      >
         <SearchOutlined /> Buscar
       </Button>
     </div>
