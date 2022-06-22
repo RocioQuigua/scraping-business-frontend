@@ -1,4 +1,4 @@
-import { all, put, takeLatest } from "redux-saga/effects";
+import { all, put, select, takeLatest } from "redux-saga/effects";
 
 import Api from "../../common/Api/Api";
 import { search } from "./SearchActions";
@@ -21,6 +21,12 @@ function* createSearch({ payload }) {
   const response = yield Api.post("/search/engine", params);
 
   if (response.ok) {
+    response.payload.payload.publications =
+      response.payload.payload.publications.map((item) => ({
+        ...item,
+        idiom: item?.language?.name,
+      }));
+
     yield put(
       search.createSearchResponse(
         response.payload.payload.publications,
@@ -34,8 +40,22 @@ function* createSearch({ payload }) {
   }
 }
 
+function* filterResults() {
+  let { publications, filterValues } = yield select((state) => state.search);
+  let newPublications = publications;
+
+  yield filterValues.forEach((element) => {
+    newPublications = newPublications.filter((item) =>
+      element.values.find((value) => value == item[element.type])
+    );
+  });
+
+  yield put(search.filterResultsResponse(newPublications));
+}
+
 function* ActionWatcher() {
   yield takeLatest(search.createSearch, createSearch);
+  yield takeLatest(search.filterResults, filterResults);
 }
 
 export default function* rootSaga() {

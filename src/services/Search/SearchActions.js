@@ -14,6 +14,11 @@ export const { search } = createActions({
       filters,
     }),
 
+    CLEAR_FILTERS: () => ({}),
+
+    FILTER_RESULTS: (type, values, position) => ({ type, values, position }),
+    FILTER_RESULTS_RESPONSE: (publications) => ({ publications }),
+
     SET_ERROR: (keyState, error) => ({ keyState, error }),
     SET_SUCCESS: (keyState, newValue) => ({ keyState, newValue }),
     SET_STATE: (keyState, newValue) => ({ keyState, newValue }),

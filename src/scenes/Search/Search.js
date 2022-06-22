@@ -14,12 +14,11 @@ export const Search = () => {
 
   const { success } = useSelector(state => state.favorite);
   const { profile } = useSelector((state) => state.user);
-  const { publications, loading } = useSelector((state) => state.search);
+  const { publications, publicationsFilter, loading } = useSelector((state) => state.search);
   const [visibleFilter, setVisibleFilters] = useState(true);
 
   useEffect(() => {
     if (success.create) {
-      //dispatch(ModalActions.setModal("alertMessage", false, undefined))
       dispatch(FavoriteActions.setSuccess('create', undefined));
       message.success('Se ha agregado un elemento a favoritos!')
     }
@@ -58,7 +57,7 @@ export const Search = () => {
             <LoadingOutlined />
           </div>
         )}
-        {publications?.length === 0 && !loading.createSearch && (
+        {(publicationsFilter || publications)?.length === 0 && !loading.createSearch && (
           <div className="search__feedback">
             <img
               src={require("../../assets/images/feedback.png")}
@@ -71,10 +70,10 @@ export const Search = () => {
             </span>
           </div>
         )}
-        {publications?.length > 0 && !loading.createSearch && (
+        {(publicationsFilter || publications)?.length > 0 && !loading.createSearch && (
           <>
             <div className="search search__results">
-              <h1>Resultados({publications?.length})</h1>
+              <h1>Resultados({(publicationsFilter || publications)?.length})</h1>
               <Button
                 className="search search__results--button"
                 type="link"
@@ -83,7 +82,7 @@ export const Search = () => {
                 📊 Analizar resultados
               </Button>
             </div>
-            {publications?.map((publication, index) => (
+            {(publicationsFilter || publications)?.map((publication, index) => (
               <CardPublication
                 key={index}
                 title={publication.title}
@@ -98,7 +97,6 @@ export const Search = () => {
                 }`}
                 type={`[${publication?.type?.name || 'Web'}]`}
                 onClickStart={() => onClickStart(publication)}
-                //isActive={publication.isActive}
               />
             ))}
           </>

@@ -1,9 +1,26 @@
 import { DoubleLeftOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Input } from "antd";
-import { useSelector } from "react-redux";
+import { Button, Checkbox } from "antd";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { search as SearchActions } from "../../../services/Search/SearchActions";
 
 export const FiltersSearch = ({ visible, setVisible }) => {
-  const { filters } = useSelector((state) => state.search);
+  const dispatch = useDispatch();
+  const { filters, filterValues } = useSelector((state) => state.search);
+
+  const [showItems, setShowItems] = useState({
+    journals: false,
+    year: false,
+  });
+
+  const handleFilter = (type, values) => {
+    dispatch(SearchActions.filterResults(type, values));
+  };
+
+  const clearFilters = () => {
+    dispatch(SearchActions.clearFilters());
+  };
 
   return (
     <div className="filters-search">
@@ -26,17 +43,33 @@ export const FiltersSearch = ({ visible, setVisible }) => {
               <DoubleLeftOutlined />
             </Button>
           </div>
+          {filterValues?.length > 0 && (
+            <Button type="primary" onClick={clearFilters} block>
+              Limpiar filtros
+            </Button>
+          )}
           <div className="filters-search__item">
             <div className="filters-search__item-title filters-search__item-title--row">
-              <h2>Tipos</h2>
+              <h2>Idiomas</h2>
             </div>
             <div className="filters-search__content">
-              {filters?.languages.map((type, index) => (
-                <Checkbox className="filters-search__checkbox" key={index}>
-                  {type.name === "undefined" ? "Otros" : type.name} (
-                  <strong>{type.value}</strong>)
-                </Checkbox>
-              ))}
+              <Checkbox.Group
+                onChange={(values) => handleFilter("idiom", values)}
+                value={
+                  filterValues?.find((item) => item.type === "idiom")?.values
+                }
+              >
+                {filters?.languages.map((type, index) => (
+                  <Checkbox
+                    className="filters-search__checkbox"
+                    value={type.name}
+                    key={index}
+                  >
+                    {type.name === "undefined" ? "Otros" : type.name} (
+                    <strong>{type.value}</strong>)
+                  </Checkbox>
+                ))}
+              </Checkbox.Group>
             </div>
           </div>
           <div className="filters-search__item">
@@ -44,20 +77,35 @@ export const FiltersSearch = ({ visible, setVisible }) => {
               <h2>Año</h2>
             </div>
             <div className="filters-search__content">
-              {filters?.years.map((type, index) => (
-                <Checkbox className="filters-search__checkbox" key={index}>
-                  {type.name === "undefined" ? "Otros" : type.name} (
-                  <strong>{type.value}</strong>)
-                </Checkbox>
-              ))}
+              <Checkbox.Group
+                onChange={(values) => handleFilter("year", values)}
+                value={
+                  filterValues?.find((item) => item.type === "year")?.values
+                }
+              >
+                {filters?.years
+                  ?.slice(0, showItems.year ? filters?.years?.length : 10)
+                  .map((type, index) => (
+                    <Checkbox
+                      className="filters-search__checkbox"
+                      value={type.name}
+                      key={index}
+                    >
+                      {type.name === "undefined" ? "Otros" : type.name} (
+                      <strong>{type.value}</strong>)
+                    </Checkbox>
+                  ))}
+              </Checkbox.Group>
             </div>
-            <h3>Intervalo especifico</h3>
-            <div className="filters-search__content">
-              <div className="filters-search__select">
-                <Input type="tel" keyboardtype="number-pad" maxLength={4} />
-                <Input type="tel" keyboardtype="number-pad" maxLength={4} />
-              </div>
-            </div>
+            <Button
+              type="link"
+              onClick={() =>
+                setShowItems({ ...showItems, year: !showItems.year })
+              }
+            >
+              {showItems.year ? "Ocultar" : "Mostrar mas"}... (
+              {filters?.years?.length - 10})
+            </Button>
           </div>
           <div className="filters-search__item">
             <div className="filters-search__item-title filters-search__item-title--row">
@@ -77,12 +125,34 @@ export const FiltersSearch = ({ visible, setVisible }) => {
               <h2>Revistas</h2>
             </div>
             <div className="filters-search__content">
-              {filters?.journals.map((type, index) => (
-                <Checkbox className="filters-search__checkbox" key={index}>
-                  {type.name} (<strong>{type.value}</strong>)
-                </Checkbox>
-              ))}
+              <Checkbox.Group
+                onChange={(values) => handleFilter("journal", values)}
+                value={
+                  filterValues?.find((item) => item.type === "journal")?.values
+                }
+              >
+                {filters?.journals
+                  ?.slice(0, showItems.journals ? filters?.journals?.length : 6)
+                  .map((type, index) => (
+                    <Checkbox
+                      className="filters-search__checkbox"
+                      value={type.name}
+                      key={index}
+                    >
+                      {type.name} (<strong>{type.value}</strong>)
+                    </Checkbox>
+                  ))}
+              </Checkbox.Group>
             </div>
+            <Button
+              type="link"
+              onClick={() =>
+                setShowItems({ ...showItems, journals: !showItems.journals })
+              }
+            >
+              {showItems.journals ? "Ocultar" : "Mostrar mas"}... (
+              {filters?.journals?.length - 6})
+            </Button>
           </div>
         </>
       ) : (
