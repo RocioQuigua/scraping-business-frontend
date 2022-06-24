@@ -40,7 +40,7 @@ export const CardPublication = ({
               className="card-publication__button card-publication__button--results"
               key={index}
             >
-              {word.name}(<strong>{word.count}</strong>)
+              {word.name}(<strong>{word.value}</strong>)
             </Button>
           ))}
         </div>

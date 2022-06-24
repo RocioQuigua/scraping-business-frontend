@@ -38,10 +38,13 @@
     display: flex;
     justify-content: space-between;
     &--results {
-      border-color: $color-blue-800 !important;
-      color: $color-blue-800 !important;
+      border-color: $color-green-600 !important;
+      color: $color-green-600 !important;
       border-radius: 8px;
       margin-right: 15px;
+      strong {
+        font-weight: bold;
+      }
     }
     &--sitie {
       font-size: medium;
@@ -82,7 +85,7 @@
     strong {
       opacity: 1;
       font-weight: bold;
-      color: $color-blue-800;
+      color: $color-green-600;
     }
   }
   .anticon-usergroup-add {

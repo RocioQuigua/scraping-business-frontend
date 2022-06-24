@@ -139,7 +139,7 @@ export const Search = () => {
                     key={index}
                     title={publication.title}
                     description={publication.description}
-                    //words={publication.words}
+                    words={publication.words}
                     authors={publication.authors}
                     origin={publication.origin}
                     website={publication.siteUrl}
