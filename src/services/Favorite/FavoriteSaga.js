@@ -16,6 +16,8 @@ function* create({ payload }) {
 
   if (payload.journal) params.journal = payload.journal;
 
+  if (payload.description) params.description = payload.description;
+
   if (payload.authors) params.authors = payload.authors;
 
   if (payload.year) params.year = payload.year;
