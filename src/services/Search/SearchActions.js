@@ -4,11 +4,11 @@ export const { search } = createActions({
   SEARCH: {
     GET_HISTORY: () => ({}),
     GET_HISTORY_RESPONSE: (history) => ({ history }),
-    CREATE_SEARCH: (q, quantity, totalPages, page, year) => ({
+    CREATE_SEARCH: (q, quantity, page, totalPages, year) => ({
       q,
       quantity,
-      totalPages,
       page,
+      totalPages,
       year,
     }),
     CREATE_SEARCH_RESPONSE: (publications, filters) => ({

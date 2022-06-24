@@ -1,0 +1,22 @@
+.pagination {
+  width: 20vh;
+  display: grid;
+  grid-template-columns: 40% 20% 20% 20%;
+  align-items: center;
+  justify-items: center;
+  .ant-btn {
+    width: 100%;
+    background-color: white!important;
+    border: 2px solid $color-green-600!important;
+    font-weight: bold;
+    font-size: 3vh;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-green-600!important;
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}

@@ -2,22 +2,20 @@
 @import "../../scenes/Auth/Login/Login.scss",
   "../../scenes/Auth/Signup/Signup.scss",
   "../../scenes/Auth/ForgetPassword/ForgetPassword.scss",
-  "../../scenes/Business/Business.scss",
-  "../../scenes/Favorites/Favorites.scss",
-  "../../scenes/Profile/Profile.scss",
-  "../../scenes/Search/Search.scss";
+  "../../scenes/Business/Business.scss", "../../scenes/Favorites/Favorites.scss",
+  "../../scenes/Profile/Profile.scss", "../../scenes/Search/Search.scss";
 
 //Atoms
 @import "../../components/atoms/Header/Header.scss",
   "../../components/atoms/InputCustom/InputCustom.scss",
   "../../components/atoms/InputSearch/InputSearch.scss";
-  
+
 //Organisms
 @import "../../components/organisms/CardPublication/CardPublication.scss",
-"../../components/organisms/FiltersSearch/FiltersSearch.scss",
-  //"../../components/organisms/Pagination/Pagination.scss",
+  "../../components/organisms/FiltersSearch/FiltersSearch.scss",
+  "../../components/organisms/Pagination/Pagination.scss",
   "../../components/organisms/Sidebar/Siderbar.scss";
 
 //modals
 @import "../../components/Modals/AlertMessage/AlertMessage.scss",
-"../../components/Modals/ModalSearchReport/ModalSearchReport.scss";
+  "../../components/Modals/ModalSearchReport/ModalSearchReport.scss";

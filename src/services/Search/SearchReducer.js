@@ -3,7 +3,7 @@ import { handleActions } from "redux-actions";
 export const INITIAL_STATE = {
   history: [],
   filterValues: [],
-  publications: [],
+  publications: undefined,
   publicationsFilter: undefined,
   filters: undefined,
   modalSearchReport: undefined,

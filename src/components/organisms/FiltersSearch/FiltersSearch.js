@@ -15,6 +15,8 @@ export const FiltersSearch = ({ visible, setVisible }) => {
   });
 
   const handleFilter = (type, values) => {
+    console.error('type ', type);
+    console.error('values', values);
     dispatch(SearchActions.filterResults(type, values));
   };
 
