@@ -2,6 +2,8 @@ import { createActions } from "redux-actions";
 
 export const { search } = createActions({
   SEARCH: {
+    GET_HISTORY: () => ({}),
+    GET_HISTORY_RESPONSE: (history) => ({ history }),
     CREATE_SEARCH: (q, quantity, totalPages, page, year) => ({
       q,
       quantity,

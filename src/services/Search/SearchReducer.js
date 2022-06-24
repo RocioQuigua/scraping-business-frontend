@@ -1,10 +1,12 @@
 import { handleActions } from "redux-actions";
 
 export const INITIAL_STATE = {
+  history: [],
   filterValues: [],
   publications: [],
   publicationsFilter: undefined,
   filters: undefined,
+  modalSearchReport: undefined,
   loading: {
     createSearch: false,
   },
@@ -19,6 +21,12 @@ export const INITIAL_STATE = {
 const reducer = handleActions(
   {
     SEARCH: {
+      GET_HISTORY: (state) => ({ ...state }),
+      GET_HISTORY_RESPONSE: (state, { payload: { history } }) => ({
+        ...state,
+        history,
+      }),
+
       CREATE_SEARCH: (state) => ({ ...state }),
       CREATE_SEARCH_RESPONSE: (
         state,

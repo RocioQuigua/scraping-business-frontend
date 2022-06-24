@@ -19,4 +19,5 @@
   "../../components/organisms/Sidebar/Siderbar.scss";
 
 //modals
-@import "../../components/Modals/AlertMessage.scss";
+@import "../../components/Modals/AlertMessage/AlertMessage.scss",
+"../../components/Modals/ModalSearchReport/ModalSearchReport.scss";

@@ -53,9 +53,25 @@ function* filterResults() {
   yield put(search.filterResultsResponse(newPublications));
 }
 
+function* getHistory() {
+  yield put(search.setLoading("getHistory", true));
+  yield put(search.setError("getHistory", undefined));
+
+  const response = yield Api.get("/history/all");
+
+  if (response.ok) {
+    yield put(search.getHistoryResponse(response.payload.payload));
+    yield put(search.setLoading("getHistory", false));
+  } else {
+    yield put(search.setError("getHistory", response.payload));
+    yield put(search.setLoading("getHistory", false));
+  }
+}
+
 function* ActionWatcher() {
   yield takeLatest(search.createSearch, createSearch);
   yield takeLatest(search.filterResults, filterResults);
+  yield takeLatest(search.getHistory, getHistory);
 }
 
 export default function* rootSaga() {
