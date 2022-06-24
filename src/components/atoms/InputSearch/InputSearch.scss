@@ -25,4 +25,15 @@
     box-shadow: none;
     height: 100%;
   }
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    height: 100%;
+  }
+  input {
+    height: 100%!important;
+    font-size: $font-size-x;
+  }
+  .ant-select-selection-placeholder {
+    display: flex;
+    align-items: center;
+  }
 }

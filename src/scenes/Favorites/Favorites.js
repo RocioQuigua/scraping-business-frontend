@@ -3,7 +3,7 @@ import { message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatterDate } from "../../common/Utils/FormatterDateUtils";
-import { AlertMessage } from "../../components/Modals/AlertMessage";
+import { AlertMessage } from "../../components/Modals/AlertMessage/AlertMessage";
 
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
 import { favorite as FavoriteActions } from "../../services/Favorite/FavoriteActions";

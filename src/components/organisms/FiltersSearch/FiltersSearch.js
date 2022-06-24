@@ -97,15 +97,17 @@ export const FiltersSearch = ({ visible, setVisible }) => {
                   ))}
               </Checkbox.Group>
             </div>
-            <Button
-              type="link"
-              onClick={() =>
-                setShowItems({ ...showItems, year: !showItems.year })
-              }
-            >
-              {showItems.year ? "Ocultar" : "Mostrar mas"}... (
-              {filters?.years?.length - 10})
-            </Button>
+            {filters?.years.length > 0 && (
+              <Button
+                type="link"
+                onClick={() =>
+                  setShowItems({ ...showItems, year: !showItems.year })
+                }
+              >
+                {showItems.year ? "Ocultar" : "Mostrar mas"}... (
+                <strong>{filters?.years?.length - 10}</strong>)
+              </Button>
+            )}
           </div>
           <div className="filters-search__item">
             <div className="filters-search__item-title filters-search__item-title--row">
@@ -144,15 +146,17 @@ export const FiltersSearch = ({ visible, setVisible }) => {
                   ))}
               </Checkbox.Group>
             </div>
-            <Button
-              type="link"
-              onClick={() =>
-                setShowItems({ ...showItems, journals: !showItems.journals })
-              }
-            >
-              {showItems.journals ? "Ocultar" : "Mostrar mas"}... (
-              {filters?.journals?.length - 6})
-            </Button>
+            {filters?.journals.length > 0 && (
+              <Button
+                type="link"
+                onClick={() =>
+                  setShowItems({ ...showItems, journals: !showItems.journals })
+                }
+              >
+                {showItems.journals ? "Ocultar" : "Mostrar mas"}... (
+                <strong>{filters?.journals?.length - 6}</strong>)
+              </Button>
+            )}
           </div>
         </>
       ) : (
