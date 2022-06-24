@@ -82,7 +82,9 @@ export const Search = () => {
               ))}
             </Select>
           </div>
-          <Pagination page={page} setPage={setPage} />
+          {
+            //<Pagination page={page} setPage={setPage} />
+          }
         </div>
         {loading.createSearch && (
           <div className="search__loading">
