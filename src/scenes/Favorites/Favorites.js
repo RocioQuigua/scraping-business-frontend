@@ -63,7 +63,7 @@ export const Favorites = () => {
             />
           ))}
         </div>
-        {favorites?.length === 0 && (
+        {favorites?.length === 0  && !loading.getAll && (
           <div className="favorites__feedback">
             <img
               src={require("../../assets/images/favorites_1.png")}
