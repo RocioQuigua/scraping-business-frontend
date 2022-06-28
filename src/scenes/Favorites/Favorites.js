@@ -11,15 +11,17 @@ import { modal as ModalActions } from "../../services/Modal/ModalActions";
 
 export const Favorites = () => {
   const [visibleAlert, setVisibleAlert] = useState();
-  const { favorites, loading, success } = useSelector((state) => state.favorite);
+  const { favorites, loading, success } = useSelector(
+    (state) => state.favorite
+  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (success.remove) {
-      dispatch(ModalActions.setModal("alertMessage", false, undefined))
-      dispatch(FavoriteActions.setSuccess('remove', undefined));
-      message.success('Se ha removido un elemento de favoritos')
+      dispatch(ModalActions.setModal("alertMessage", false, undefined));
+      dispatch(FavoriteActions.setSuccess("remove", undefined));
+      message.success("Se ha removido un elemento de favoritos");
     }
   }, [success.remove, dispatch]);
 
@@ -54,13 +56,25 @@ export const Favorites = () => {
               origin={item.publication.origin}
               journal={`${item.publication.journal} (${item.publication.year})`}
               authors={item.publication.authors}
-              type={`[${item.publication?.type?.name || 'Web'}]`}
+              type={`[${item.publication?.type?.name || "Web"}]`}
               isActive={true}
               date={formatterDate(item.publication.createdAt)}
               onClickStart={() => handleRemove(item)}
             />
           ))}
         </div>
+        {favorites?.length === 0 && (
+          <div className="favorites__feedback">
+            <img
+              src={require("../../assets/images/favorites_1.png")}
+              alt="img"
+            />
+            <h2>
+              Aun no tienes favoritos guardados, recuerda que puedes <br />
+              realizar <strong> busquedas</strong> y guardar tus intereses!
+            </h2>
+          </div>
+        )}
         <div className="favorites__loading">
           {loading.getAll && <LoadingOutlined />}
         </div>
