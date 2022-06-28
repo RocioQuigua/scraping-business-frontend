@@ -36,10 +36,10 @@ export const Profile = () => {
   useEffect(() => {
     if (profile)
       form.setFieldsValue({
-        name: profile.person.name,
-        lastname: profile.person.lastname,
-        phone: profile.person.phone,
-        email: profile.email,
+        name: profile?.person.name,
+        lastname: profile?.person.lastname,
+        phone: profile?.person.phone,
+        email: profile?.email,
         categoryId: profile?.category?.id,
       });
   }, [profile, form]);
@@ -52,11 +52,11 @@ export const Profile = () => {
   const isChange = () => {
     const { name, lastname, phone, email, categoryId } = form.getFieldsValue();
     return (
-      name !== profile?.person.name ||
-      lastname !== profile?.person.lastname ||
+      name !== profile?.person?.name ||
+      lastname !== profile?.person?.lastname ||
       phone !== profile?.person.phone ||
       email !== profile?.email ||
-      categoryId !== profile?.category.id
+      categoryId !== profile?.category?.id
     );
   };
 

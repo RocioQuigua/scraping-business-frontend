@@ -28,7 +28,7 @@ export const InputSearch = ({ placeholder, onSearch, ...props }) => {
         disabled={!value}
         block
       >
-        <SearchOutlined /> Buscar
+        <SearchOutlined /> <span className="text">Buscar</span>
       </Button>
     </div>
   );

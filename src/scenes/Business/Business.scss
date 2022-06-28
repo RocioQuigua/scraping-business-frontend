@@ -1,7 +1,7 @@
 .business {
   width: 100%;
   font-family: $font-poppins;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,5 +34,10 @@
   &__button {
     border-radius: 5px;
     margin-top: 50px;
+  }
+  @media (max-width: $break-point-mobile) {
+    &__info {
+      width: 90%;
+    }
   }
 }

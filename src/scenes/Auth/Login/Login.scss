@@ -1,11 +1,12 @@
 .login {
+  width: 100%;
   font-family: "Poppins", sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   &__info {
-    width: 30%;
+    width: 60vh;
   }
   &__content {
     font-weight: $font-weight-p;
@@ -61,6 +62,11 @@
       font-size: $font-size-y;
       text-decoration-line: underline !important;
       color: $color-blue-800 !important;
+    }
+  }
+  @media (max-width: $break-point-mobile) {
+    &__info {
+      width: 80%;
     }
   }
 }

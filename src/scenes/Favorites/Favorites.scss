@@ -26,4 +26,10 @@
       color: $color-blue-800;
     }
   }
+  @media (max-width: $break-point-mobile) {
+    &__container {
+      padding: 0px;
+      margin-top: 24px;
+    }
+  }
 }

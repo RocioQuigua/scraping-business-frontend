@@ -1,5 +1,8 @@
 .sidebar {
   font-family: $font-poppins;
+  .ant-drawer-content-wrapper {
+    width: 60vh!important;
+  }
   &__title {
     display: grid;
     margin-bottom: 60px;
@@ -42,5 +45,10 @@
   p {
     font-weight: $font-weight-a;
     margin: 0px;
+  }
+  @media (max-width: $break-point-mobile) {
+    .ant-drawer-content-wrapper {
+      width: 90%!important;
+    }
   }
 }

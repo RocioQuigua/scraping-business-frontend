@@ -34,4 +34,9 @@
     border-radius: 5px;
     margin-top: 14px;
   }
+  @media (max-width: $break-point-mobile) {
+    &__info {
+      width: 90%;
+    }
+  }
 }

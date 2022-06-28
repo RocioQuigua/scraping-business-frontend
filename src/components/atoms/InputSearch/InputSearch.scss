@@ -2,11 +2,13 @@
   display: grid;
   grid-template-columns: 82% 15%;
   justify-content: space-between;
+  font-family: $font-poppins;
   height: 40px;
   &__button {
     width: 100%;
     border: none;
     font-size: $font-size-m;
+    font-weight: 600;
     color: $color-gray-50 !important;
     height: 100%;
     background-color: $color-blue-800!important;
@@ -35,5 +37,12 @@
   .ant-select-selection-placeholder {
     display: flex;
     align-items: center;
+  }
+  @media (max-width: $break-point-mobile) {
+    &__button {
+      .text {
+        display: none;
+      }
+    }
   }
 }
