@@ -32,8 +32,11 @@
     "start:local": "react-app-env --env-file=environments/.env.local start",
     "start:staging": "react-app-env --env-file=environments/.env.staging start",
     "start:production": "react-app-env --env-file=environments/.env.production start",
+    "build": "react-scripts build",
     "build:production": "react-app-env --env-file=environments/.env.production build",
-    "build:staging": "react-app-env --env-file=environments/.env.staging build"
+    "build:staging": "react-app-env --env-file=environments/.env.staging build",
+    "deploy": "npm run build:staging && firebase deploy --only hosting"
+    
   },
   "eslintConfig": {
     "extends": [
