@@ -15,8 +15,6 @@ export const FiltersSearch = ({ visible, setVisible }) => {
   });
 
   const handleFilter = (type, values) => {
-    console.error('type ', type);
-    console.error('values', values);
     dispatch(SearchActions.filterResults(type, values));
   };
 
@@ -99,7 +97,7 @@ export const FiltersSearch = ({ visible, setVisible }) => {
                   ))}
               </Checkbox.Group>
             </div>
-            {filters?.years.length > 0 && (filters?.years?.length - 10) > 0  && (
+            {filters?.years.length > 0 && filters?.years?.length - 10 > 0 && (
               <Button
                 type="link"
                 onClick={() =>
@@ -116,12 +114,23 @@ export const FiltersSearch = ({ visible, setVisible }) => {
               <h2>Tipos</h2>
             </div>
             <div className="filters-search__content">
-              {filters?.type.map((type, index) => (
-                <Checkbox className="filters-search__checkbox" key={index}>
-                  {type.name === "undefined" ? "Otros" : type.name} (
-                  <strong>{type.value}</strong>)
-                </Checkbox>
-              ))}
+              <Checkbox.Group
+                onChange={(values) => handleFilter("type", values)}
+                value={
+                  filterValues?.find((item) => item.type === "type")?.values
+                }
+              >
+                {filters?.type.map((type, index) => (
+                  <Checkbox
+                    className="filters-search__checkbox"
+                    value={type.name}
+                    key={index}
+                  >
+                    {type.name === "undefined" ? "Otros" : type.name} (
+                    <strong>{type.value}</strong>)
+                  </Checkbox>
+                ))}
+              </Checkbox.Group>
             </div>
           </div>
           <div className="filters-search__item">
@@ -148,7 +157,7 @@ export const FiltersSearch = ({ visible, setVisible }) => {
                   ))}
               </Checkbox.Group>
             </div>
-            {filters?.journals.length > 0 && (filters?.journals?.length - 6 ) > 0 && (
+            {filters?.journals.length > 0 && filters?.journals?.length - 6 > 0 && (
               <Button
                 type="link"
                 onClick={() =>

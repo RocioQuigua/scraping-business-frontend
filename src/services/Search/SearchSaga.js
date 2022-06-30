@@ -4,8 +4,8 @@ import Api from "../../common/Api/Api";
 import { search } from "./SearchActions";
 
 function* createSearch({ payload }) {
-  yield put(search.setState('publicationsFilter', undefined))
-  yield put(search.setState('filters', undefined))
+  yield put(search.setState("publicationsFilter", undefined));
+  yield put(search.setState("filters", undefined));
   yield put(search.setLoading("createSearch", true));
   yield put(search.setError("createSearch", undefined));
   let params = {
@@ -26,7 +26,9 @@ function* createSearch({ payload }) {
     response.payload.payload.publications =
       response.payload.payload.publications.map((item) => ({
         ...item,
-        idiom: item?.language?.name,
+        idiom: item?.language?.name || "undefined",
+        year: item?.year || "undefined",
+        type: item?.type?.name || "undefined",
       }));
 
     yield put(
