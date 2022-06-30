@@ -49,6 +49,14 @@
   &__button {
     border-radius: 5px;
     margin-top: 14px;
+    font-weight: bold;
+    font-size: $font-size-x;
+    background-color: $color-blue-800!important;
+    color: white!important;
+    border: none;
+    &:disabled {
+      opacity: 0.4;
+    }
     &--created {
       margin-top: 100px;
     }

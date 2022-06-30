@@ -44,7 +44,7 @@ export const FiltersSearch = ({ visible, setVisible }) => {
             </Button>
           </div>
           {filterValues?.length > 0 && (
-            <Button type="primary" onClick={clearFilters} block>
+            <Button className="filters-search__btn-clean" type="primary" onClick={clearFilters} block>
               Limpiar filtros
             </Button>
           )}

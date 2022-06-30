@@ -21,7 +21,7 @@ function* login({ payload }) {
     yield Token.setToken('local', response.payload.payload);
     yield put(auth.setLoading("login", false));
   } else {
-    yield put(auth.setError("login", response.payload));
+    yield put(auth.setError("login",  'USER_NOT_EXIST'));
     yield put(auth.setLoading("login", false));
   }
 }

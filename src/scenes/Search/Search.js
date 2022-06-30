@@ -56,6 +56,11 @@ export const Search = () => {
   const onSearch = (text) => {
     dispatch(SearchActions.createSearch(text, quantity, page));
     setQ(text);
+    setPage(1);
+  };
+
+  const isShowPagination = () => {
+    return (publications?.length > 0 && !loading.createSearch) || page > 1;
   };
 
   return (
@@ -102,20 +107,19 @@ export const Search = () => {
               </span>
             </div>
           )}
-        {(!publicationsFilter && !publications) &&
-          !loading.createSearch && (
-            <div className="search__feedback">
-              <img
-                src={require("../../assets/images/feedback.png")}
-                alt="feedback_img"
-              />
-              <span>
-                !Encuentra todo lo que necesites para que
-                <br />
-                <strong>tu negocio crezca</strong>!
-              </span>
-            </div>
-          )}
+        {!publicationsFilter && !publications && !loading.createSearch && (
+          <div className="search__feedback">
+            <img
+              src={require("../../assets/images/feedback.png")}
+              alt="feedback_img"
+            />
+            <span>
+              !Encuentra todo lo que necesites para que
+              <br />
+              <strong>tu negocio crezca</strong>!
+            </span>
+          </div>
+        )}
         {(publicationsFilter || publications)?.length > 0 &&
           !loading.createSearch && (
             <>
@@ -154,13 +158,11 @@ export const Search = () => {
               )}
             </>
           )}
-        {publications?.length > 0 &&
-          !publicationsFilter &&
-          !loading.createSearch && (
-            <div className="search__footer">
-              <Pagination page={page} setPage={setPage} />
-            </div>
-          )}
+        {isShowPagination() && (
+          <div className="search__footer">
+            <Pagination page={page} setPage={setPage} />
+          </div>
+        )}
       </div>
       <ModalSearchReport />
     </div>

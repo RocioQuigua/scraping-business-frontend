@@ -13,6 +13,16 @@
       margin: 0px;
     }
   }
+  &__btn-clean {
+    background-color: $color-green-500!important;
+    border: none;
+    margin: 10px 0px;
+    font-weight: $font-weight-p;
+    font-size: $font-size-y;
+    &:hover, &:active {
+      opacity: 0.8;
+    }
+  }
   &__filter {
     border-right: 1px solid $color-gray-400;
     padding: 15px;
