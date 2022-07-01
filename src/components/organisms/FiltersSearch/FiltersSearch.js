@@ -44,7 +44,12 @@ export const FiltersSearch = ({ visible, setVisible }) => {
             </Button>
           </div>
           {filterValues?.length > 0 && (
-            <Button className="filters-search__btn-clean" type="primary" onClick={clearFilters} block>
+            <Button
+              className="filters-search__btn-clean"
+              type="primary"
+              onClick={clearFilters}
+              block
+            >
               Limpiar filtros
             </Button>
           )}
@@ -108,6 +113,30 @@ export const FiltersSearch = ({ visible, setVisible }) => {
                 <strong>{filters?.years?.length - 10}</strong>)
               </Button>
             )}
+          </div>
+          <div className="filters-search__item">
+            <div className="filters-search__item-title filters-search__item-title--row">
+              <h2>Origen</h2>
+            </div>
+            <div className="filters-search__content">
+              <Checkbox.Group
+                onChange={(values) => handleFilter("origin", values)}
+                value={
+                  filterValues?.find((item) => item.type === "origin")?.values
+                }
+              >
+                {filters?.origins.map((type, index) => (
+                  <Checkbox
+                    className="filters-search__checkbox"
+                    value={type.name}
+                    key={index}
+                  >
+                    {type.name === "undefined" ? "Otros" : type.name} (
+                    <strong>{type.value}</strong>)
+                  </Checkbox>
+                ))}
+              </Checkbox.Group>
+            </div>
           </div>
           <div className="filters-search__item">
             <div className="filters-search__item-title filters-search__item-title--row">
