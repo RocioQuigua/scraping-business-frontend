@@ -34,7 +34,8 @@ function* createSearch({ payload }) {
     yield put(
       search.createSearchResponse(
         response.payload.payload.publications,
-        response.payload.payload.filters
+        response.payload.payload.filters,
+        payload.page
       )
     );
     yield put(search.setLoading("createSearch", false));
@@ -72,10 +73,25 @@ function* getHistory() {
   }
 }
 
+function* getCacheSearch({ payload }) {
+  const { publicationsCache } = yield select((state) => state.search);
+
+  if (publicationsCache.length > 0) {
+    yield put(
+      search.createSearchResponse(
+        publicationsCache[payload.page - 1].publications,
+        publicationsCache[payload.page - 1].filters,
+        payload.page
+      )
+    );
+  }
+}
+
 function* ActionWatcher() {
   yield takeLatest(search.createSearch, createSearch);
   yield takeLatest(search.filterResults, filterResults);
   yield takeLatest(search.getHistory, getHistory);
+  yield takeLatest(search.getCacheSearch, getCacheSearch);
 }
 
 export default function* rootSaga() {

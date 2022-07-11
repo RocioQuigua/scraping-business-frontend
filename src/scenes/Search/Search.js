@@ -19,7 +19,7 @@ export const Search = () => {
 
   const { success } = useSelector((state) => state.favorite);
   const { profile } = useSelector((state) => state.user);
-  const { publications, publicationsFilter, loading } = useSelector(
+  const { publications, publicationsFilter, loading, pageGlobal } = useSelector(
     (state) => state.search
   );
 
@@ -40,7 +40,10 @@ export const Search = () => {
   }, [dispatch, loading.createSearch]);
 
   useEffect(() => {
-    if (q) dispatch(SearchActions.createSearch(q, quantity, page));
+    if (q && page > pageGlobal)
+      dispatch(SearchActions.createSearch(q, quantity, page));
+    else 
+      dispatch(SearchActions.getCacheSearch(page));
   }, [quantity, page, dispatch]);
 
   const onClickStart = (item) => {

@@ -11,10 +11,13 @@ export const { search } = createActions({
       totalPages,
       year,
     }),
-    CREATE_SEARCH_RESPONSE: (publications, filters) => ({
+    CREATE_SEARCH_RESPONSE: (publications, filters, page) => ({
       publications,
       filters,
+      page,
     }),
+
+    GET_CACHE_SEARCH: (page, ) => ({ page }),
 
     CLEAR_FILTERS: () => ({}),
 
