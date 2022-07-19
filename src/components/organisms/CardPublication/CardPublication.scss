@@ -5,9 +5,31 @@
   justify-content: center;
   background-color: $color-slate-50;
   border: 1px solid $color-gray-400;
-  padding: 25px;
+  padding: 10px;
   border-radius: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  &--selected {
+    border: 1px solid rgb(24, 106, 60);
+    background-color: #f6fdf3;
+  }
+  &__checkbox {
+    width: 3vh;
+    height: 3vh;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    background-color: $color-blue-50;
+    border: 1px solid $color-green-600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .anticon-check {
+      font-size: 2vh;
+      color: white;
+    }
+    &--check {
+      background-color: $color-green-600;
+    }
+  }
   &__card {
     display: flex;
     justify-content: space-between;
@@ -16,6 +38,13 @@
       justify-content: flex-end;
       gap: 15px;
     }
+  }
+  &__container-start {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
   }
   &__results {
     display: flex;
@@ -34,34 +63,40 @@
     justify-content: space-between;
     margin: 10px 0px;
   }
-  &__button {
+  &__container-button {
     display: flex;
     justify-content: space-between;
-    &--results {
-      border-color: $color-green-600 !important;
-      color: $color-green-600 !important;
-      border-radius: 8px;
-      margin-right: 15px;
-      strong {
-        font-weight: bold;
-      }
-    }
-    &--sitie {
-      font-size: medium;
+  }
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color-green-600 !important;
+    color: $color-green-600 !important;
+    border-radius: 8px;
+    margin-right: 15px;
+    padding: 0px 5px;
+    height: 25px !important;
+    font-size: 12px;
+    strong {
       font-weight: bold;
-      color: $color-blue-800!important;
-      text-decoration-line: underline !important;
-      padding: 0px;
-      height: auto!important;
     }
+  }
+  &__button-sitie {
+    font-size: medium;
+    font-weight: bold;
+    color: $color-blue-800 !important;
+    text-decoration-line: underline !important;
+    padding: 0px;
+    height: auto !important;
   }
   h1 {
     color: $color-black-800;
     font-weight: $font-weight-p;
-    font-size: $font-size-x;
-    line-height: $font-size-e ;
+    font-size: $font-size-y;
+    line-height: $font-size-e;
     text-align: justify;
-    padding-bottom: 16px;
+    padding-bottom: 6px;
   }
   h2 {
     font-weight: $font-weight-s;
@@ -72,14 +107,14 @@
     color: $color-black-800;
     opacity: 0.4;
     font-weight: $font-weight-s;
-    font-size: $font-size-y;
-    line-height: $font-size-e ;
+    font-size: 12px;
+    line-height: $font-size-x;
     text-align: justify;
   }
   &__detail {
     h3 {
       color: $color-black-800;
-      font-size: small;
+      font-size: 12px;
       line-height: $font-size-a;
     }
     strong {

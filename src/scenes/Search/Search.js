@@ -1,4 +1,4 @@
-import { LoadingOutlined } from "@ant-design/icons";
+import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Button, message, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { modal as ModalActions } from "../../services/Modal/ModalActions";
 import { favorite as FavoriteActions } from "../../services/Favorite/FavoriteActions";
 import { ModalSearchReport } from "../../components/Modals/ModalSearchReport/ModalSearchReport";
 import { Pagination } from "../../components/organisms/Pagination/Pagination";
+import { DownloadReport } from "../../components/organisms/DownloadReport/DownloadReport";
 
 const COUNTS = [20, 40, 60, 80, 100, 120, 140, 160, 180, 200];
 
@@ -27,6 +28,8 @@ export const Search = () => {
   const [quantity, setQuantity] = useState(COUNTS[COUNTS.length - 1]);
   const [page, setPage] = useState(1);
   const [q, setQ] = useState();
+  const [itemsSelected, setItemsSelected] = useState([]);
+  const [isSelectAll, setIsSelectAll] = useState(false);
 
   useEffect(() => {
     if (success.create) {
@@ -42,8 +45,7 @@ export const Search = () => {
   useEffect(() => {
     if (q && page > pageGlobal)
       dispatch(SearchActions.createSearch(q, quantity, page));
-    else 
-      dispatch(SearchActions.getCacheSearch(page));
+    else dispatch(SearchActions.getCacheSearch(page));
   }, [quantity, page, dispatch]);
 
   const onClickStart = (item) => {
@@ -66,6 +68,41 @@ export const Search = () => {
     return (publications?.length > 0 && !loading.createSearch) || page > 1;
   };
 
+  const handleAddSelected = (item, index) => {
+    if (getItemSelected(index)) {
+      let newsItems = itemsSelected.filter(
+        (item) => item.id !== `${page}${index}`
+      );
+      setItemsSelected(newsItems);
+    } else {
+      setItemsSelected([...itemsSelected, { id: `${page}${index}`, ...item }]);
+    }
+  };
+
+  const handleAllSelected = () => {
+    let newsItems;
+    if (isSelectAll) {
+      newsItems = itemsSelected.filter((item) => item.page !== page);
+    } else {
+      newsItems = publications.map((item, index) => ({
+        id: `${page}${index}`,
+        ...item,
+        page,
+      }));
+
+      newsItems = [...itemsSelected, ...newsItems];
+    }
+
+    setItemsSelected(newsItems);
+    setIsSelectAll(!isSelectAll);
+  };
+
+  const getItemSelected = (index) => {
+    return (
+      itemsSelected.find((item) => item.id === `${page}${index}`) !== undefined
+    );
+  };
+
   return (
     <div className={`search search--${!visibleFilter && "hide-filters"}`}>
       <div
@@ -79,9 +116,19 @@ export const Search = () => {
           onSearch={onSearch}
           allowClear
         />
-        <div className="search__actions">
+        <div className="search search__results">
+          <h1>Resultados({(publicationsFilter || publications)?.length})</h1>
+          <Button
+            className="search search__results--button"
+            type="link"
+            onClick={() =>
+              dispatch(ModalActions.setModal("modalSearchReport", true))
+            }
+          >
+            📊 Reporte de resultados
+          </Button>
           <div className="search__container-count">
-            <h2>Publicaciones por pagina</h2>
+            <h3>Publicaciones por pagina</h3>
             <Select value={quantity} onChange={(value) => setQuantity(value)}>
               {COUNTS.map((item, index) => (
                 <Select.Option key={index} value={item}>
@@ -90,9 +137,6 @@ export const Search = () => {
               ))}
             </Select>
           </div>
-          {
-            //<Pagination page={page} setPage={setPage} />
-          }
         </div>
         {loading.createSearch && (
           <div className="search__loading">
@@ -126,19 +170,21 @@ export const Search = () => {
         {(publicationsFilter || publications)?.length > 0 &&
           !loading.createSearch && (
             <>
-              <div className="search search__results">
-                <h1>
-                  Resultados({(publicationsFilter || publications)?.length})
-                </h1>
-                <Button
-                  className="search search__results--button"
-                  type="link"
-                  onClick={() =>
-                    dispatch(ModalActions.setModal("modalSearchReport", true))
-                  }
+              <div className="search__container-download">
+                <div
+                  className={`card-publication__checkbox card-publication__checkbox--${
+                    isSelectAll && "check"
+                  }`}
+                  onClick={handleAllSelected}
                 >
-                  📊 Reporte de resultados
-                </Button>
+                  {isSelectAll && <CheckOutlined />}
+                </div>
+                <h3 onClick={handleAllSelected}>Seleccionar la pagina</h3>
+                <DownloadReport
+                  name={`Exportar(${itemsSelected.length})`}
+                  disabled={itemsSelected.length === 0}
+                  data={itemsSelected}
+                />
               </div>
               {(publicationsFilter || publications)?.map(
                 (publication, index) => (
@@ -156,6 +202,9 @@ export const Search = () => {
                     }`}
                     type={`[${publication?.type?.name || "Web"}]`}
                     onClickStart={() => onClickStart(publication)}
+                    isCheck={true}
+                    onSelect={() => handleAddSelected(publication, index)}
+                    isSelected={getItemSelected(index)}
                   />
                 )
               )}

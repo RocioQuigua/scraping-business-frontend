@@ -25,7 +25,8 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",
     "sass": "^1.52.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-app-env --env-file=environments/.env.staging start",
@@ -36,7 +37,6 @@
     "build:production": "react-app-env --env-file=environments/.env.production build",
     "build:staging": "react-app-env --env-file=environments/.env.staging build",
     "deploy": "npm run build:staging && firebase deploy --only hosting"
-    
   },
   "eslintConfig": {
     "extends": [
