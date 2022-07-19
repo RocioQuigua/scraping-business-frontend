@@ -125,7 +125,7 @@ export const Search = () => {
               dispatch(ModalActions.setModal("modalSearchReport", true))
             }
           >
-            📊 Reporte de resultados
+            📊 Graficos
           </Button>
           <div className="search__container-count">
             <h3>Publicaciones por pagina</h3>
