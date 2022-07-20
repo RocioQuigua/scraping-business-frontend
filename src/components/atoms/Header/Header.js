@@ -16,7 +16,7 @@ export const Header = () => {
     <div className="header">
       <div className="header__information">
         <h1 onClick={() => navigate("/")}>
-          Search<strong>GO</strong>
+          Udlavite
         </h1>
         <div className="header__information header__information--group">
           <h2 onClick={() => setVisibleMenu(true)}>{profile?.person?.name}</h2>

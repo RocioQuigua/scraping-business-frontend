@@ -117,9 +117,14 @@ export const Search = () => {
           allowClear
         />
         <div className="search search__results">
-          <h1>Resultados({(publicationsFilter || publications)?.length})</h1>
+          {publications?.length > 0 ? (
+            <h1>Resultados({(publicationsFilter || publications)?.length})</h1>
+          ) : (
+            <h1>Resultados</h1>
+          )}
           <Button
             className="search search__results--button"
+            disabled={(publicationsFilter || publications)?.length === 0}
             type="link"
             onClick={() =>
               dispatch(ModalActions.setModal("modalSearchReport", true))
