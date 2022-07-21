@@ -13,7 +13,7 @@ export const DoughnutChart = ({ labels, values, labelName, ...props }) => {
         data: values,
         backgroundColor: ["#9BECD7", "#99C9FF", "#D5ECF3", "#1D74FB"],
         borderColor: ["#67BDA7", "#99C9FF", "#D5ECF3", "#1D74FB"],
-        borderWidth: 1,
+        borderWidth: 4,
       },
     ],
   };

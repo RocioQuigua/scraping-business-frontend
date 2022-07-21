@@ -7,7 +7,7 @@ import { BardChart } from "./Charts/BardChart";
 import { DoughnutChart } from "./Charts/DoughnutChart";
 
 export const ModalSearchReport = () => {
-  const { filters } = useSelector((state) => state.search);
+  const { filters, publications } = useSelector((state) => state.search);
 
   const {
     modals: { modalSearchReport },
@@ -29,20 +29,24 @@ export const ModalSearchReport = () => {
       closable={false}
       centered
     >
-      <h1>📊 Reporte de resultados</h1>
+      <h1>📊 Graficos</h1>
       <div className="modal-search-report__content">
         <BardChart
           className="modal-search-report__bard"
-          labelName="Publicaciones"
+          labelName={`Publicaciones (${publications?.length})`}
           labels={filters?.years.map((item) => item.name)}
           values={filters?.years.map((item) => item.value)}
         />
         <div className="modal-search-report__row">
           <DoughnutChart
             className="modal-search-report__bard"
-            labelName="Publicaciones"
-            labels={filters?.languages.map((item) => item.name)}
-            values={filters?.languages.map((item) => item.value)}
+            labels={filters?.languages.filter(item => item.name !== 'undefined').map((item) => `${item.name} (${item.value})`)}
+            values={filters?.languages.filter(item => item.name !== 'undefined').map((item) => item.value)}
+          />
+          <DoughnutChart
+            className="modal-search-report__bard"
+            labels={filters?.origins.filter(item => item.name !== 'undefined').map((item) => `${item.name} (${item.value})`)}
+            values={filters?.origins.filter(item => item.name !== 'undefined').map((item) => item.value)}
           />
         </div>
       </div>
