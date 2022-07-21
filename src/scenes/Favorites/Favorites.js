@@ -1,4 +1,4 @@
-import { LoadingOutlined } from "@ant-design/icons";
+import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
 import { message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +6,15 @@ import { formatterDate } from "../../common/Utils/FormatterDateUtils";
 import { AlertMessage } from "../../components/Modals/AlertMessage/AlertMessage";
 
 import { CardPublication } from "../../components/organisms/CardPublication/CardPublication";
+import { DownloadReport } from "../../components/organisms/DownloadReport/DownloadReport";
 import { favorite as FavoriteActions } from "../../services/Favorite/FavoriteActions";
 import { modal as ModalActions } from "../../services/Modal/ModalActions";
 
 export const Favorites = () => {
   const [visibleAlert, setVisibleAlert] = useState();
+  const [itemsSelected, setItemsSelected] = useState([]);
+  const [isSelectAll, setIsSelectAll] = useState(false);
+
   const { favorites, loading, success } = useSelector(
     (state) => state.favorite
   );
@@ -42,10 +46,51 @@ export const Favorites = () => {
     dispatch(FavoriteActions.remove(item.id));
   };
 
+  const handleAddSelected = (item, id) => {
+    if (getItemSelected(id)) {
+      let newsItems = itemsSelected.filter((item) => item.id !== id);
+      setItemsSelected(newsItems);
+    } else {
+      setItemsSelected([...itemsSelected, { ...item.publication, ...item }]);
+    }
+  };
+
+  const handleAllSelected = () => {
+    let newsItems;
+    if (isSelectAll) {
+      newsItems = [];
+    } else {
+      newsItems = favorites;
+    }
+
+    setItemsSelected(newsItems);
+    setIsSelectAll(!isSelectAll);
+  };
+
+  const getItemSelected = (id) => {
+    return itemsSelected.find((item) => item.id === id);
+  };
+
   return (
     <div className="favorites">
       <div className="favorites__container">
         <h1 className="favorites__title">Favoritos ({favorites?.length}) ⭐</h1>
+        <div className="search__container-download">
+          <div
+            className={`card-publication__checkbox card-publication__checkbox--${
+              isSelectAll && "check"
+            }`}
+            onClick={handleAllSelected}
+          >
+            {isSelectAll && <CheckOutlined />}
+          </div>
+          <h3 onClick={handleAllSelected}>Seleccionar todos</h3>
+          <DownloadReport
+            name={`Exportar(${itemsSelected.length})`}
+            disabled={itemsSelected.length === 0}
+            data={itemsSelected}
+          />
+        </div>
         <div className="favorites__favorites">
           {favorites?.map((item, index) => (
             <CardPublication
@@ -60,10 +105,13 @@ export const Favorites = () => {
               isActive={true}
               date={formatterDate(item.publication.createdAt)}
               onClickStart={() => handleRemove(item)}
+              isCheck={true}
+              onSelect={() => handleAddSelected(item, item?.id)}
+              isSelected={getItemSelected(item?.id)}
             />
           ))}
         </div>
-        {favorites?.length === 0  && !loading.getAll && (
+        {favorites?.length === 0 && !loading.getAll && (
           <div className="favorites__feedback">
             <img
               src={require("../../assets/images/favorites_1.png")}
