@@ -1,4 +1,8 @@
-import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  InfoCircleOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { Button, message, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -116,6 +120,11 @@ export const Search = () => {
           onSearch={onSearch}
           allowClear
         />
+        <span className="search__alert">
+          <InfoCircleOutlined /> {' '}
+          Puedes utilizar busquedas condicionales en español (<strong>y</strong> =
+          AND / <strong>o</strong> = OR).
+        </span>
         <div className="search search__results">
           {publications?.length > 0 ? (
             <h1>Resultados({(publicationsFilter || publications)?.length})</h1>
