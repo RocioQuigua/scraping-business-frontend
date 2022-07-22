@@ -17,7 +17,7 @@ import { ModalSearchReport } from "../../components/Modals/ModalSearchReport/Mod
 import { Pagination } from "../../components/organisms/Pagination/Pagination";
 import { DownloadReport } from "../../components/organisms/DownloadReport/DownloadReport";
 
-const COUNTS = [20, 40, 60, 80, 100, 120, 140, 160, 180, 200];
+const COUNTS = [20, 50, 100];
 
 export const Search = () => {
   const dispatch = useDispatch();
