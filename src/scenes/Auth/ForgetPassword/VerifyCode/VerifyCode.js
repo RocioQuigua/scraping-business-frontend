@@ -32,7 +32,7 @@ export const VerifyCode = () => {
 
   useEffect(() => {
     if (error.verifyCode) {
-      message.success("El código no coincide con el que se envio.");
+      message.error("El código no coincide con el que se envio.");
       dispatch(AuthActions.setError("verifyCode", undefined));
     }
   }, [error.verifyCode, dispatch]);

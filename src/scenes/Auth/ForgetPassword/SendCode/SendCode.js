@@ -22,7 +22,7 @@ export const SendCode = () => {
 
   useEffect(() => {
     if (error.sendCode) {
-      message.success(
+      message.error(
         "El correo electrónico no está registrado en nuestro sistema."
       );
       dispatch(AuthActions.setError("sendCode", undefined));
