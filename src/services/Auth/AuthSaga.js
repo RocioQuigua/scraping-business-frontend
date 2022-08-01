@@ -1,4 +1,4 @@
-import { put, takeLatest, all } from "redux-saga/effects";
+import { put, takeLatest, all, select } from "redux-saga/effects";
 
 import { auth } from "./AuthActions";
 import Api from "../../common/Api/Api";
@@ -18,12 +18,63 @@ function* login({ payload }) {
 
   if (response.ok) {
     yield put(auth.loginResponse(response.payload.payload));
-    yield Token.setToken('local', response.payload.payload);
+    yield Token.setToken("local", response.payload.payload);
     yield put(auth.setLoading("login", false));
   } else {
-    yield put(auth.setError("login",  'USER_NOT_EXIST'));
+    yield put(auth.setError("login", "USER_NOT_EXIST"));
     yield put(auth.setLoading("login", false));
   }
+}
+
+function* sendCode({ payload }) {
+  yield put(auth.setLoading("sendCode", true));
+  yield put(auth.setError("sendCode", undefined));
+
+  const response = yield Api.post("/auth/send-code", payload);
+
+  if (response.ok) {
+    yield put(auth.setSuccess("sendCode", true));
+    yield put(
+      auth.sendCodeResponse(payload.email, response.payload.payload.code)
+    );
+  } else {
+    yield put(auth.setError("sendCode", response.payload.error));
+  }
+  yield put(auth.setLoading("sendCode", false));
+}
+
+function* verifyCode({ payload }) {
+  yield put(auth.setLoading("verifyCode", true));
+  yield put(auth.setError("verifyCode", undefined));
+
+  const { emailUser } = yield select((state) => state.auth);
+  payload.email = emailUser;
+
+  const response = yield Api.post("/auth/verify-code", payload);
+
+  if (response.ok) {
+    yield put(auth.setSuccess("verifyCode", true));
+  } else {
+    yield put(auth.setError("verifyCode", response.payload.error));
+  }
+  yield put(auth.setLoading("verifyCode", false));
+}
+
+function* changePassword({ payload }) {
+  yield put(auth.setLoading("changePassword", true));
+  yield put(auth.setError("changePassword", undefined));
+
+  const { emailUser } = yield select((state) => state.auth);
+  payload.email = emailUser;
+
+  const response = yield Api.post("/auth/change-password", payload);
+
+  if (response.ok) {
+    yield put(auth.setSuccess("changePassword", true));
+  } else {
+    yield put(auth.setError("changePassword", response.payload.error));
+  }
+  yield put(auth.setLoading("changePassword", false));
 }
 
 function* signup({ payload }) {
@@ -39,12 +90,9 @@ function* signup({ payload }) {
     categoryId: parseInt(payload.categoryId, 10),
   };
 
-  if (payload.businessName)
-    params.businessName = payload.businessName;
-  
-  if (payload.nit) 
-    params.nit = payload.nit;
-  
+  if (payload.businessName) params.businessName = payload.businessName;
+
+  if (payload.nit) params.nit = payload.nit;
 
   const response = yield Api.post("/auth/signup", params);
 
@@ -66,6 +114,9 @@ function* logout() {
 
 function* ActionWatcher() {
   yield takeLatest(auth.login, login);
+  yield takeLatest(auth.sendCode, sendCode);
+  yield takeLatest(auth.verifyCode, verifyCode);
+  yield takeLatest(auth.changePassword, changePassword);
   yield takeLatest(auth.signup, signup);
   yield takeLatest(auth.logout, logout);
 }

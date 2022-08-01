@@ -1,0 +1,101 @@
+.verify-code {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__info {
+    font-weight: $font-weight-p;
+    width: 30%;
+    &--required {
+      color: $color-red-500;
+    }
+  }
+  &__container-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4vh;
+    h1 {
+      font-weight: $font-weight-p;
+      font-size: $font-size-z;
+      color: $color-black-900;
+    }
+    p {
+      font-size: $font-size-y;
+      font-weight: 500;
+      opacity: 0.5;
+      text-align: center;
+    }
+  }
+  &__inputNumber {
+    width: 100%;
+    height: 45px;
+    font-weight: $font-weight-a;
+    font-size: $font-size-z;
+    color: $color-gray-400;
+    border: 1px solid $color-gray-400 !important;
+    border-radius: 5px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input {
+      text-align: center;
+      letter-spacing: 2vh;
+    }
+  }
+  &__input {
+    font-weight: $font-weight-a;
+    font-size: $font-size-x;
+    color: $color-gray-400;
+    border: 1px solid $color-gray-400 !important;
+    border-radius: 5px;
+    margin-top: 6px;
+  }
+  &__footer {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--button {
+      font-weight: $font-weight-p;
+      font-size: $font-size-y;
+      text-decoration-line: underline !important;
+      color: $color-blue-800 !important;
+      padding: 5px;
+    }
+    &--buttonp {
+      font-weight: $font-weight-p;
+      font-size: $font-size-y;
+      text-decoration-line: underline !important;
+      color: $color-blue-800 !important;
+    }
+  }
+  &__group {
+    flex-direction: row;
+    margin-top: 60px;
+    padding: 0px;
+    font-weight: $font-weight-a;
+    justify-content: center;
+  }
+  &__button {
+    border-radius: 5px;
+    margin-top: 14px;
+    font-weight: bold;
+    font-size: $font-size-x;
+    background-color: $color-blue-800 !important;
+    color: white !important;
+    border: none;
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
+  @media (max-width: $break-point-mobile) {
+    &__info {
+      width: 80%;
+    }
+  }
+}

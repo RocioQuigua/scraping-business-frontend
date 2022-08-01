@@ -91,7 +91,7 @@ export const Login = () => {
             <Button
               className="login__footer login__footer--buttonp"
               type="link"
-              onClick={() => navigate("/forgetpassword")}
+              onClick={() => navigate("/send-code")}
             >
               Olvidé mi contraseña
             </Button>

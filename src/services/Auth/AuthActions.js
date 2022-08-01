@@ -26,6 +26,13 @@ export const { auth } = createActions({
     }),
     SIGNUP_RESPONSE: (token) => ({ token }),
 
+    SEND_CODE: (email) => ({ email }),
+    SEND_CODE_RESPONSE: (email, code) => ({ email, code }),
+
+    VERIFY_CODE: (code) => ({ code }),
+
+    CHANGE_PASSWORD: (password) => ({ password }),
+
     LOGOUT: () => ({}),
 
     SET_ERROR: (keyState, error) => ({ keyState, error }),

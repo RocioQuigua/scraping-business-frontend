@@ -4,6 +4,7 @@ import { Token } from "../../common/Storage/Token";
 export const INITIAL_STATE = {
   authentication: Token.isTokenValid(),
   token: undefined,
+  emailUser: undefined,
   loading: {
     loginTwilio: false,
     signup: false,
@@ -37,6 +38,21 @@ const reducer = handleActions(
           };
         },
       },
+
+      SEND_CODE: (state) => ({ ...state }),
+      SEND_CODE_RESPONSE: {
+        next(state, { payload: { email, code } }) {
+          return {
+            ...state,
+            emailUser: email,
+            code,
+          };
+        },
+      },
+
+      VERIFY_CODE: (state) => ({ ...state }),
+      CHANGE_PASSWORD: (state) => ({ ...state }),
+
 
       LOGOUT: (state) => ({ ...state, authentication: false }),
 
