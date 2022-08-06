@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { InputCustom } from "../../../../components/atoms/InputCustom/InputCustom";
 import { auth as AuthActions } from "../../../../services/Auth/AuthActions";
+import { CustomButton } from "../../../../components/atoms/CustomButton/CustomButton";
 
 export const SendCode = () => {
   const [form] = Form.useForm();
@@ -35,25 +36,31 @@ export const SendCode = () => {
 
   return (
     <div className="send-code">
+      <div className="login__header">
+        <span onClick={() => navigate("/")}>Udlavite</span>
+        <img src="logo.png" alt="logo" onClick={() => navigate("/")}/>
+      </div>
       <div className="send-code__info">
         <Form onFinish={onFinish} form={form}>
-          <h1>Olvidé mi contraseña</h1>
-          <label>
+          <img
+            className="send-code__image"
+            src={require("../../../../assets/images/password.jpg")}
+            alt="login avatar"
+          />
+          <h1 className="send-code__title">Olvidé mi contraseña</h1>
+          <label className="send-code__label">
             Correo
-            <strong className="send-code__info send-code__info--required">
-              *
-            </strong>
+            <strong>*</strong>
           </label>
-          <Form.Item name="email">
-            <InputCustom
-              className="send-code__input"
-              placeholder="example@tucorreo.com"
-            />
+          <Form.Item
+            name="email"
+            rules={[{ type: "email", message: "El correo no es valido  " }]}
+          >
+            <InputCustom placeholder="example@tucorreo.com" />
           </Form.Item>
           <Form.Item shouldUpdate noStyle>
             {() => (
-              <Button
-                className="send-code__button"
+              <CustomButton
                 type="primary"
                 htmlType="submit"
                 disabled={!form.getFieldValue("email") && !loading.sendCode}
@@ -61,19 +68,24 @@ export const SendCode = () => {
               >
                 {loading.sendCode && <LoadingOutlined />}
                 {!loading.sendCode && "Enviar código"}
-              </Button>
+              </CustomButton>
             )}
           </Form.Item>
         </Form>
         <div className="send-code__footer">
-          <div className="send-code__group">
+          <div className="send-code__footer send-code__footer--row">
             <label>Recuerdas tu contraseña?</label>
-            <Button type="link" onClick={() => navigate("/login")}>
+            <Button
+              className="send-code__link"
+              type="link"
+              onClick={() => navigate("/login")}
+            >
               Ingresar
             </Button>
           </div>
         </div>
       </div>
+      <span />
     </div>
   );
 };

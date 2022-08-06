@@ -10,14 +10,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
 import { auth as AuthActions } from "../../../services/Auth/AuthActions";
+import packageJSON from "../../../../package.json";
+import { CustomButton } from "../../../components/atoms/CustomButton/CustomButton";
 
 export const Login = () => {
   const dispatch = useDispatch();
-
   const { loading: loadingAuth, error } = useSelector((state) => state.auth);
 
-  const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
   useEffect(() => {
     if (error.login === "USER_NOT_EXIST") {
@@ -30,30 +31,45 @@ export const Login = () => {
     dispatch(AuthActions.login(values));
   };
 
+  const isValid = () => {
+    return (
+      form.getFieldValue("email") &&
+      form.getFieldValue("password") &&
+      form.getFieldsError().filter(({ errors }) => errors.length).length === 0
+    );
+  };
+
   return (
     <div className="login">
+      <div className="login__header">
+        <span onClick={() => navigate("/")}>Udlavite</span>
+        <img src="logo.png" alt="logo" onClick={() => navigate("/")}/>
+      </div>
       <div className="login__info">
         <Form onFinish={onFinish} form={form}>
-          <h1 className="login__content login__content--titlep">
-            Iniciar sesion
-          </h1>
-          <label className="login__content login__content--title">
+          <h1 className="login__title">Iniciar sesion</h1>
+          <img
+            className="login__image"
+            src={require("../../../assets/images/favorites_1.png")}
+            alt="login avatar"
+          />
+          <label className="login__label">
             Correo
-            <strong className="login__content login__content--s">*</strong>
+            <strong>*</strong>
           </label>
-          <Form.Item name="email">
-            <InputCustom
-              className="login__content login__content--input"
-              placeholder="example@tucorreo.com"
-            />
+          <Form.Item
+            name="email"
+            rules={[{ type: "email", message: "El correo no es valido  " }]}
+          >
+            <InputCustom placeholder="example@tucorreo.com" />
           </Form.Item>
-          <label className="login__content login__content--title">
+          <label className="login__label">
             Contraseña
-            <strong className="login__content login__content--s">*</strong>
+            <strong>*</strong>
           </label>
           <Form.Item name="password">
             <Input.Password
-              className="login__content login__content--input"
+              className="login__input"
               placeholder="********"
               iconRender={(visible) =>
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
@@ -62,26 +78,21 @@ export const Login = () => {
           </Form.Item>
           <Form.Item shouldUpdate noStyle>
             {() => (
-              <Button
-                className="login__button"
+              <CustomButton
                 type="primary"
                 htmlType="submit"
-                disabled={
-                  !form.getFieldValue("email") ||
-                  !form.getFieldValue("password") ||
-                  loadingAuth.login
-                }
+                disabled={!isValid() || loadingAuth.auth}
                 block
               >
                 {loadingAuth.login ? <LoadingOutlined /> : "Ingresar"}
-              </Button>
+              </CustomButton>
             )}
           </Form.Item>
           <div className="login__footer">
-            <div className="login__footer login__footer--group">
+            <div className="login__footer login__footer--row">
               <label>No tienes una cuenta?</label>
               <Button
-                className="login__footer login__footer--button"
+                className="login__link"
                 type="link"
                 onClick={() => navigate("/signup")}
               >
@@ -89,7 +100,7 @@ export const Login = () => {
               </Button>
             </div>
             <Button
-              className="login__footer login__footer--buttonp"
+              className="login__link"
               type="link"
               onClick={() => navigate("/send-code")}
             >
@@ -98,6 +109,9 @@ export const Login = () => {
           </div>
         </Form>
       </div>
+      <p>
+        v{packageJSON.version} ({new Date().getFullYear()})
+      </p>
     </div>
   );
 };

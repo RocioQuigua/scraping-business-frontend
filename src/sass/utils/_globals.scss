@@ -3,3 +3,10 @@
   font-size: $font-size-y;
   color: $color-black-800;
 }
+
+.ant-form-item-explain-error {
+  text-decoration-line: underline!important;
+  text-align: end;
+  margin: 0.5vh 0px;
+  margin-bottom: 1vh;
+}
