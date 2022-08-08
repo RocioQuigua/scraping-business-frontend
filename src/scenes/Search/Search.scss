@@ -82,6 +82,10 @@
       border-bottom: 1px solid $color-gray-400 !important;
       padding-top: 5px;
     }
+    &--row {
+      width: auto;
+      flex-direction: row;
+    }
   }
   &__feedback {
     display: flex;
@@ -121,13 +125,16 @@
     }
   }
   @media (max-width: $break-point-mobile) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     padding: 0px;
     &__container {
       padding: 0px 16px;
     }
     &__filter {
       padding: 0px 16px;
+    }
+    &__results {
+      flex-direction: column;
     }
   }
 }
