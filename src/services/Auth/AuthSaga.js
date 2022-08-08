@@ -84,7 +84,7 @@ function* signup({ payload }) {
   let params = {
     name: payload.name,
     lastname: payload.lastname,
-    phone: payload.phone,
+    phone: `${payload.phone}`,
     email: payload.email,
     password: payload.password,
     categoryId: parseInt(payload.categoryId, 10),

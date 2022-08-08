@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Input, Select, message } from "antd";
+import { Form, Button, Input, Select, message, InputNumber } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
 import { auth as AuthActions } from "../../../services/Auth/AuthActions";
+import { CustomButton } from "../../../components/atoms/CustomButton/CustomButton";
+
+const MAX_LENGTH_PHONE = 10;
 
 export const Signup = () => {
   const [values, setValues] = useState({});
@@ -46,49 +49,85 @@ export const Signup = () => {
     dispatch(AuthActions.signup({ ...values, ...fields }));
   };
 
+  const validatorMinPhone = ({ getFieldValue }) => ({
+    validator(rule, value) {
+      if (
+        !value ||
+        getFieldValue("phone").toString().length === MAX_LENGTH_PHONE
+      )
+        return Promise.resolve();
+
+      //No borrar el catch, evita que los errores de consola pongan lenta los selects
+      return Promise.reject("El teléfono debe ser valido").catch();
+    },
+  });
+
   return (
     <div className="signup">
+      <div className="login__header">
+        <span onClick={() => navigate("/")}>Udlavite</span>
+        <img src="logo.png" alt="logo" onClick={() => navigate("/")} />
+      </div>
       {visibleInfo ? (
         <div className="signup__info">
           <Form onFinish={onFinishUser} form={form}>
-            <h1 className="signup__titlep">Registro</h1>
-            <h2 className="signup__titles">Información personal</h2>
-            <label className="signup__title">
+            <h1 className="signup__title">Registro</h1>
+            <h2 className="signup__description">Información personal</h2>
+            <label className="signup__label">
               Nombres
-              <strong className="signup__title signup__title--s">*</strong>
+              <strong>*</strong>
             </label>
             <Form.Item name="name" rules={[{ required: true, message: "" }]}>
-              <InputCustom />
+              <InputCustom placeholder="Escribe tu(s) nombre(s)" />
             </Form.Item>
-            <label className="signup__title">
+            <label className="signup__label">
               Apellidos
-              <strong className="signup__title signup__title--s">*</strong>
+              <strong>*</strong>
             </label>
             <Form.Item
               name="lastname"
               rules={[{ required: true, message: "" }]}
             >
-              <InputCustom />
+              <InputCustom placeholder="Escribe tu(s) apellidos(s)" />
             </Form.Item>
-            <label className="signup__title">
+            <label className="signup__label">
               Celular
-              <strong className="signup__title signup__title--s">*</strong>
+              <strong>*</strong>
             </label>
-            <Form.Item name="phone" rules={[{ required: true, message: "" }]}>
-              <Input className="signup__input" maxLength={10} />
+            <Form.Item
+              name="phone"
+              rules={[{ required: true, message: "" }, validatorMinPhone]}
+            >
+              <InputNumber
+                type="tel"
+                keyboardtype="number-pad"
+                className="signup__input"
+                maxLength={MAX_LENGTH_PHONE}
+                placeholder="Escribe tu celular"
+                controls={false}
+              />
             </Form.Item>
-            <label className="signup__title">
+            <label className="signup__label">
               Correo
-              <strong className="signup__title signup__title--s">*</strong>
+              <strong>*</strong>
             </label>
-            <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+            <Form.Item
+              name="email"
+              rules={[
+                { required: true, message: "" },
+                { type: "email", message: "El correo no es valido  " },
+              ]}
+            >
               <InputCustom placeholder="example@tucorreo.com" />
             </Form.Item>
-            <label className="signup__title">
+            <label className="signup__label">
               Tipo de actividad
-              <strong className="signup__title signup__title--s">*</strong>
+              <strong>*</strong>
             </label>
-            <Form.Item name="categoryId" rules={[{ required: true, message: "" }]}>
+            <Form.Item
+              name="categoryId"
+              rules={[{ required: true, message: "" }]}
+            >
               <Select
                 className="signup__options"
                 placeholder="Selecciona una opción"
@@ -100,9 +139,9 @@ export const Signup = () => {
                 ))}
               </Select>
             </Form.Item>
-            <label className="signup__title">
+            <label className="signup__label">
               Contraseña
-              <strong className="signup__title signup__title--s">*</strong>
+              <strong>*</strong>
             </label>
             <Form.Item
               name="password"
@@ -116,10 +155,10 @@ export const Signup = () => {
                 }
               />
             </Form.Item>
+            <br />
             <Form.Item shouldUpdate noStyle>
               {() => (
-                <Button
-                  className="signup__button"
+                <CustomButton
                   type="primary"
                   htmlType="submit"
                   disabled={
@@ -127,7 +166,7 @@ export const Signup = () => {
                     !form.getFieldValue("lastname") ||
                     !form.getFieldValue("phone") ||
                     !form.getFieldValue("email") ||
-                    !form.getFieldValue("password") || 
+                    !form.getFieldValue("password") ||
                     !form.getFieldValue("categoryId") ||
                     form.getFieldsError().filter(({ errors }) => errors.length)
                       .length > 0
@@ -135,13 +174,13 @@ export const Signup = () => {
                   block
                 >
                   Siguiente
-                </Button>
+                </CustomButton>
               )}
             </Form.Item>
-            <div className="signup__footer">
+            <div className="signup__footer signup__footer--row">
               <label>Tienes una cuenta?</label>
               <Button
-                className="signup__footer signup__footer--button"
+                className="signup__link"
                 type="link"
                 onClick={() => navigate("/login")}
               >
@@ -153,38 +192,42 @@ export const Signup = () => {
       ) : (
         <div className="signup__info">
           <Form onFinish={onFinishBusiness} form={form}>
-            <h1 className="signup__titlep signup__titlep-b">Registro</h1>
-            <h2 className="signup__titles signup__titles-b">
+            <h1 className="signup__title">Registro</h1>
+            <h2 className="signup__description">
               Información de la empresa (Opcional)
             </h2>
-            <label className="signup__title">Nombre de la empresa</label>
+            <br />
+            <label className="signup__label">Nombre de la empresa</label>
             <Form.Item name="businessName">
-              <InputCustom className="signu__input" />
+              <InputCustom placeholder="Escribe el nombre de tu empresa" />
             </Form.Item>
-            <label className="signup__title">Nit</label>
+            <label className="signup__label">Nit</label>
             <Form.Item name="nit">
-              <Input className="signup__input" maxLength={10} />
+              <InputCustom
+                maxLength={10}
+                placeholder="Escribe el NIT"
+              />
             </Form.Item>
+            <br />
             <Form.Item shouldUpdate noStyle>
               {() => (
-                <Button
-                  className="signup__button signup__button--created"
-                  type="primary"
-                  htmlType="submit"
-                  block
-                >
+                <CustomButton type="primary" htmlType="submit" block>
                   {loading.signup && <LoadingOutlined />}
                   {!loading.signup && "Crear cuenta"}
-                </Button>
+                </CustomButton>
               )}
             </Form.Item>
-            <Button
-              className="signup__footer signup__footer--back"
-              type="link"
-              onClick={() => setVisibleInfo(true)}
-            >
-              Atras
-            </Button>
+            <br />
+            <br />
+            <div className="signup__footer">
+              <Button
+                className="signup__link"
+                type="link"
+                onClick={() => setVisibleInfo(true)}
+              >
+                {"< "}Atras
+              </Button>
+            </div>
           </Form>
         </div>
       )}

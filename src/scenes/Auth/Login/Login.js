@@ -22,7 +22,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (error.login === "USER_NOT_EXIST") {
-      message.error("El correo y/o contraseña son incorrestos");
+      message.error("El correo y/o contraseña son incorrectos");
       dispatch(AuthActions.setError("login", undefined));
     }
   }, [error.login, dispatch]);
@@ -47,7 +47,7 @@ export const Login = () => {
       </div>
       <div className="login__info">
         <Form onFinish={onFinish} form={form}>
-          <h1 className="login__title">Iniciar sesion</h1>
+          <h1 className="login__title">Iniciar sesión</h1>
           <img
             className="login__image"
             src={require("../../../assets/images/favorites_1.png")}

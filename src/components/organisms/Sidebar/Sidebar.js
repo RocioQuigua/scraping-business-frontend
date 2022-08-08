@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { auth as AuthActions } from "../../../services/Auth/AuthActions";
+import packageJSON from "../../../../package.json";
 
 export const Sidebar = ({ visible, setVisible }) => {
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ export const Sidebar = ({ visible, setVisible }) => {
       </div>
 
       <div className="sidebar__close">
-        <h2>v1.2</h2>
+        <h2>v{packageJSON.version}</h2>
         <Button className="sidebar__button" type="link" onClick={() => dispatch(AuthActions.logout())}>
           Cerrar sesion
         </Button>
