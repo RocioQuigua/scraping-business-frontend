@@ -5,6 +5,11 @@
   align-items: center;
   background-color: $color-blue-800;
   font-family: $font-poppins;
+  &__container-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   &__information {
     width: 100%;
     display: flex;
@@ -16,7 +21,7 @@
     }
     h1 {
       color: $color-slate-50;
-      font-weight: $font-weight-s;
+      font-weight:  bold;
       font-size: $font-size-m;
       margin: 10px;
       cursor: pointer;
@@ -26,6 +31,13 @@
       font-weight: $font-weight-s;
       margin-top: 5px;
       cursor: pointer;
+    }
+    img {
+      width: 3vh;
+      height: 3vh;
+      object-fit: contain;
+      border: 1px solid rgb(103, 103, 103);
+      border-radius: 5px;
     }
   }
   &__btn-menu {
