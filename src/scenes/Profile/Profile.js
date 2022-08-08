@@ -8,7 +8,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { InputCustom } from "../../components/atoms/InputCustom/InputCustom";
+import { CustomButton } from "../../components/atoms/CustomButton/CustomButton";
 import { user as UserActions } from "../../services/User/UserActions";
+
+const MAX_LENGTH_PHONE = 10;
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -60,47 +63,61 @@ export const Profile = () => {
     );
   };
 
+  const validatorMinPhone = ({ getFieldValue }) => ({
+    validator(rule, value) {
+      if (
+        !value ||
+        getFieldValue("phone").toString().length === MAX_LENGTH_PHONE
+      )
+        return Promise.resolve();
+
+      //No borrar el catch, evita que los errores de consola pongan lenta los selects
+      return Promise.reject("El teléfono debe ser valido").catch();
+    },
+  });
+
   return (
     <div className="profile">
       <div className="profile__info">
         <Form onFinish={onFinish} form={form}>
-          <h1 className="profile__titlep">Información personal</h1>
-          <label className="profile__title">
+          <h1 className="profile__title">Información personal</h1>
+          <label className="profile__label">
             Nombres
-            <strong className="profile__title profile__title--s">*</strong>
+            <strong>*</strong>
           </label>
           <Form.Item name="name" rules={[{ required: true, message: "" }]}>
             <InputCustom />
           </Form.Item>
-          <label className="profile__title">
+          <label className="profile__label">
             Apellidos
-            <strong className="profile__title profile__title--s">*</strong>
+            <strong>*</strong>
           </label>
           <Form.Item name="lastname" rules={[{ required: true, message: "" }]}>
             <InputCustom />
           </Form.Item>
-          <label className="profile__title">
+          <label className="profile__label">
             Celular
-            <strong className="profile__title profile__title--s">*</strong>
+            <strong>*</strong>
           </label>
-          <Form.Item name="phone" rules={[{ required: true, message: "" }]}>
-            <Input
-              className="profile__input"
-              type="tel"
-              keyboardtype="number-pad"
-              maxLength={10}
-            />
+          <Form.Item name="phone" rules={[{ required: true, message: "" },  validatorMinPhone]}>
+            <InputCustom type="tel" keyboardtype="number-pad" maxLength={10} />
           </Form.Item>
-          <label className="profile__title">
+          <label className="profile__label">
             Correo
-            <strong className="profile__title profile__title--s">*</strong>
+            <strong>*</strong>
           </label>
-          <Form.Item name="email" rules={[{ required: true, message: "" }]}>
+          <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: "" },
+              { type: "email", message: "El correo no es valido  " },
+            ]}
+          >
             <InputCustom placeholder="example@tucorreo.com" />
           </Form.Item>
-          <label className="signup__title">
+          <label className="signup__label">
             Tipo de actividad
-            <strong className="signup__title signup__title--s">*</strong>
+            <strong>*</strong>
           </label>
           <Form.Item
             name="categoryId"
@@ -117,9 +134,9 @@ export const Profile = () => {
               ))}
             </Select>
           </Form.Item>
-          <label className="profile__title">
+          <label className="profile__label">
             Contraseña
-            <strong className="profile__title profile__title--s">*</strong>
+            <strong>*</strong>
           </label>
           <Form.Item name="password">
             <Input.Password
@@ -131,10 +148,10 @@ export const Profile = () => {
               }
             />
           </Form.Item>
+          <br />
           <Form.Item shouldUpdate noStyle>
             {() => (
-              <Button
-                className="profile__button"
+              <CustomButton
                 type="primary"
                 htmlType="submit"
                 disabled={
@@ -146,7 +163,7 @@ export const Profile = () => {
               >
                 {loading.updateProfile && <LoadingOutlined />}
                 {!loading.updateProfile && "Actualizar datos"}
-              </Button>
+              </CustomButton>
             )}
           </Form.Item>
         </Form>

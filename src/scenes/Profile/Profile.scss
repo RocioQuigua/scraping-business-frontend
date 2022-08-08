@@ -8,31 +8,42 @@
   &__info {
     width: 30%;
   }
-  &__titlep {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-weight: $font-weight-p;
-    font-size: $font-size-z;
-    color: $color-black-900 !important;
-    margin-bottom: 18px;
-  }
   &__title {
+    display: flex;
+    justify-content: center;
+    font-size: $font-size-m;
     font-weight: $font-weight-p;
-    color: $color-black-800 !important;
-    &--s {
-      font-size: $font-size-x;
-      color: $color-red-500 !important;
+    color: $color-black-900;
+    margin-bottom: 10px;
+  }
+  &__label {
+    font-size: $font-size-p;
+    font-weight: $font-weight-p;
+    color: $color-black-800;
+    strong {
+      color: $color-red-500;
     }
   }
   &__input {
+    height: 40px;
+    font-weight: $font-weight-a;
+    font-size: $font-size-x;
+    color: $color-black-800;
+    border: 1px solid $color-gray-400 !important;
     border-radius: 5px;
-    border: 1px solid $color-gray-400;
+    margin-top: 6px;
   }
-  &__button {
+  &__options {
+    height: 40px;
+    border: 1px solid $color-gray-400 !important;
     border-radius: 5px;
-    margin-top: 14px;
+    margin-top: 4px;
+    .ant-select-selector {
+      height: 100%!important;
+    }
+  }
+  .ant-form-item {
+    margin-bottom: 10px;
   }
   @media (max-width: $break-point-mobile) {
     &__info {
