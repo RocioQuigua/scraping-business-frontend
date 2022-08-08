@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 export const InputSearch = ({ placeholder, onSearch, ...props }) => {
   const [value, setValue] = useState();
+  const { loading } = useSelector(state => state.search);
 
   const { history } = useSelector((state) => state.search);
 
@@ -25,7 +26,7 @@ export const InputSearch = ({ placeholder, onSearch, ...props }) => {
       <Button
         className="input-search__button"
         onClick={() => onSearch(value)}
-        disabled={!value}
+        disabled={!value || loading.createSearch }
         block
       >
         <SearchOutlined /> <span className="text">Buscar</span>

@@ -3,7 +3,7 @@
   grid-template-columns: 82% 15%;
   justify-content: space-between;
   font-family: $font-poppins;
-  height: 40px;
+  height: 50px;
   &__button {
     width: 100%;
     border: none;
@@ -24,7 +24,7 @@
     width: 100%;
     border-radius: 5px;
     border: 1px solid $color-gray-400 !important;
-    box-shadow: none;
+    box-shadow: none!important;
     height: 100%;
   }
   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -37,6 +37,11 @@
   .ant-select-selection-placeholder {
     display: flex;
     align-items: center;
+  }
+  .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: $color-gray-400!important;
+    outline: none!important;
+    box-shadow: none!important;
   }
   @media (max-width: $break-point-mobile) {
     &__button {

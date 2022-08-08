@@ -33,7 +33,10 @@ export const FiltersSearch = ({ visible, setVisible }) => {
                 className="filters-search__button filters-search__button--filter"
                 onClick={() => setVisible(!visible)}
               >
-                <MenuFoldOutlined />
+                <img
+                  src={require("../../../assets/images/filtrar.png")}
+                  alt="icono filtrar"
+                />
               </Button>
             </div>
             <Button
@@ -204,7 +207,10 @@ export const FiltersSearch = ({ visible, setVisible }) => {
           className="filters-search__button filters-search__button--filter"
           onClick={() => setVisible(!visible)}
         >
-          <MenuFoldOutlined />
+          <img
+            src={require("../../../assets/images/filtrar.png")}
+            alt="icono filtrar"
+          />
         </Button>
       )}
     </div>
