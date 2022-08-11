@@ -94,7 +94,9 @@ export const Search = () => {
         page,
       }));
 
-      newsItems = [...itemsSelected, ...newsItems];
+      if (isSelectAll) {
+        newsItems = [...itemsSelected, ...newsItems];
+      }
     }
 
     setItemsSelected(newsItems);
