@@ -75,16 +75,19 @@
       margin: 0px;
       padding-top: 10px;
     }
-    &--button {
-      font-weight: $font-weight-p;
-      font-size: $font-size-x;
-      color: $color-blue-800 !important;
-      border-bottom: 1px solid $color-gray-400 !important;
-      padding-top: 5px;
-    }
     &--row {
       width: auto;
       flex-direction: row;
+    }
+  }
+  &__button-chart {
+    font-weight: $font-weight-p;
+    font-size: $font-size-x;
+    color: $color-blue-800 !important;
+    border-bottom: 1px solid $color-gray-400 !important;
+    padding-top: 5px;
+    &:disabled {
+      opacity: 0.4;
     }
   }
   &__feedback {

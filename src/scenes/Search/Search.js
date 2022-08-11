@@ -63,9 +63,11 @@ export const Search = () => {
   };
 
   const onSearch = (text) => {
+    dispatch(SearchActions.clearAll());
     dispatch(SearchActions.createSearch(text, quantity, page));
     setQ(text);
     setPage(1);
+    setItemsSelected([])
   };
 
   const isShowPagination = () => {
@@ -134,8 +136,8 @@ export const Search = () => {
             <h1>Resultados</h1>
           )}
           <Button
-            className="search search__results--button"
-            disabled={(publicationsFilter || publications)?.length === 0}
+            className="search__button-chart"
+            disabled={(publicationsFilter || publications)?.length === 0 || loading.createSearch}
             type="link"
             onClick={() =>
               dispatch(ModalActions.setModal("modalSearchReport", true))

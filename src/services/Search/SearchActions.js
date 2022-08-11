@@ -21,6 +21,8 @@ export const { search } = createActions({
 
     CLEAR_FILTERS: () => ({}),
 
+    CLEAR_ALL : () => ({}),
+
     FILTER_RESULTS: (type, values, position) => ({ type, values, position }),
     FILTER_RESULTS_RESPONSE: (publications) => ({ publications }),
 

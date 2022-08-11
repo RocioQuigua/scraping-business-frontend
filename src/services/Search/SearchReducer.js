@@ -58,6 +58,10 @@ const reducer = handleActions(
         publicationsFilter: undefined,
       }),
 
+      CLEAR_ALL: (state) => ({
+        ...state, ...INITIAL_STATE
+      }),
+
       FILTER_RESULTS: (state, { payload: { type, values } }) => {
         let newFilters = state.filterValues;
         let isExist = newFilters.findIndex((item) => item.type === type);
