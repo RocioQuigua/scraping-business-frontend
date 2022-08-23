@@ -29,15 +29,6 @@ const reducer = handleActions(
       },
 
       SIGNUP: (state) => ({ ...state }),
-      SIGNUP_RESPONSE: {
-        next(state, { payload: { token } }) {
-          return {
-            ...state,
-            authentication: true,
-            token,
-          };
-        },
-      },
 
       SEND_CODE: (state) => ({ ...state }),
       SEND_CODE_RESPONSE: {
@@ -52,7 +43,6 @@ const reducer = handleActions(
 
       VERIFY_CODE: (state) => ({ ...state }),
       CHANGE_PASSWORD: (state) => ({ ...state }),
-
 
       LOGOUT: (state) => ({ ...state, authentication: false }),
 

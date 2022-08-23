@@ -1,23 +1,29 @@
-import React, { useEffect } from "react";
-import { Form, Button, Input, message } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
-  LoadingOutlined,
+  LoadingOutlined
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import { CustomButton } from "../../../components/atoms/CustomButton/CustomButton";
 import { InputCustom } from "../../../components/atoms/InputCustom/InputCustom";
 import { auth as AuthActions } from "../../../services/Auth/AuthActions";
+
 import packageJSON from "../../../../package.json";
-import { CustomButton } from "../../../components/atoms/CustomButton/CustomButton";
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const { loading: loadingAuth, error } = useSelector((state) => state.auth);
-
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+
+  const { loading, error } = useSelector((state) => state.auth);
+
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -25,9 +31,27 @@ export const Login = () => {
       message.error("El correo y/o contraseña son incorrectos");
       dispatch(AuthActions.setError("login", undefined));
     }
+
+    if (error.login === "USER_UNVERIFIED") {
+      message.warn("El usuario tiene la cuenta sin verificar, revisa tu correo electrónico, hemos enviado un correo electrónico de verificación.", 20 );
+      dispatch(AuthActions.setError("login", undefined));
+    }
+
+    if (error.login === "USER_INACTIVE") {
+      message.error("El usuario tiene la cuenta inactiva");
+      dispatch(AuthActions.setError("login", undefined));
+    }
+
+
+    dispatch(AuthActions.setError("login", undefined));
+
   }, [error.login, dispatch]);
 
   const onFinish = (values) => {
+    const code = queryParams.get('code');
+    if (code)
+      values.code = code;
+
     dispatch(AuthActions.login(values));
   };
 
@@ -81,10 +105,10 @@ export const Login = () => {
               <CustomButton
                 type="primary"
                 htmlType="submit"
-                disabled={!isValid() || loadingAuth.auth}
+                disabled={!isValid() || loading.auth}
                 block
               >
-                {loadingAuth.login ? <LoadingOutlined /> : "Ingresar"}
+                {loading.login ? <LoadingOutlined /> : "Ingresar"}
               </CustomButton>
             )}
           </Form.Item>

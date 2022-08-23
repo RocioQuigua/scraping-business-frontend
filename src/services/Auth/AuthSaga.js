@@ -14,6 +14,9 @@ function* login({ payload }) {
     password: payload.password,
   };
 
+  if (payload.code)
+    params.code = payload.code;
+
   const response = yield Api.post("/auth/login", params);
 
   if (response.ok) {
@@ -21,7 +24,7 @@ function* login({ payload }) {
     yield Token.setToken("local", response.payload.payload);
     yield put(auth.setLoading("login", false));
   } else {
-    yield put(auth.setError("login", "USER_NOT_EXIST"));
+    yield put(auth.setError("login", response.payload.error));
     yield put(auth.setLoading("login", false));
   }
 }
@@ -79,6 +82,7 @@ function* changePassword({ payload }) {
 
 function* signup({ payload }) {
   yield put(auth.setLoading("signup", true));
+  yield put(auth.setSuccess("signup", undefined));
   yield put(auth.setError("signup", undefined));
 
   let params = {
@@ -90,17 +94,17 @@ function* signup({ payload }) {
     categoryId: parseInt(payload.categoryId, 10),
   };
 
-  if (payload.businessName) params.businessName = payload.businessName;
+  if (payload.businessName)
+    params.businessName = payload.businessName;
 
-  if (payload.nit) params.nit = payload.nit;
+  if (payload.nit)
+    params.nit = payload.nit;
 
   const response = yield Api.post("/auth/signup", params);
 
   if (response.ok) {
-    history.push("/");
-    yield put(auth.signupResponse(response.payload.payload));
     yield put(auth.setLoading("signup", false));
-    Token.setToken("local", response.payload.payload);
+    yield put(auth.setSuccess("signup", true));
   } else {
     yield put(auth.setError("signup", response.payload));
     yield put(auth.setLoading("signup", false));

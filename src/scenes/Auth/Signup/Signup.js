@@ -37,8 +37,9 @@ export const Signup = () => {
     if (success.signup) {
       message.success("Se ha creado exitosamente tu cuenta, bienvenido!");
       dispatch(AuthActions.setSuccess("signup", undefined));
+      navigate('/');
     }
-  }, [success, dispatch]);
+  }, [success, dispatch, navigate]);
 
   const onFinishUser = (values) => {
     setValues(values);
