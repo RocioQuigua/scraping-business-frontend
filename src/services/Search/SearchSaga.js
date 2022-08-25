@@ -6,6 +6,7 @@ import { search } from "./SearchActions";
 function* createSearch({ payload }) {
   yield put(search.setState("publicationsFilter", undefined));
   yield put(search.setState("filters", undefined));
+  yield put(search.setState("filterValues", undefined));
   yield put(search.setLoading("createSearch", true));
   yield put(search.setError("createSearch", undefined));
   let params = {
