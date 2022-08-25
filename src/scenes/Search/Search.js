@@ -64,7 +64,7 @@ export const Search = () => {
 
   const onSearch = (text) => {
     dispatch(SearchActions.clearAll());
-    dispatch(SearchActions.setState('filterValues', undefined));
+    dispatch(SearchActions.setState('filterValues', []));
     dispatch(SearchActions.createSearch(text, quantity, page));
     setQ(text);
     setPage(1);
