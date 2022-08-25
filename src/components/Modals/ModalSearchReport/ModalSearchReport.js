@@ -26,7 +26,7 @@ export const ModalSearchReport = () => {
       okButtonProps={{ hidden: true }}
       cancelButtonProps={{ hidden: true }}
       onCancel={handleClose}
-      closable={false}
+      //closable={false}
       centered
     >
       <h1>📊 Graficos</h1>
