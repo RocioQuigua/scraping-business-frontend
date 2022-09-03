@@ -64,11 +64,11 @@ export const Search = () => {
 
   const onSearch = (text) => {
     dispatch(SearchActions.clearAll());
-    dispatch(SearchActions.setState('filterValues', []));
+    dispatch(SearchActions.setState("filterValues", []));
     dispatch(SearchActions.createSearch(text, quantity, page));
     setQ(text);
     setPage(1);
-    setItemsSelected([])
+    setItemsSelected([]);
   };
 
   const isShowPagination = () => {
@@ -82,6 +82,8 @@ export const Search = () => {
       );
       setItemsSelected(newsItems);
     } else {
+      delete item.type;
+      delete item.words;
       setItemsSelected([...itemsSelected, { id: `${page}${index}`, ...item }]);
     }
   };
@@ -91,11 +93,16 @@ export const Search = () => {
     if (isSelectAll) {
       newsItems = itemsSelected.filter((item) => item.page !== page);
     } else {
-      newsItems = publications.map((item, index) => ({
-        id: `${page}${index}`,
-        ...item,
-        page,
-      }));
+      newsItems = publications.map((item, index) => {
+        delete item.type;
+        delete item.words;
+
+        return {
+          id: `${page}${index}`,
+          ...item,
+          page,
+        };
+      });
 
       if (isSelectAll) {
         newsItems = [...itemsSelected, ...newsItems];
@@ -126,9 +133,8 @@ export const Search = () => {
           allowClear
         />
         <span className="search__alert">
-          <InfoCircleOutlined /> {' '}
-          Puedes usar búsquedas condicionales en español (<strong>y</strong> =
-          AND / <strong>o</strong> = OR).
+          <InfoCircleOutlined /> Puedes usar búsquedas condicionales en español
+          (<strong>y</strong> = AND / <strong>o</strong> = OR).
         </span>
         <div className="search search__results">
           {publications?.length > 0 ? (
@@ -138,7 +144,10 @@ export const Search = () => {
           )}
           <Button
             className="search__button-chart"
-            disabled={!(publicationsFilter || publications)?.length || loading.createSearch}
+            disabled={
+              !(publicationsFilter || publications)?.length ||
+              loading.createSearch
+            }
             type="link"
             onClick={() =>
               dispatch(ModalActions.setModal("modalSearchReport", true))

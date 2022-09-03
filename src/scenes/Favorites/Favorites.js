@@ -51,6 +51,13 @@ export const Favorites = () => {
       let newsItems = itemsSelected.filter((item) => item.id !== id);
       setItemsSelected(newsItems);
     } else {
+      item = { ...item.publication, ...item };
+      delete item.createdAt;
+      delete item.updatedAt;
+      delete item.publication;
+      delete item.state;
+      delete item.type;
+
       setItemsSelected([...itemsSelected, { ...item.publication, ...item }]);
     }
   };
@@ -61,6 +68,18 @@ export const Favorites = () => {
       newsItems = [];
     } else {
       newsItems = favorites;
+      newsItems = newsItems.map((item) => {
+        item = { ...item.publication, ...item };
+        delete item.createdAt;
+        delete item.updatedAt;
+        delete item.publication;
+        delete item.state;
+        delete item.type;
+
+        return {
+          ...item,
+        };
+      });
     }
 
     setItemsSelected(newsItems);
@@ -75,22 +94,24 @@ export const Favorites = () => {
     <div className="favorites">
       <div className="favorites__container">
         <h1 className="favorites__title">Favoritos ({favorites?.length}) ⭐</h1>
-        <div className="search__container-download">
-          <div
-            className={`card-publication__checkbox card-publication__checkbox--${
-              isSelectAll && "check"
-            }`}
-            onClick={handleAllSelected}
-          >
-            {isSelectAll && <CheckOutlined />}
+        {!loading.getAll && favorites?.length > 0 && (
+          <div className="search__container-download">
+            <div
+              className={`card-publication__checkbox card-publication__checkbox--${
+                isSelectAll && "check"
+              }`}
+              onClick={handleAllSelected}
+            >
+              {isSelectAll && <CheckOutlined />}
+            </div>
+            <h3 onClick={handleAllSelected}>Seleccionar todos</h3>
+            <DownloadReport
+              name={`Exportar(${itemsSelected.length})`}
+              disabled={itemsSelected.length === 0}
+              data={itemsSelected}
+            />
           </div>
-          <h3 onClick={handleAllSelected}>Seleccionar todos</h3>
-          <DownloadReport
-            name={`Exportar(${itemsSelected.length})`}
-            disabled={itemsSelected.length === 0}
-            data={itemsSelected}
-          />
-        </div>
+        )}
         <div className="favorites__favorites">
           {favorites?.map((item, index) => (
             <CardPublication
@@ -118,8 +139,8 @@ export const Favorites = () => {
               alt="img"
             />
             <h2>
-              Aun no tienes favoritos guardados, recuerda que puedes <br />
-              realizar <strong> busquedas</strong> y guardar tus intereses!
+              Aún no tienes favoritos guardados, recuerda que puedes <br />
+              realizar <strong> búsquedas</strong> y guardar tus intereses!
             </h2>
           </div>
         )}
