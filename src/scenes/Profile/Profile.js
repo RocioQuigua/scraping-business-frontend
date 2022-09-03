@@ -31,7 +31,7 @@ export const Profile = () => {
 
   useEffect(() => {
     if (success.updateProfile) {
-      message.success("Actualizacion exitosa!");
+      message.success("Actualización exitosa!");
       dispatch(UserActions.setSuccess("updateProfile", undefined));
     }
   }, [success.updateProfile, dispatch]);

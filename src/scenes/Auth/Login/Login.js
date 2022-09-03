@@ -28,7 +28,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (error.login === "USER_NOT_EXIST") {
-      message.error("El correo y/o contraseña son incorrectos");
+      message.error("El correo electrónico y/o la contraseña son incorrectos");
       dispatch(AuthActions.setError("login", undefined));
     }
 
@@ -38,7 +38,7 @@ export const Login = () => {
     }
 
     if (error.login === "USER_INACTIVE") {
-      message.error("El usuario tiene la cuenta inactiva");
+      message.error("El usuario tiene una cuenta inactiva.");
       dispatch(AuthActions.setError("login", undefined));
     }
 
@@ -83,7 +83,7 @@ export const Login = () => {
           </label>
           <Form.Item
             name="email"
-            rules={[{ type: "email", message: "El correo no es valido  " }]}
+            rules={[{ type: "email", message: "El correo no es válido" }]}
           >
             <InputCustom placeholder="example@tucorreo.com" />
           </Form.Item>
@@ -120,7 +120,7 @@ export const Login = () => {
                 type="link"
                 onClick={() => navigate("/signup")}
               >
-                Registrarse
+                Crear cuenta
               </Button>
             </div>
             <Button

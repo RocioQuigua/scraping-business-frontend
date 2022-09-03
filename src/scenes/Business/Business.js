@@ -13,7 +13,7 @@ export const Business = () => {
 
   useEffect(() => {
     if (success.updateBusiness) {
-      message.success("Actualizacion exitosa!");
+      message.success("Actualización exitosa!");
       dispatch(UserActions.setSuccess("updateBusiness", undefined));
     }
   }, [success.updateBusiness, dispatch]);

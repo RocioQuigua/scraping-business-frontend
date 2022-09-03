@@ -14,26 +14,26 @@ export const Sidebar = ({ visible, setVisible }) => {
 
   const options = [
     {
-      name: "Mi informacion",
-      description: "Gestion de tu informacion",
+      name: "Mi información",
+      description: "Gestión de tu información",
       image: require("../../../assets/images/my-information.png"),
       onClick: () => handleNavigate("/profile")
     },
     {
       name: "Mi empresa",
-      description: "Gestion de tu empresa",
+      description: "Gestión de tu empresa",
       image: require("../../../assets/images/my-business.png"),
       onClick: () => handleNavigate("/business")
     },
     {
       name: "Mis favoritos",
-      description: "Gestion de tus favoritos",
+      description: "Gestión de tus favoritos",
       image: require("../../../assets/images/my-favorite.png"),
       onClick: () => handleNavigate("/favorites")
     },
     {
       name: "Buscador",
-      description: "Realizar busqueda",
+      description: "Realizar búsqueda",
       image: require("../../../assets/images/searcher.png"),
       onClick: () => handleNavigate("/search")
     },
@@ -88,7 +88,7 @@ export const Sidebar = ({ visible, setVisible }) => {
       <div className="sidebar__close">
         <h2>v{packageJSON.version}</h2>
         <Button className="sidebar__button" type="link" onClick={() => dispatch(AuthActions.logout())}>
-          Cerrar sesion
+          Cerrar sesión
         </Button>
       </div>
     </Drawer>

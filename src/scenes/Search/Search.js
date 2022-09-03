@@ -121,13 +121,13 @@ export const Search = () => {
       </div>
       <div className="search__container">
         <InputSearch
-          placeholder="Que estas buscando?"
+          placeholder="¿Qué estás buscando?"
           onSearch={onSearch}
           allowClear
         />
         <span className="search__alert">
           <InfoCircleOutlined /> {' '}
-          Puedes utilizar busquedas condicionales en español (<strong>y</strong> =
+          Puedes usar búsquedas condicionales en español (<strong>y</strong> =
           AND / <strong>o</strong> = OR).
         </span>
         <div className="search search__results">
@@ -144,10 +144,10 @@ export const Search = () => {
               dispatch(ModalActions.setModal("modalSearchReport", true))
             }
           >
-            📊 Graficos
+            📊 Gráficos
           </Button>
           <div className="search__container-count">
-            <h3>Publicaciones por pagina</h3>
+            <h3>Publicaciones por página</h3>
             <Select value={quantity} onChange={(value) => setQuantity(value)}>
               {COUNTS.map((item, index) => (
                 <Select.Option key={index} value={item}>
@@ -159,7 +159,7 @@ export const Search = () => {
         </div>
         {loading.createSearch && (
           <div className="search__loading">
-            <span>Consultando informacion...</span>
+            <span>Consultar información...</span>
             <LoadingOutlined />
           </div>
         )}
@@ -167,7 +167,7 @@ export const Search = () => {
           !loading.createSearch && (
             <div className="search__feedback">
               <span>
-                Ups! no hemos encontrado ningun resultado
+                ¡ups! no hemos encontrado ningún resultado
                 <br />
                 <strong>Vuelve a intentarlo</strong>!
               </span>
@@ -180,9 +180,9 @@ export const Search = () => {
               alt="feedback_img"
             />
             <span>
-              !Encuentra todo lo que necesites para que
+              ¡Encuentra todo lo que necesitas para hacer
               <br />
-              <strong>tu negocio crezca</strong>!
+              <strong>crecer tu negocio</strong>!
             </span>
           </div>
         )}
@@ -198,7 +198,7 @@ export const Search = () => {
                 >
                   {isSelectAll && <CheckOutlined />}
                 </div>
-                <h3 onClick={handleAllSelected}>Seleccionar la pagina</h3>
+                <h3 onClick={handleAllSelected}>Seleccionar la página</h3>
                 <DownloadReport
                   name={`Exportar(${itemsSelected.length})`}
                   disabled={itemsSelected.length === 0}
