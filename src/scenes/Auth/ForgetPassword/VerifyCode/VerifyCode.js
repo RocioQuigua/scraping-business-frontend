@@ -61,8 +61,8 @@ export const VerifyCode = () => {
             alt="login avatar"
           />
           <div className="verify-code__container-title">
-            <h1 className="verify-code__title">Verificar codigo</h1>
-            <p>Escribe el codigo que hemos enviado a tu correo.</p>
+            <h1 className="verify-code__title">Verificar código</h1>
+            <p>Escribe el código que hemos enviado a tu correo.</p>
           </div>
           <Form.Item name="code">
             <InputNumber
@@ -83,7 +83,7 @@ export const VerifyCode = () => {
                 block
               >
                 {loading.verifyCode && <LoadingOutlined />}
-                {!loading.verifyCode && "Verificar codigo"}
+                {!loading.verifyCode && "Verificar código"}
               </CustomButton>
             )}
           </Form.Item>

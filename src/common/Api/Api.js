@@ -86,7 +86,6 @@ class Api {
   get(url, params) {
     if (!navigator.onLine) return { error: "DISCONNECT" };
 
-    console.error( 'URL ', url)
     url = new URL(`${apiUrl}${url}`);
 
     if (params)

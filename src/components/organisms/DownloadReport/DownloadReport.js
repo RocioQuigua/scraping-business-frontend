@@ -10,8 +10,8 @@ export const DownloadReport = ({data, name, ...props}) => {
     utils.sheet_add_aoa(ws, headings);
 
     utils.sheet_add_json(ws, data, { origin: "A2", skipHeader: true });
-    utils.book_append_sheet(wb, ws, "Report");
-    writeFile(wb, "report.xlsx");
+    utils.book_append_sheet(wb, ws, "Udlavite");
+    writeFile(wb, "Udlavite.xlsx");
   };
 
   return <Button onClick={handleDownload} {...props}>{name}</Button>;
