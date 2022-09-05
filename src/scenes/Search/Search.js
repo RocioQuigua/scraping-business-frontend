@@ -69,6 +69,7 @@ export const Search = () => {
     setQ(text);
     setPage(1);
     setItemsSelected([]);
+    setIsSelectAll();
   };
 
   const isShowPagination = () => {
