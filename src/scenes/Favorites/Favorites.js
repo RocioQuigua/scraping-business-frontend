@@ -36,7 +36,7 @@ export const Favorites = () => {
   const handleRemove = (item) => {
     dispatch(
       ModalActions.setModal("alertMessage", true, {
-        title: "¿Estas seguro de remover el actual item?",
+        title: "¿Estas seguro de remover el actual ítem?",
         onClick: () => removeItem(item),
       })
     );
@@ -118,7 +118,7 @@ export const Favorites = () => {
               alt="img"
             />
             <h2>
-              Aun no tienes favoritos guardados, recuerda que puedes <br />
+              Aún no tienes favoritos guardados, recuerda que puedes <br />
               realizar <strong> busquedas</strong> y guardar tus intereses!
             </h2>
           </div>
