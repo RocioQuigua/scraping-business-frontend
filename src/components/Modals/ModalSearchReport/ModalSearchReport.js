@@ -29,7 +29,7 @@ export const ModalSearchReport = () => {
       //closable={false}
       centered
     >
-      <h1>📊 Graficos</h1>
+      <h1>📊 Gráficos</h1>
       <div className="modal-search-report__content">
         <BardChart
           className="modal-search-report__bard"
