@@ -15,14 +15,16 @@ export const VerifyCode = () => {
 
   const navigate = useNavigate();
 
-  const { error, loading, success } = useSelector((state) => state.auth);
+  const { error, loading, success, emailUser } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (success.verifyCode) navigate("/change-password");
+    if (success.verifyCode)
+      navigate("/change-password");
   }, [success.verifyCode, navigate]);
 
   useEffect(() => {
-    if (!success.sendCode) navigate("/send-code");
+    if (!success.sendCode)
+      navigate("/send-code");
 
     return () => {
       dispatch(AuthActions.setSuccess("sendCode", undefined));
@@ -39,6 +41,10 @@ export const VerifyCode = () => {
   const onFinish = (values) => {
     dispatch(AuthActions.verifyCode(values.code));
   };
+
+  const handleSendCode = () => {
+    dispatch(AuthActions.sendCode(emailUser));
+  }
 
   const isValid = () => {
     let { code } = form.getFieldsValue();
@@ -94,9 +100,11 @@ export const VerifyCode = () => {
             <Button
               className="send-code__link"
               type="link"
-              onClick={() => navigate("/")}
+              onClick={handleSendCode}
+              disabled={loading.sendCode}
             >
-              Volver a enviar
+              {loading.sendCode && <LoadingOutlined />}
+              {!loading.sendCode && "Volver a enviar"}
             </Button>
           </div>
         </div>
