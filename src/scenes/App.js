@@ -11,7 +11,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(UtilsActions.getCategories());
-  }, [dispatch]);
+  }, [dispatch, authentication]);
 
   return authentication ? <Private /> : <Public />;
 }
