@@ -98,7 +98,7 @@ function* signup({ payload }) {
     params.businessName = payload.businessName;
 
   if (payload.nit)
-    params.nit = payload.nit;
+    params.nit = payload.nit + '';
 
   const response = yield Api.post("/auth/signup", params);
 

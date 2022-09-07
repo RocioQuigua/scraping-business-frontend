@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Input, Select, message, InputNumber } from "antd";
+import {
+  Form,
+  Button,
+  Input,
+  Select,
+  message,
+  InputNumber,
+  Tooltip,
+} from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
+  InfoCircleOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +46,7 @@ export const Signup = () => {
     if (success.signup) {
       message.success("Se ha creado exitosamente tu cuenta, bienvenido!");
       dispatch(AuthActions.setSuccess("signup", undefined));
-      navigate('/');
+      navigate("/");
     }
   }, [success, dispatch, navigate]);
 
@@ -202,13 +211,29 @@ export const Signup = () => {
             <Form.Item name="businessName">
               <InputCustom placeholder="Escribe el nombre de tu empresa" />
             </Form.Item>
-            <label className="signup__label">Nit</label>
+            <label className="signup__label">Nit (Solo números)</label>
             <Form.Item name="nit">
-              <InputCustom
-                maxLength={10}
-                placeholder="Escribe el NIT"
+              <InputNumber
+                type="tel"
+                keyboardtype="number-pad"
+                className="signup__input"
+                maxLength={11}
+                placeholder="Escribe tu celular"
+                controls={false}
+                suffix={
+                  <Tooltip title="No se permite ningún carácter especial">
+                    <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+                  </Tooltip>
+                }
               />
             </Form.Item>
+            <span className="text">
+              Personas jurídicas ➜ 10 números | Personas naturales ➜ 11 números
+            </span>
+            <br />
+            <br />
+            <br />
+            <br />
             <br />
             <Form.Item shouldUpdate noStyle>
               {() => (
