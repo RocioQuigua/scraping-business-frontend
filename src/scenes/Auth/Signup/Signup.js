@@ -218,7 +218,7 @@ export const Signup = () => {
                 keyboardtype="number-pad"
                 className="signup__input"
                 maxLength={11}
-                placeholder="Escribe tu celular"
+                placeholder="Escribe el NIT"
                 controls={false}
                 suffix={
                   <Tooltip title="No se permite ningún carácter especial">
