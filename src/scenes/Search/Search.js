@@ -22,7 +22,7 @@ const COUNTS = [20, 50, 100];
 export const Search = () => {
   const dispatch = useDispatch();
 
-  const { success } = useSelector((state) => state.favorite);
+  const { success, favorites } = useSelector((state) => state.favorite);
   const { profile } = useSelector((state) => state.user);
   const { publications, publicationsFilter, loading, pageGlobal } = useSelector(
     (state) => state.search
@@ -41,6 +41,10 @@ export const Search = () => {
       message.success("Se ha agregado un elemento a favoritos!");
     }
   }, [success.create, dispatch]);
+
+  useEffect(() => {
+    dispatch(FavoriteActions.getAll());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(SearchActions.getHistory());
@@ -73,19 +77,24 @@ export const Search = () => {
   };
 
   const isShowPagination = () => {
-    return (publications?.length > 0 && !loading.createSearch) || page > 1;
+    return (
+      ((publications?.length > 0 && !loading.createSearch) || page > 1) &&
+      publicationsFilter?.length === 0
+    );
   };
 
-  const handleAddSelected = (item, index) => {
-    if (getItemSelected(index)) {
-      let newsItems = itemsSelected.filter(
-        (item) => item.id !== `${page}${index}`
-      );
+  const isFavorite = (code) => {
+    return favorites.find(e => e.publication.code === code);
+  }
+
+  const handleAddSelected = (item) => {
+    if (getItemSelected(item.code)) {
+      let newsItems = itemsSelected.filter((e) => e.code !== item.code);
       setItemsSelected(newsItems);
     } else {
       delete item.type;
       delete item.words;
-      setItemsSelected([...itemsSelected, { id: `${page}${index}`, ...item }]);
+      setItemsSelected([...itemsSelected, item]);
     }
   };
 
@@ -94,12 +103,11 @@ export const Search = () => {
     if (isSelectAll) {
       newsItems = itemsSelected.filter((item) => item.page !== page);
     } else {
-      newsItems = publications.map((item, index) => {
+      newsItems = (publicationsFilter || publications).map((item, index) => {
         delete item.type;
         delete item.words;
 
         return {
-          id: `${page}${index}`,
           ...item,
           page,
         };
@@ -114,10 +122,8 @@ export const Search = () => {
     setIsSelectAll(!isSelectAll);
   };
 
-  const getItemSelected = (index) => {
-    return (
-      itemsSelected.find((item) => item.id === `${page}${index}`) !== undefined
-    );
+  const getItemSelected = (code) => {
+    return itemsSelected.find((item) => item.code === code) !== undefined;
   };
 
   return (
@@ -232,8 +238,9 @@ export const Search = () => {
                     type={`[${publication?.type?.name || "Web"}]`}
                     onClickStart={() => onClickStart(publication)}
                     isCheck={true}
-                    onSelect={() => handleAddSelected(publication, index)}
-                    isSelected={getItemSelected(index)}
+                    isActive={isFavorite(publication.code)}
+                    onSelect={() => handleAddSelected(publication)}
+                    isSelected={getItemSelected(publication.code)}
                   />
                 )
               )}

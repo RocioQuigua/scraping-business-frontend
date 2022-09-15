@@ -26,9 +26,19 @@ function* create({ payload }) {
 
   if (payload.typeKey) params.typeKey = payload.typeKey;
 
+  if (payload.code) params.code = payload.code;
+
   const response = yield Api.post("/favorite/create", params);
 
   if (response.ok) {
+    const { favorites } = yield select((state) => state.favorite);
+
+    yield put(
+      favorite.setState("favorites", [
+        ...favorites,
+        { state: "active", id: "", publication: params },
+      ])
+    );
     yield put(favorite.setLoading("create", false));
     yield put(favorite.setSuccess("create", true));
   } else {
@@ -56,11 +66,11 @@ function* remove({ payload }) {
   yield put(favorite.setLoading("remove", true));
   yield put(favorite.setError("remove", undefined));
 
-  const response = yield Api.post(`/favorite/delete?id=${payload.id}`,);
-  
+  const response = yield Api.post(`/favorite/delete?id=${payload.id}`);
+
   if (response.ok) {
-    let { favorites } = yield select(state => state.favorite);
-    favorites = favorites.filter(item => item.id !== payload.id)
+    let { favorites } = yield select((state) => state.favorite);
+    favorites = favorites.filter((item) => item.id !== payload.id);
     yield put(favorite.removeResponse(favorites));
     yield put(favorite.setLoading("remove", false));
     yield put(favorite.setSuccess("remove", true));
@@ -74,7 +84,6 @@ function* ActionWatcher() {
   yield takeLatest(favorite.getAll, getAll);
   yield takeLatest(favorite.create, create);
   yield takeLatest(favorite.remove, remove);
-
 }
 
 export default function* rootSaga() {

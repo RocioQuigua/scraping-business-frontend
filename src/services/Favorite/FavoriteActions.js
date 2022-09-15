@@ -16,6 +16,7 @@ export const { favorite } = createActions({
       year,
       quotes,
       typeKey,
+      code,
     }) => ({
       userId,
       title,
@@ -27,6 +28,7 @@ export const { favorite } = createActions({
       year,
       quotes,
       typeKey,
+      code,
     }),
     REMOVE: (id) => ({ id }),
     REMOVE_RESPONSE: (newFavorites) => ({ newFavorites }),
