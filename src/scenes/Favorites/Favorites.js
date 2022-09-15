@@ -120,7 +120,7 @@ export const Favorites = () => {
               description={item?.publication?.description}
               website={item.publication.siteUrl}
               origin={item.publication.origin}
-              journal={`${item.publication.journal} (${item.publication.year})`}
+              journal={`${item.publication.journal} (${item.publication.year || '_'})`}
               authors={item.publication.authors}
               type={`[${item.publication?.type?.name || "Web"}]`}
               isActive={true}

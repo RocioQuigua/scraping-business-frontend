@@ -62,7 +62,8 @@ export const Search = () => {
         ...item,
         userId: parseInt(profile.id, 10),
         typeKey: item?.type?.key,
-      })
+        year: item.year !== 'undefined' && item.year
+       })
     );
   };
 
@@ -233,7 +234,7 @@ export const Search = () => {
                     website={publication.siteUrl}
                     language={publication?.language}
                     journal={`${publication?.journal || ""} ${
-                      publication.year || ""
+                      publication.year === 'undefined' ? '' : publication.year
                     }`}
                     type={`[${publication?.type?.name || "Web"}]`}
                     onClickStart={() => onClickStart(publication)}
